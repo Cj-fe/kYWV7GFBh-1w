@@ -1,4 +1,4 @@
-<?php include '../includes/session.php'; ?>
+<?php include '../includes/session.php';  ?>
 
 <?php
 
@@ -34,7 +34,7 @@ if (isset($_SESSION['forms_completed']) && $_SESSION['forms_completed'] == false
     }
 
     // Retrieve admin data
-    $adminData = $firebase->retrieve("admin");
+    $adminData = $firebase->retrieve("admin/$adminNodeKey");
     $adminData = json_decode($adminData, true);
 
     // Fetch all messages once from Firebase

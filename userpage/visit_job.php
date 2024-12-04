@@ -65,7 +65,7 @@
     $data = json_decode($firebase->retrieve("job"), true);
     $jobsData = [];
 
-    $adminData = $firebase->retrieve("admin");
+    $adminData = $firebase->retrieve("admin/$adminNodeKey");
     $adminData = json_decode($adminData, true);
 
 

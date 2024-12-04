@@ -57,7 +57,7 @@
         $news_data = $firebase->retrieve("news/{$news_id}");
         $news_data = json_decode($news_data, true);
 
-        $adminData = $firebase->retrieve("admin");
+        $adminData = $firebase->retrieve("admin/$adminNodeKey");
         $adminData = json_decode($adminData, true);
 
         if ($news_data) {

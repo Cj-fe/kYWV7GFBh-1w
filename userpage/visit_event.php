@@ -42,7 +42,7 @@
         $event_data = $firebase->retrieve("event/{$event_id}");
         $event_data = json_decode($event_data, true);
 
-        $adminData = $firebase->retrieve("admin");
+        $adminData = $firebase->retrieve("admin/$adminNodeKey");
         $adminData = json_decode($adminData, true);
 
         $messages = json_decode($firebase->retrieve("messages"), true);

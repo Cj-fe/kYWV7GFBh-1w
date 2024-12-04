@@ -4,7 +4,9 @@ define('EMAIL_USERNAME', 'montgomeryaurelia06@gmail.com');
 define('EMAIL_PASSWORD', 'oylq mpnj adlw iuod');
 
 
-$databaseURL = "https://mccalumniapp-cdac5-default-rtdb.firebaseio.com";
+$databaseURL = "https://mccalumniapp-default-rtdb.firebaseio.com/";
+
+$adminNodeKey = '-MyUniqueID12345ABCDEFGHIJKLMnoPQRSTUvWxYz';
 
 // MySQL configuration
 $mysqlHost = "127.0.0.1";
