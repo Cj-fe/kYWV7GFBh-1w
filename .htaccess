@@ -1,4 +1,4 @@
-# Enable the rewrite engin
+# Enable the rewrite engine
 RewriteEngine On
 
 # Redirect all HTTP requests to HTTPS
