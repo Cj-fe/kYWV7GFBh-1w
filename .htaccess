@@ -9,6 +9,9 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 RewriteCond %{HTTP_HOST} !^mccalumnitracker\.com$ [NC]
 RewriteRule ^(.*)$ https://mccalumnitracker.com/$1 [R=301,L]
 
+# Ensure MultiviewsMatch only accepts .php files
+MultiviewsMatch \.php$
+
 # Hide PHP extension in URL bar only
 RewriteCond %{THE_REQUEST} ^GET\ /(.+)\.php\ HTTP
 RewriteRule ^(.+)\.php$ /$1 [R=301,L]
@@ -18,6 +21,22 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L,QSA]
+
+# Protect index.php
+<Files "index.php">
+    # Deny direct access to the file from outside
+    Require all denied
+
+    # Additional layer of protection against script injection
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK|OPTIONS)
+        RewriteRule .* - [F]
+    </IfModule>
+</Files>
+
+# Protect against direct access to index.php via URL
+RewriteRule ^index\.php$ - [F]
 
 # Disable directory listing
 Options -Indexes
