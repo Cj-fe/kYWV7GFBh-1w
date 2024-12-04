@@ -42,9 +42,12 @@
         $event_data = $firebase->retrieve("event/{$event_id}");
         $event_data = json_decode($event_data, true);
 
-        $adminData = $firebase->retrieve("admin/$adminNodeKey");
-        $adminData = json_decode($adminData, true);
+        $adminPath = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
 
+        // Retrieve admin data
+        $adminData = $firebase->retrieve($adminPath);
+        $adminData = json_decode($adminData, true);
+        
         $messages = json_decode($firebase->retrieve("messages"), true);
         $messages_json = json_encode($messages);
 

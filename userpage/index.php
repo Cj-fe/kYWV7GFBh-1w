@@ -33,8 +33,10 @@ if (isset($_SESSION['forms_completed']) && $_SESSION['forms_completed'] == false
         return $dateB - $dateA;
     }
 
+    $adminPath = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
+
     // Retrieve admin data
-    $adminData = $firebase->retrieve("admin/$adminNodeKey");
+    $adminData = $firebase->retrieve($adminPath);
     $adminData = json_decode($adminData, true);
 
     // Fetch all messages once from Firebase

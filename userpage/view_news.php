@@ -30,7 +30,10 @@
     $data = $firebase->retrieve("news");
     $data = json_decode($data, true);
 
-    $adminData = $firebase->retrieve("admin/$adminNodeKey");
+    $adminPath = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
+
+    // Retrieve admin data
+    $adminData = $firebase->retrieve($adminPath);
     $adminData = json_decode($adminData, true);
 
     $messages = json_decode($firebase->retrieve("messages"), true);
