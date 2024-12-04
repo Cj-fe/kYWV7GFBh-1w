@@ -6,10 +6,14 @@ $response = array();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once 'includes/firebaseRDB.php';
     require_once 'includes/config.php';
+
     $firebase = new firebaseRDB($databaseURL);
 
+    // Construct the path with layers
+    $adminPath = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
+
     // Retrieve the current admin data
-    $adminData = $firebase->retrieve("admin");
+    $adminData = $firebase->retrieve($adminPath);
     $adminData = json_decode($adminData, true);
 
     if ($adminData === null) {
@@ -30,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adminData['toggle_sidebar'] = $newToggleValue;
 
             // Perform update
-            $result = $firebase->update('admin', '', $adminData); // Pass an empty string for uniqueID
+            $result = $firebase->update($adminPath, '', $adminData); // Pass an empty string for uniqueID
 
             if ($result === null) {
                 $response['status'] = 'error';

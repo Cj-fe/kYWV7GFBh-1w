@@ -1,7 +1,6 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-
 require_once 'includes/firebaseRDB.php';
 require_once 'includes/config.php';
 
@@ -36,8 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['code'])) {
     }
 
     try {
+        // Construct the path with layers
+        $adminPath = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
+
         // Retrieve specific admin node data
-        $adminData = $firebase->retrieve("admin/{$adminNodeKey}");
+        $adminData = $firebase->retrieve($adminPath);
         $adminData = json_decode($adminData, true);
 
         if ($adminData && isset($adminData['code']) && $submitted_code === $adminData['code']) {
@@ -73,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['code'])) {
             ];
 
             // Update specific admin node
-            $firebase->update("admin/{$adminNodeKey}", "", $update_data);
+            $firebase->update($adminPath, "", $update_data);
 
             $log_data = [
                 'type' => 'gmail_code_2fa_request',

@@ -14,7 +14,8 @@ header('Content-Type: application/json');
 $firebase = new firebaseRDB($databaseURL);
 
 // Retrieve admin data
-$adminData = $firebase->retrieve("admin/{$adminNodeKey}");
+$adminPath = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
+$adminData = $firebase->retrieve($adminPath);
 $adminData = json_decode($adminData, true);
 
 function sendInfobipSMS($to, $message) {
@@ -76,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Update only the code field in the existing admin data
             $adminData['code'] = $code;
             // Update the existing admin node
-            $updateResult = $firebase->update("admin/{$adminNodeKey}", "", $adminData);
+            $updateResult = $firebase->update($adminPath, "", $adminData);
             if (!$updateResult) {
                 echo json_encode(['success' => false, 'message' => 'Failed to generate verification code']);
                 exit;
@@ -95,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 // If SMS fails, clear the code
                 $adminData['code'] = '';
-                $firebase->update("admin/{$adminNodeKey}", "", $adminData);
+                $firebase->update($adminPath, "", $adminData);
                 // Log failed attempt
                 insertLog($firebase, $adminData['email'] ?? '', "Failed to send 2FA verification code", "number_code_2fa_request", "failed");
                 echo json_encode(['success' => false, 'message' => 'Failed to send SMS']);
@@ -124,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['admin_token'] = $adminData['token'];
                 // Clear the code after successful verification
                 $adminData['code'] = '';
-                $firebase->update("admin/{$adminNodeKey}", "", $adminData);
+                $firebase->update($adminPath, "", $adminData);
                 // Log successful verification with Manila timestamp
                 insertLog($firebase, $adminData['phone'] ?? '', "You request number verification code for 2FA", "number_code_2fa_verification", "success");
                 echo json_encode([

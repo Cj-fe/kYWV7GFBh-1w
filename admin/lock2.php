@@ -7,21 +7,24 @@ require_once 'includes/config.php';
 $firebase = new firebaseRDB($databaseURL);
 
 try {
+    // Construct the path with layers
+    $adminPath = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
+    
     // Retrieve admin data
-    $adminData = $firebase->retrieve("admin");
+    $adminData = $firebase->retrieve($adminPath);
     $adminData = json_decode($adminData, true);
 
     // Check if the specific admin node exists
-    if (!$adminData || !isset($adminData[$adminNodeKey])) {
+    if (!$adminData) {
         header('Location: lock.php');
         exit();
     }
 
     // Access the specific admin node
-    $adminNode = $adminData[$adminNodeKey];
+    $adminNode = $adminData;
 
     // Check lockscreen and MFA status
-   if (!$adminNode['lockscreen'] && isset($adminNode['mfa']) && !$adminNode['mfa']) {
+    if (!$adminNode['lockscreen'] && isset($adminNode['mfa']) && !$adminNode['mfa']) {
         if (!isset($_SESSION['admin'])) {
             header('Location: index.php');
             exit();
@@ -36,13 +39,11 @@ try {
             header('Location: lock.php');
             exit();
         }
-
         if (!isset($adminNode['token2']) || $adminNode['token2'] !== $_GET['token'] || !isset($adminNode['reset_token_expires_at'])) {
             session_destroy();
             header('Location: lock.php');
             exit();
         }
-
         $expiresAt = strtotime($adminNode['reset_token_expires_at']);
         if (time() > $expiresAt) {
             session_destroy();
@@ -55,7 +56,6 @@ try {
             exit();
         }
     }
-    
 
     // Set user data from admin node
     $user = [

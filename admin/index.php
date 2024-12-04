@@ -137,124 +137,123 @@ try {
     <script src="../dist/js/login.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const formContainer = document.getElementById('form-container');
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM fully loaded and parsed');
+    const formContainer = document.getElementById('form-container');
 
-            const loginFormHTML = `
-                <form class="login100-form validate-form" id="login-form" action="login.php" method="POST">
-                    <span class="login100-form-title">
-                        Admin Login
-                    </span>
+    const loginFormHTML = `
+        <form class="login100-form validate-form" id="login-form" action="login.php" method="POST">
+            <span class="login100-form-title">
+                Admin Login
+            </span>
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="username" placeholder="Input Username" required autofocus autocomplete="off">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
-                    </div>
+            <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                <input class="input100" type="text" name="username" placeholder="Input Username" required autofocus autocomplete="off">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+            </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="password" placeholder="Input Password">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                        </span>
-                    </div>
+            <div class="wrap-input100 validate-input" data-validate="Password is required">
+                <input class="input100" type="password" name="password" placeholder="Input Password">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                </span>
+            </div>
 
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="longitude" id="longitude">
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
 
-                    <div class="container-login100-form-btn">
-                        <button class="login100-form-btn" name="login" disabled>
-                            Login
-                        </button>
-                    </div>
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn" name="login" disabled>
+                    Login
+                </button>
+            </div>
 
-                    <div class="text-center p-t-12">
-                        <span class="txt1">
-                            Forgot
-                        </span>
-                        <a class="txt2" href="#" id="forgot-password-link">
-                            Username / Password?
-                        </a>
-                    </div>
+            <div class="text-center p-t-12">
+                <span class="txt1">
+                    Forgot
+                </span>
+                <a class="txt2" href="#" onclick="showForgotPasswordForm(); return false;">
+                    Username / Password?
+                </a>
+            </div>
 
-                    <div class="text-center p-t-136">
-                    </div>
-                </form>
-            `;
+            <div class="text-center p-t-136">
+            </div>
+        </form>
+    `;
 
-            const forgotPasswordFormHTML = `
-                <form class="login100-form validate-form" id="forgot-password-form" action="index.php" method="POST" autocomplete="off">
-                    <span class="login100-form-title">
-                        Forgot Password
-                    </span>
+    const forgotPasswordFormHTML = `
+        <form class="login100-form validate-form" id="forgot-password-form" action="index.php" method="POST" autocomplete="off">
+            <span class="login100-form-title">
+                Forgot Password
+            </span>
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="email" name="email" placeholder="Email" required>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
-                    </div>
+            <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                <input class="input100" type="email" name="email" placeholder="Email" required>
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+            </div>
 
-                    <div class="container-login100-form-btn">
-                        <button class="login100-form-btn" type="submit" name="check-email" disabled>
-                            Reset Password
-                        </button>
-                    </div>
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn" type="submit" name="check-email" disabled>
+                    Reset Password
+                </button>
+            </div>
 
-                    <div class="text-center p-t-12">
-                        <a class="txt2" href="#" id="back-to-login">
-                            Back to Login
-                        </a>
-                    </div>
-                </form>
-            `;
+            <div class="text-center p-t-12">
+                <a class="txt2" href="#" onclick="showLoginForm(); return false;">
+                    Back to Login
+                </a>
+            </div>
+        </form>
+    `;
 
-            function showLoginForm() {
-                formContainer.innerHTML = loginFormHTML;
-                document.getElementById('forgot-password-link').addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showForgotPasswordForm();
-                });
-                getLocation();
-            }
+    // Make these global functions
+    window.showLoginForm = function() {
+        console.log('Showing login form');
+        formContainer.innerHTML = loginFormHTML;
+        getLocation();
+    };
 
-            function showForgotPasswordForm() {
-                formContainer.innerHTML = forgotPasswordFormHTML;
-                document.getElementById('back-to-login').addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showLoginForm();
-                });
-            }
+    window.showForgotPasswordForm = function() {
+        console.log('Showing forgot password form');
+        formContainer.innerHTML = forgotPasswordFormHTML;
+        enableSubmitButtons();
+    };
 
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        document.getElementById('latitude').value = position.coords.latitude;
-                        document.getElementById('longitude').value = position.coords.longitude;
-                        enableSubmitButtons();
-                    }, function(error) {
-                        console.error("Error obtaining location: ", error);
-                        alert("Please enable location services to proceed.");
-                    });
-                } else {
-                    alert("Geolocation is not supported by this browser.");
-                }
-            }
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                document.getElementById('latitude').value = position.coords.latitude;
+                document.getElementById('longitude').value = position.coords.longitude;
+                enableSubmitButtons();
+            }, function(error) {
+                console.error("Error obtaining location: ", error);
+                alert("Please enable location services to proceed.");
+                enableSubmitButtons();
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+            enableSubmitButtons();
+        }
+    }
 
-            function enableSubmitButtons() {
-                const loginButton = document.querySelector('#login-form .login100-form-btn');
-                const forgotPasswordButton = document.querySelector('#forgot-password-form .login100-form-btn');
-                if (loginButton) loginButton.disabled = false;
-                if (forgotPasswordButton) forgotPasswordButton.disabled = false;
-            }
+    function enableSubmitButtons() {
+        const loginButton = document.querySelector('#login-form .login100-form-btn');
+        const forgotPasswordButton = document.querySelector('#forgot-password-form .login100-form-btn');
+        if (loginButton) loginButton.disabled = false;
+        if (forgotPasswordButton) forgotPasswordButton.disabled = false;
+    }
 
-            // Initially show the login form
-            showLoginForm();
-        });
-    </script>
+    // Initially show the login form
+    showLoginForm();
+});
+</script>
 </body>
 </html>

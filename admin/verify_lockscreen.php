@@ -4,7 +4,6 @@ use PHPMailer\PHPMailer\Exception;
 
 session_start();
 header('Content-Type: application/json');
-
 require '../vendor/autoload.php';
 require_once 'includes/firebaseRDB.php';
 require_once 'includes/config.php';
@@ -37,8 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Construct the path with layers
+    $adminPath = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
+
     // Get admin data from Firebase using adminNodeKey
-    $admin_data = $firebase->retrieve("admin/{$adminNodeKey}");
+    $admin_data = $firebase->retrieve($adminPath);
     $admin_data = json_decode($admin_data, true);
 
     // Check if submitted email matches admin email
@@ -61,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Update the code in Firebase
-        $firebase->update("admin/{$adminNodeKey}", "", $update_data);
+        $firebase->update($adminPath, "", $update_data);
 
         // Send verification email
         if (sendVerificationEmail($admin_data['email'], $admin_data['firstname'], $verification_code)) {
@@ -95,20 +97,16 @@ function isValidEmail($email) {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return false;
     }
-
     // Extract the domain from the email
     list(, $domain) = explode('@', $email);
-
     // Check if the domain is gmail.com
     if ($domain !== 'gmail.com') {
         return false;
     }
-
     // Check if the domain has valid MX records
     if (!checkdnsrr($domain, 'MX')) {
         return false;
     }
-
     return true;
 }
 
@@ -122,10 +120,8 @@ function sendVerificationEmail($email, $firstname, $code) {
         $mail->Password = EMAIL_PASSWORD;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-
         $mail->setFrom(EMAIL_USERNAME, 'Admin System');
         $mail->addAddress($email, $firstname);
-
         $mail->isHTML(true);
         $mail->Subject = 'Lockscreen Verification Code';
         $mail->Body = "
@@ -141,7 +137,6 @@ function sendVerificationEmail($email, $firstname, $code) {
                 <p>Best regards,<br>Admin System</p>
             </div>
         ";
-
         return $mail->send();
     } catch (Exception $e) {
         error_log('Mail Error: ' . $e->getMessage());
