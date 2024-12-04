@@ -38,7 +38,7 @@ $eventCount = countUniqueKeys($firebase, "deleted_event");
 $totalCount = $newsCount + $alumniCount + $jobCount + $galleryCount + $surveyCount + $eventCount;
 
 // Check for new log entries
-$newLogCount = checkLogNotifications($firebase, $adminData['notification_timestamp']);
+$newLogCount = checkLogNotifications($firebase, $adminData[$layer_one][$layer_two]['notification_timestamp']);
 ?>
 
 <aside class="main-sidebar">
@@ -58,7 +58,7 @@ $newLogCount = checkLogNotifications($firebase, $adminData['notification_timesta
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">REPORTS</li>
-      <li class=""><a href="home.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+      <li class=""><a href="home.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
       <li class="header">MANAGE</li>
       <li class="treeview">
         <a href="#">
@@ -69,9 +69,9 @@ $newLogCount = checkLogNotifications($firebase, $adminData['notification_timesta
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="alumni.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Manage Alumni</a></li>
-          <li><a href="field_of_work.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Alumni Status</a></li>
-          <li><a href="category.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Category</a></li>
+          <li><a href="alumni.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Manage Alumni</a></li>
+          <li><a href="field_of_work.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Alumni Status</a></li>
+          <li><a href="category.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Category</a></li>
         </ul>
       </li>
       <li class="treeview">
@@ -83,10 +83,10 @@ $newLogCount = checkLogNotifications($firebase, $adminData['notification_timesta
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="news.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa fa-angle-right"></i> News</a></li>
-          <li><a href="event.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Events</a></li>
-          <li><a href="gallery.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Gallery</a></li>
-          <li><a href="job.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Job Offer</a></li>
+          <li><a href="news.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa fa-angle-right"></i> News</a></li>
+          <li><a href="event.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Events</a></li>
+          <li><a href="gallery.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Gallery</a></li>
+          <li><a href="job.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Job Offer</a></li>
         </ul>
       </li>
       <li class="treeview">
@@ -98,7 +98,7 @@ $newLogCount = checkLogNotifications($firebase, $adminData['notification_timesta
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="survey.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Survey List</a></li>
+          <li><a href="survey.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Survey List</a></li>
         </ul>
       </li>
       <li class="treeview">
@@ -110,13 +110,13 @@ $newLogCount = checkLogNotifications($firebase, $adminData['notification_timesta
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="survey_report.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Survey Report</a></li>
-          <li><a href="alumni_report.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Alumni Report</a></li>
-          <li><a href="event_report.php?token_url=<?php echo urlencode($adminData['token_url']); ?>"><i class="fa fa-angle-right"></i> Event Report</a></li>
+          <li><a href="survey_report.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Survey Report</a></li>
+          <li><a href="alumni_report.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Alumni Report</a></li>
+          <li><a href="event_report.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>"><i class="fa fa-angle-right"></i> Event Report</a></li>
         </ul>
       </li>
        <li>
-       <a href="timeline.php?token_url=<?php echo urlencode($adminData['token_url']); ?>">
+       <a href="timeline.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>">
             <i class="fa fa-th"></i> 
             <span>Logs</span>
             <span class="pull-right-container">
@@ -140,39 +140,39 @@ $newLogCount = checkLogNotifications($firebase, $adminData['notification_timesta
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="deleted_alumni.php?token_url=<?php echo urlencode($adminData['token_url']); ?>">
+            <a href="deleted_alumni.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>">
               <i class="fa fa-angle-right"></i> <small class="label bg-red"><?php echo $alumniCount; ?></small> Alumni
             </a>
           </li>
           <li>
-            <a href="deleted_news.php?token_url=<?php echo urlencode($adminData['token_url']); ?>">
+            <a href="deleted_news.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>">
               <i class="fa fa-angle-right"></i> <small class="label bg-red"><?php echo $newsCount; ?></small> News
             </a>
           </li>
           <li>
-            <a href="deleted_event.php?token_url=<?php echo urlencode($adminData['token_url']); ?>">
+            <a href="deleted_event.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>">
               <i class="fa fa-angle-right"></i> <small class="label bg-red"><?php echo $eventCount; ?></small> Event
             </a>
           </li>
           <li>
-            <a href="deleted_gallery.php?token_url=<?php echo urlencode($adminData['token_url']); ?>">
+            <a href="deleted_gallery.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>">
               <i class="fa fa-angle-right"></i> <small class="label bg-red"><?php echo $galleryCount; ?></small> Gallery
             </a>
           </li>
           <li>
-            <a href="deleted_job.php?token_url=<?php echo urlencode($adminData['token_url']); ?>">
+            <a href="deleted_job.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>">
               <i class="fa fa-angle-right"></i> <small class="label bg-red"><?php echo $jobCount; ?></small> Job
             </a>
           </li>
           <li>
-            <a href="deleted_survey.php?token_url=<?php echo urlencode($adminData['token_url']); ?>">
+            <a href="deleted_survey.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>">
               <i class="fa fa-angle-right"></i> <small class="label bg-red"><?php echo $surveyCount; ?></small> Survey
             </a>
           </li>
         </ul>
       </li>
       <li>
-       <a href="apk_version.php?token_url=<?php echo urlencode($adminData['token_url']); ?>">
+       <a href="apk_version.php?token_url=<?php echo urlencode($adminData[$layer_one][$layer_two]['token_url']); ?>">
             <i class="fa fa-th"></i> 
             <span>Apk Version</span>
           </a>

@@ -7,14 +7,22 @@ try {
     $adminData = $firebase->retrieve("admin/{$adminNodeKey}");
     $adminData = json_decode($adminData, true);
 
-    if (!$adminData || !isset($adminData['lockscreen']) || !isset($adminData['mfa'])) {
+    // Navigate through layer_one and layer_two
+    if (!isset($adminData[$layer_one][$layer_two])) {
+        header('Location: lock.php');
+        exit();
+    }
+
+    $adminNode = $adminData[$layer_one][$layer_two];
+
+    if (!$adminNode || !isset($adminNode['lockscreen']) || !isset($adminNode['mfa'])) {
         // If admin data, lockscreen status, or mfa status is missing, redirect to lock page
         header('Location: lock.php');
         exit();
     }
 
     // Check lockscreen and MFA status
-    if ($adminData['lockscreen'] || $adminData['mfa']) {
+    if ($adminNode['lockscreen'] || $adminNode['mfa']) {
         // If either lockscreen or MFA is true, enforce token verification
         if (!isset($_GET['token']) || !isset($_SESSION['admin_token']) || $_GET['token'] !== $_SESSION['admin_token']) {
             header('Location: lock.php');
@@ -22,14 +30,14 @@ try {
         }
 
         // Additional token verification
-        if (!isset($adminData['token']) || $adminData['token'] !== $_SESSION['admin_token'] || !isset($adminData['reset_token_expires_at'])) {
+        if (!isset($adminNode['token']) || $adminNode['token'] !== $_SESSION['admin_token'] || !isset($adminNode['reset_token_expires_at'])) {
             session_destroy();
             header('Location: lock.php');
             exit();
         }
 
         // Check if token has expired
-        $expiresAt = strtotime($adminData['reset_token_expires_at']);
+        $expiresAt = strtotime($adminNode['reset_token_expires_at']);
         if (time() > $expiresAt) {
             session_destroy();
             header('Location: lock.php');
@@ -37,17 +45,14 @@ try {
         }
     } else {
         // If both lockscreen and MFA are false, use token_url verification
-
-        // Check if token_url is not in URL but exists in admin data
-        if (!isset($_GET['token_url']) && isset($adminData['token_url'])) {
+        if (!isset($_GET['token_url']) && isset($adminNode['token_url'])) {
             // Redirect to same page with token_url parameter
-            header('Location: ' . $_SERVER['PHP_SELF'] . '?token_url=' . urlencode($adminData['token_url']));
+            header('Location: ' . $_SERVER['PHP_SELF'] . '?token_url=' . urlencode($adminNode['token_url']));
             exit();
         }
 
         // Check if token_url parameter exists and matches
-        if (!isset($_GET['token_url']) || !isset($adminData['token_url']) || 
-            $_GET['token_url'] !== $adminData['token_url']) {
+        if (!isset($_GET['token_url']) || !isset($adminNode['token_url']) || $_GET['token_url'] !== $adminNode['token_url']) {
             header('Location: includes/404.html');
             exit();
         }

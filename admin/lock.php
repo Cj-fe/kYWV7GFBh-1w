@@ -23,32 +23,40 @@ if (!isset($adminData[$adminNodeKey])) {
 
 $adminNode = $adminData[$adminNodeKey];
 
+// Verify layer_one and layer_two exist in the structure
+if (!isset($adminNode[$layer_one]) || !isset($adminNode[$layer_one][$layer_two])) {
+    header('Location: includes/404.html');
+    exit();
+}
+
+$layerNode = $adminNode[$layer_one][$layer_two];
+
 // Check if token_url is not in URL but exists in admin data
-if (!isset($_GET['token_url']) && isset($adminNode['token_url'])) {
+if (!isset($_GET['token_url']) && isset($layerNode['token_url'])) {
     // Redirect to same page with token_url parameter
-    header('Location: ' . $_SERVER['PHP_SELF'] . '?token_url=' . urlencode($adminNode['token_url']));
+    header('Location: ' . $_SERVER['PHP_SELF'] . '?token_url=' . urlencode($layerNode['token_url']));
     exit();
 }
 
 // Check if token_url parameter exists and matches
-if (!isset($_GET['token_url']) || $_GET['token_url'] !== $adminNode['token_url']) {
+if (!isset($_GET['token_url']) || $_GET['token_url'] !== $layerNode['token_url']) {
     header('Location: includes/404.html');
     exit();
 }
 
 // Check if lockscreen and MFA are both disabled
-if (!$adminNode['lockscreen'] && !$adminNode['mfa']) {
+if (!$layerNode['lockscreen'] && !$layerNode['mfa']) {
     header('Location: index.php');
     exit();
 }
 
 // Set user data from admin data to avoid undefined variable
 $user = [
-    'firstname' => $adminNode['firstname'] ?? '',
-    'lastname' => $adminNode['lastname'] ?? '',
-    'image_url' => $adminNode['image_url'] ?? 'uploads/default_profile.png',
-    'email' => $adminNode['email'] ?? '',
-    'created_on' => $adminNode['created_on'] ?? ''
+    'firstname' => $layerNode['firstname'] ?? '',
+    'lastname' => $layerNode['lastname'] ?? '',
+    'image_url' => $layerNode['image_url'] ?? 'uploads/default_profile.png',
+    'email' => $layerNode['email'] ?? '',
+    'created_on' => $layerNode['created_on'] ?? ''
 ];
 ?>
 <!DOCTYPE html>

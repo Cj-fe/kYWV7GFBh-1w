@@ -2,10 +2,13 @@
 include 'includes/session.php';
 
 // Function to update admin notification timestamp
-function updateAdminNotificationTimestamp($firebase)
-{
+function updateAdminNotificationTimestamp($firebase) {
     date_default_timezone_set('Asia/Manila');
     $currentTimestamp = date('Y-m-d H:i:s');
+    
+    // Define the path using adminNodeKey, layer_one, and layer_two
+    global $adminNodeKey, $layer_one, $layer_two;
+    $path = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
 
     try {
         // Prepare the updated data
@@ -14,7 +17,7 @@ function updateAdminNotificationTimestamp($firebase)
         ];
 
         // Update the Firebase data
-        $updateResult = $firebase->update("admin", '', $updatedData);
+        $updateResult = $firebase->update($path, '', $updatedData);
         return $updateResult;
     } catch (Exception $e) {
         error_log("Failed to update notification timestamp: " . $e->getMessage());

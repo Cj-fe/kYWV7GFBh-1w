@@ -1,8 +1,8 @@
-<?php 
-session_start(); 
-include 'includes/firebaseRDB.php'; 
-require_once 'includes/config.php'; 
-require_once '../vendor/autoload.php'; 
+<?php
+session_start();
+include 'includes/firebaseRDB.php';
+require_once 'includes/config.php';
+require_once '../vendor/autoload.php';
 
 use Detection\MobileDetect;
 
@@ -53,24 +53,29 @@ if (isset($_POST['login'])) {
     $adminData = $firebase->retrieve("admin/{$adminNodeKey}");
     $adminData = json_decode($adminData, true);
 
-    if (isset($adminData['user']) && $adminData['user'] === $username) {
-        if (password_verify($password, $adminData['password'])) {
-            $_SESSION['admin'] = $username; // Set session admin ID
-            $_SESSION['login_attempts'] = 0; // Reset login attempts on success
+    // Navigate through layer_one and layer_two
+    if (isset($adminData[$layer_one][$layer_two])) {
+        $adminNode = $adminData[$layer_one][$layer_two];
 
-            // Get the token from admin data
-            $token = isset($adminData['token']) ? $adminData['token'] : '';
+        if (isset($adminNode['user']) && $adminNode['user'] === $username) {
+            if (password_verify($password, $adminNode['password'])) {
+                $_SESSION['admin'] = $username; // Set session admin ID
+                $_SESSION['login_attempts'] = 0; // Reset login attempts on success
 
-            // Redirect with token
-            header('Location: home.php?token=' . urlencode($token));
-            exit();
+                // Get the token from admin data
+                $token = isset($adminNode['token']) ? $adminNode['token'] : '';
+
+                // Redirect with token
+                header('Location: home.php?token=' . urlencode($token));
+                exit();
+            } else {
+                // Increase login attempt count on failure
+                $_SESSION['login_attempts'] += 1;
+            }
         } else {
-            // Increase login attempt count on failure
+            // Increase login attempt count if user is not found
             $_SESSION['login_attempts'] += 1;
         }
-    } else {
-        // Increase login attempt count if user is not found
-        $_SESSION['login_attempts'] += 1;
     }
 
     // Check if login attempts exceed 3
@@ -94,7 +99,7 @@ if (isset($_POST['login'])) {
     }
 
     // If login failed, redirect back with token (if exists)
-    $token = isset($adminData['token']) ? $adminData['token'] : '';
+    $token = isset($adminNode['token']) ? $adminNode['token'] : '';
     header('Location: index.php?token=' . urlencode($token));
     exit();
 }

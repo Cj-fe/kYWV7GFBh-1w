@@ -1,6 +1,5 @@
-<?php 
-include 'includes/session.php'; 
-
+<?php
+include 'includes/session.php';
 $return = isset($_GET['return']) ? $_GET['return'] : 'home.php';
 
 // Enhanced logging function
@@ -100,8 +99,11 @@ try {
                 require_once 'includes/config.php';
                 $firebase = new firebaseRDB($databaseURL);
 
-                // Update Firebase
-                $updateResult = $firebase->update("admin/{$adminNodeKey}", "", $updatedData);
+                // Concatenate adminNodeKey with layer_one and layer_two
+                $fullNodePath = "admin/{$adminNodeKey}/{$layer_one}/{$layer_two}";
+
+                // Update Firebase using the concatenated path
+                $updateResult = $firebase->update($fullNodePath, "", $updatedData);
                 $updateResult = json_decode($updateResult, true);
 
                 if ($updateResult !== null && $updateResult !== false) {
