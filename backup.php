@@ -1,11 +1,50 @@
 <?php
-require_once 'controllerUserData.php';
+session_start();
+require_once 'includes/firebaseRDB.php'; // Use require_once to prevent multiple inclusions
+require_once 'includes/config.php'; // Include configuration file
 
 // Function to check if data is empty
 function isDataEmpty($data) {
     return empty($data);
 }
 
+// Initialize Firebase
+$firebase = new firebaseRDB($databaseURL);
+
+// Retrieve admin data
+$adminData = $firebase->retrieve("admin");
+$adminData = json_decode($adminData, true);
+
+// Ensure admin data is retrieved
+if (!$adminData || !isset($adminData[$adminNodeKey])) {
+    header('Location: includes/404.html');
+    exit();
+}
+
+$adminNode = $adminData[$adminNodeKey];
+
+// Verify layer_one and layer_two exist in the structure
+if (!isset($adminNode[$layer_one]) || !isset($adminNode[$layer_one][$layer_two])) {
+    header('Location: includes/404.html');
+    exit();
+}
+
+$layerNode = $adminNode[$layer_one][$layer_two];
+
+// Check if token_url is not in URL but exists in admin data
+if (!isset($_GET['token_url']) && isset($layerNode['token_url'])) {
+    // Redirect to the same page with token_url parameter
+    header('Location: ' . $_SERVER['PHP_SELF'] . '?token_url=' . urlencode($layerNode['token_url']));
+    exit();
+}
+
+// Check if token_url parameter exists and matches
+if (!isset($_GET['token_url']) || $_GET['token_url'] !== $layerNode['token_url']) {
+    header('Location: includes/404.html');
+    exit();
+}
+
+// Check if the user is an alumni and redirect accordingly
 if (isset($_SESSION['alumni'])) {
     if ($_SESSION['forms_completed'] == false) {
         header('location: userpage/alumni_profile.php');
@@ -29,36 +68,6 @@ usort($data, function ($a, $b) {
 });
 $data = array_slice($data, 0, 5);
 ?>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var urlParams = new URLSearchParams(window.location.search);
-    var error = urlParams.get('error');
-    if (error) {
-        var decodedError = decodeURIComponent(error);
-        decodedError = decodedError.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        var title, footer;
-
-        if (decodedError.includes("No matching alumni found")) {
-            title = "No Match Found";
-        } else if (decodedError.includes("already verified")) {
-            title = "Already Verified";
-            footer = '<a href="#">Forgot your password?</a>';
-        } else {
-            title = "Oppps..";
-        }
-
-        Swal.fire({
-            icon: "error",
-            title: title,
-            text: decodedError,
-            footer: footer
-        });
-
-        // Remove the error parameter from the URL
-        window.history.replaceState({}, document.title, window.location.pathname);
-    }
-});
-</script>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -7,7 +7,7 @@ define('EMAIL_PASSWORD', 'oylq mpnj adlw iuod');
 define('RECAPTCHA_SECRET_KEY', '6LfKXHwqAAAAALxzMrcFwWomBIgw4sbip0bW47Ka');
 
 // Firebase configuration
-$databaseURL = "https://mccalumniapp-default-rtdb.firebaseio.com/";
+$databaseURL = "https://mccnians-bc4f4-default-rtdb.firebaseio.com/";
 $adminNodeKey = '-MyUniqueID12345ABCDEFGHIJKLMnoPQRSTUvWxYz';
 
 //Layer for Logs

@@ -4,7 +4,8 @@ require_once 'includes/firebaseRDB.php'; // Use require_once to prevent multiple
 require_once 'includes/config.php'; // Include configuration file
 
 // Function to check if data is empty
-function isDataEmpty($data) {
+function isDataEmpty($data)
+{
     return empty($data);
 }
 
@@ -103,7 +104,8 @@ $data = array_slice($data, 0, 5);
                                 <p class="fs-5 text-white mb-4 pb-2">Welcome to the MCC Alumni Network! We are thrilled
                                     to have you back and eager to help you reconnect with old friends, reimagine your
                                     future, and rediscover the spirit of our beloved institution.</p>
-                                    <a href="includes/auth.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft openFormButton">Signin</a>
+                                <a href="includes/auth.php"
+                                    class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft openFormButton">Signin</a>
                             </div>
                         </div>
                     </div>
@@ -124,7 +126,8 @@ $data = array_slice($data, 0, 5);
                                     exclusive job listings, mentorship programs, and career development resources
                                     tailored just for you. Whether it’s professional networking or social gatherings,
                                     there’s always something exciting happening. Your success is our pride.</p>
-                                    <a href="includes/auth.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft openFormButton">Signin</a>
+                                <a href="includes/auth.php"
+                                    class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft openFormButton">Signin</a>
 
                             </div>
                         </div>
@@ -147,7 +150,8 @@ $data = array_slice($data, 0, 5);
                                     and achievements from our community. Celebrate the milestones that keep our legacy
                                     alive. Your involvement can inspire current students and shape the future of our
                                     institution.</p>
-                                    <a href="includes/auth.php" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft openFormButton">Signin</a>
+                                <a href="includes/auth.php"
+                                    class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft openFormButton">Signin</a>
 
                             </div>
                         </div>
@@ -307,8 +311,8 @@ $data = array_slice($data, 0, 5);
                 </div>
                 <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
                     <a class="position-relative d-block h-100 overflow-hidden" href="">
-                        <img class="img-fluid position-absolute w-100 h-100"
-                            src="images/no_image.png" alt="" style="object-fit: cover;">
+                        <img class="img-fluid position-absolute w-100 h-100" src="images/no_image.png" alt=""
+                            style="object-fit: cover;">
 
                     </a>
                 </div>
@@ -336,12 +340,15 @@ $data = array_slice($data, 0, 5);
                             <div class="item">
                                 <a class="openFormButton probootstrap-featured-news-box">
                                     <figure class="probootstrap-media">
-                                        <img src="admin/<?php echo htmlspecialchars($news['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="News Image"
-                                            class="img-responsive fixed-dimension-img">
+                                        <img src="admin/<?php echo htmlspecialchars($news['image_url'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            alt="News Image" class="img-responsive fixed-dimension-img">
                                     </figure>
                                     <div class="probootstrap-text">
-                                        <h3 class="news-title"><?php echo htmlspecialchars($news['news_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                                        <p class="news-description"><?php echo htmlspecialchars(strip_tags($news['news_description']), ENT_QUOTES, 'UTF-8'); ?></p>
+                                        <h3 class="news-title">
+                                            <?php echo htmlspecialchars($news['news_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                        <p class="news-description">
+                                            <?php echo htmlspecialchars(strip_tags($news['news_description']), ENT_QUOTES, 'UTF-8'); ?>
+                                        </p>
                                         <span class="probootstrap-date"><i
                                                 class="icon-calendar"></i><?php echo htmlspecialchars($news['news_created'], ENT_QUOTES, 'UTF-8'); ?></span>
                                     </div>
@@ -373,17 +380,20 @@ $data = array_slice($data, 0, 5);
                                 <center>
                                     <a class="openFormButton probootstrap-featured-news-box">
                                         <figure class="probootstrap-media">
-                                            <img src="admin/<?php echo htmlspecialchars($event['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="Event Image"
-                                                class="img-responsive fixed-dimension-img">
+                                            <img src="admin/<?php echo htmlspecialchars($event['image_url'], ENT_QUOTES, 'UTF-8'); ?>"
+                                                alt="Event Image" class="img-responsive fixed-dimension-img">
                                         </figure>
                                         <div class="probootstrap-text"
                                             style="border-top: 1px solid silver; border-left: 1px solid silver; border-right: 1px solid silver; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                                            <h3 class="event-title"><?php echo htmlspecialchars($event['event_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                                            <p class="event-description"><?php echo htmlspecialchars(strip_tags($event['event_description']), ENT_QUOTES, 'UTF-8'); ?>
+                                            <h3 class="event-title">
+                                                <?php echo htmlspecialchars($event['event_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                            <p class="event-description">
+                                                <?php echo htmlspecialchars(strip_tags($event['event_description']), ENT_QUOTES, 'UTF-8'); ?>
                                             </p>
                                             <span class="probootstrap-date" style="font-size:14px"><i
                                                     class="icon-calendar"></i><b>Date Posted:</b>
-                                                <?php echo htmlspecialchars($event['event_created'], ENT_QUOTES, 'UTF-8'); ?> | <b>Date of Event:</b>
+                                                <?php echo htmlspecialchars($event['event_created'], ENT_QUOTES, 'UTF-8'); ?> |
+                                                <b>Date of Event:</b>
                                                 <?php echo htmlspecialchars($event['event_date'], ENT_QUOTES, 'UTF-8'); ?></span>
                                         </div>
                                     </a>
@@ -402,34 +412,45 @@ $data = array_slice($data, 0, 5);
 
 
     <?php if (!isDataEmpty($jobData)): ?>
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center px-3">JOBS</h6>
-                <h1 class="mb-5">Available Job Listings</h1>
-            </div>
-            <div class="row g-4 justify-content-center">
-                <?php foreach ($jobData as $job): ?>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="item">
-                        <center>
-                            <a class="openFormButton probootstrap-featured-news-box">
-                                <figure class="probootstrap-media">
-                                    <img src="admin/<?php echo htmlspecialchars($job['image_path'], ENT_QUOTES, 'UTF-8'); ?>" alt="Job Image" class="img-responsive fixed-dimension-img">
-                                </figure>
-                                <div class="probootstrap-text" style="border-top: 1px solid silver; border-left: 1px solid silver; border-right: 1px solid silver; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
-                                    <h3 class="job-title"><?php echo htmlspecialchars($job['job_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                                    <p class="event-description"><?php echo htmlspecialchars(strip_tags($job['job_description']), ENT_QUOTES, 'UTF-8'); ?></p>
-                                    <span class="probootstrap-date" style="font-size:14px"><i class="icon-calendar"></i><b>Date Posted:</b> <?php echo htmlspecialchars($job['job_created'], ENT_QUOTES, 'UTF-8'); ?> | <b>Company:</b> <?php echo htmlspecialchars($job['company_name'], ENT_QUOTES, 'UTF-8'); ?> | <b>Work Time:</b> <?php echo htmlspecialchars($job['work_time'], ENT_QUOTES, 'UTF-8'); ?></span>
-                                </div>
-                            </a>
-                        </center>
-                    </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title bg-white text-center px-3">JOBS</h6>
+                    <h1 class="mb-5">Available Job Listings</h1>
                 </div>
-                <?php endforeach; ?>
+                <div class="row g-4 justify-content-center">
+                    <?php foreach ($jobData as $job): ?>
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="item">
+                                <center>
+                                    <a class="openFormButton probootstrap-featured-news-box">
+                                        <figure class="probootstrap-media">
+                                            <img src="admin/<?php echo htmlspecialchars($job['image_path'], ENT_QUOTES, 'UTF-8'); ?>"
+                                                alt="Job Image" class="img-responsive fixed-dimension-img">
+                                        </figure>
+                                        <div class="probootstrap-text"
+                                            style="border-top: 1px solid silver; border-left: 1px solid silver; border-right: 1px solid silver; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                                            <h3 class="job-title">
+                                                <?php echo htmlspecialchars($job['job_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                            <p class="event-description">
+                                                <?php echo htmlspecialchars(strip_tags($job['job_description']), ENT_QUOTES, 'UTF-8'); ?>
+                                            </p>
+                                            <span class="probootstrap-date" style="font-size:14px"><i
+                                                    class="icon-calendar"></i><b>Date Posted:</b>
+                                                <?php echo htmlspecialchars($job['job_created'], ENT_QUOTES, 'UTF-8'); ?> |
+                                                <b>Company:</b>
+                                                <?php echo htmlspecialchars($job['company_name'], ENT_QUOTES, 'UTF-8'); ?> |
+                                                <b>Work Time:</b>
+                                                <?php echo htmlspecialchars($job['work_time'], ENT_QUOTES, 'UTF-8'); ?></span>
+                                        </div>
+                                    </a>
+                                </center>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
-    </div>
     <?php endif; ?>
 
 
@@ -443,7 +464,8 @@ $data = array_slice($data, 0, 5);
 
     <!-- JavaScript Libraries -->
     <script nonce="<random-nonce>" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script nonce="<random-nonce>" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script nonce="<random-nonce>"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script nonce="<random-nonce>" src="homepage/lib/wow/wow.min.js"></script>
     <script nonce="<random-nonce>" src="homepage/lib/easing/easing.min.js"></script>
     <script nonce="<random-nonce>" src="homepage/lib/waypoints/waypoints.min.js"></script>
