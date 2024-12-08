@@ -1,7 +1,6 @@
-<?php include '../includes/session.php';  ?>
+<?php include '../includes/session.php'; ?>
 
 <?php
-
 // If the user is not logged in, redirect to the main index page
 if (!isset($_SESSION['alumni'])) {
     header('location: ../index.php');
@@ -13,7 +12,6 @@ if (isset($_SESSION['forms_completed']) && $_SESSION['forms_completed'] == false
     header('location: alumni_profile.php');
     exit();
 }
-
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -62,6 +60,20 @@ if (isset($_SESSION['forms_completed']) && $_SESSION['forms_completed'] == false
     $eventData = $firebase->retrieve("event");
     $eventData = json_decode($eventData, true);
 
+    // Function to sort events by date
+    function sortByEventDate($a, $b)
+    {
+        $dateA = strtotime($a['event_created']);
+        $dateB = strtotime($b['event_created']);
+        return $dateB - $dateA;
+    }
+
+    // Sort events by date and maintain unique ID
+    if (is_array($eventData)) {
+        uasort($eventData, 'sortByEventDate');
+        $eventData = array_slice($eventData, 0, 5, true);
+    }
+
     // Retrieve job data
     $jobData = $firebase->retrieve("job");
     $jobData = json_decode($jobData, true);
@@ -77,7 +89,6 @@ if (isset($_SESSION['forms_completed']) && $_SESSION['forms_completed'] == false
         usort($jobData, 'sortByDateJob');
     }
     ?>
-
 </head>
 
 <body>
@@ -90,7 +101,6 @@ if (isset($_SESSION['forms_completed']) && $_SESSION['forms_completed'] == false
     <!-- Mobile Menu start -->
     <?php include 'includes/mobile_view.php' ?>
     <!-- Mobile Menu end -->
-
 
     <!-- End Sale Statistic area-->
     <div class="main-content">
@@ -193,7 +203,6 @@ if (isset($_SESSION['forms_completed']) && $_SESSION['forms_completed'] == false
 
     <?php include 'global_chatbox.php'?>
 
-
     <!--  Custom JS-->
     <script>
         $('#logoutBtn').on('click', function () {
@@ -240,10 +249,6 @@ if (isset($_SESSION['forms_completed']) && $_SESSION['forms_completed'] == false
             });
         });
     </script>
-
-
-
-
 </body>
 
 </html>

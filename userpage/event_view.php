@@ -24,6 +24,19 @@
             $data = $firebase->retrieve("event");
             $data = json_decode($data, true);
 
+            // Function to sort events by date
+            function sortByEventDate($a, $b)
+            {
+                $dateA = strtotime($a['event_created']);
+                $dateB = strtotime($b['event_created']);
+                return $dateB - $dateA;
+            }
+
+            // Sort events by date and maintain unique ID
+            if (is_array($data)) {
+                uasort($data, 'sortByEventDate');
+            }
+
             foreach ($data as $eventID => $event) {
                 $eventTitle = htmlspecialchars($event['event_title']);
                 $eventDate = htmlspecialchars($event['event_date']);
