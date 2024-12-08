@@ -4,7 +4,6 @@ require_once '../includes/config.php';
 
 date_default_timezone_set('Asia/Manila');
 
-
 $firebase = new firebaseRDB($databaseURL);
 
 function timeAgo($timestamp) {
@@ -52,6 +51,10 @@ if (isset($_GET['job_id']) && isset($_GET['last_update']) && isset($_GET['alumni
             $commenterProfileUrl = $commenterData["profile_url"] ?? '';
             $commenterFirstName = $commenterData["firstname"] ?? '';
             $commenterLastName = $commenterData["lastname"] ?? '';
+            
+            // Check if the current user has liked the comment
+            $isLiked = isset($comment["liked_by"][$alumniId]);
+
             ?>
             <li data-comment-id="<?php echo $commentId; ?>" style="list-style:none;">
                 <div class="comment-avatar"><img src="<?php echo $commenterProfileUrl; ?>" alt=""></div>
@@ -62,7 +65,7 @@ if (isset($_GET['job_id']) && isset($_GET['last_update']) && isset($_GET['alumni
                         </h6>
                         <span><?php echo $comment["date_ago"]; ?></span>
                         <i class="fa fa-reply reply-button"></i>
-                        <i class="fa fa-heart heart-icon <?php echo in_array($alumniId, $comment["liked_by"] ?? []) ? 'liked' : ''; ?>"
+                        <i class="fa fa-heart heart-icon" style="color: <?php echo $isLiked ? 'red' : 'gray'; ?>;"
                             data-comment-id="<?php echo $commentId; ?>"></i>
                         <span class="heart-count"><?php echo isset($comment["heart_count"]) ? $comment["heart_count"] : 0; ?></span>
                     </div>
@@ -91,7 +94,6 @@ if (isset($_GET['job_id']) && isset($_GET['last_update']) && isset($_GET['alumni
                                 <div class="comment-header">
                                     <h6 class="comment-author">
                                     <a href="view_alumni_details.php?id=<?php echo htmlspecialchars($comment['alumni_id']); ?>"><?php echo htmlspecialchars($replyAuthorData["firstname"] ?? '') . " " . htmlspecialchars($replyAuthorData["lastname"] ?? ''); ?></a>
-
                                     </h6>
                                     <span><?php echo timeAgo($reply["date_replied"]); ?></span>
                                 </div>
