@@ -1,7 +1,0 @@
-
-
-# Ignore compiled binaries and build directories
-!.includes/config.php
-
-# But not these files...
-!.htaccess
