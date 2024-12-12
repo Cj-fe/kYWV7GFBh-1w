@@ -101,63 +101,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Add alumni data to Firebase
         $firebaseResult = $firebase->insert($table, $alumniData);
 
-        // Get the Firebase-generated ID
-        $firebaseId = null;
-        if ($firebaseResult !== null) {
-            $insertedData = $firebase->retrieve($table);
-            $insertedData = json_decode($insertedData, true);
-            if (is_array($insertedData)) {
-                $lastInserted = end($insertedData);
-                if ($lastInserted !== false) {
-                    $firebaseId = key($insertedData);
-                }
-            }
-        }
-
-        if ($firebaseId === null) {
+        if ($firebaseResult === null) {
             $response['status'] = 'error';
-            $response['message'] = 'Failed to get Firebase-generated ID.';
-            echo json_encode($response);
-            exit;
-        }
-
-        // MySQL connection
-        $mysqlConn = getMySQLConnection();
-        if (!$mysqlConn) {
-            $response['status'] = 'error';
-            $response['message'] = 'Failed to connect to MySQL database.';
-            echo json_encode($response);
-            exit;
-        }
-
-        // Prepare alumni data for MySQL
-        $mysqlData = array(
-            'id' => $firebaseId,
-            'firstname' => $firstname,
-            'forms_completed' => 0,
-            'lastname' => $lastname,
-            'middlename' => $middlename,
-            'studentid' => $studentid,
-        );
-
-        // Prepare MySQL query
-        $mysqlQuery = "INSERT INTO alumni_verified (" . implode(", ", array_keys($mysqlData)) . ") VALUES ('" . implode("', '", array_map(array($mysqlConn, 'real_escape_string'), $mysqlData)) . "')";
-
-        // Execute MySQL query
-        $mysqlResult = $mysqlConn->query($mysqlQuery);
-
-        // Close MySQL connection
-        $mysqlConn->close();
-
-        // Check results
-        if ($firebaseResult === null || !$mysqlResult) {
-            $response['status'] = 'error';
-            $response['message'] = 'Failed to add alumni data to one or both databases.';
-            error_log('Firebase error: ' . ($firebaseResult === null ? 'Failed to insert' : 'Inserted successfully'));
-            error_log('MySQL error: ' . ($mysqlResult ? 'Inserted successfully' : $mysqlConn->error));
+            $response['message'] = 'Failed to add alumni data to Firebase.';
         } else {
             $response['status'] = 'success';
-            $response['message'] = 'Alumni data added successfully to both databases!';
+            $response['message'] = 'Alumni data added successfully to Firebase!';
         }
 
         echo json_encode($response);
