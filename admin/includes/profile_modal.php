@@ -59,7 +59,10 @@
                     <div class="form-group">
                         <label for="tfa_switch" class="col-sm-3 control-label">
                             2FA
-                            <span data-toggle="tooltip" title="Two Factor Authentication" class="ml-2">
+                            <span data-toggle="popover" data-trigger="hover" data-html="true"
+                                data-original-title="Two Factor Authentication"
+                                data-content="Two Factor Authentication adds an extra layer of security by requiring not only a password and username but also something that only the user has on them."
+                                class="ml-2">
                                 <i class="fa fa-info-circle"></i>
                             </span>
                         </label>
@@ -73,7 +76,10 @@
                     <div class="form-group">
                         <label for="mfa_switch" class="col-sm-3 control-label">
                             MFA
-                            <span data-toggle="tooltip" title="Multi Factor Authentication" class="ml-2">
+                            <span data-toggle="popover" data-trigger="hover" data-html="true"
+                                data-original-title="Multi Factor Authentication"
+                                data-content="Multi Factor Authentication requires two or more verification factors to gain access to a resource such as an application or online account."
+                                class="ml-2">
                                 <i class="fa fa-info-circle"></i>
                             </span>
                         </label>
@@ -84,7 +90,6 @@
                             </label>
                         </div>
                     </div>
-
 
 
             </div>
@@ -101,14 +106,13 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-
-        $('[data-toggle="tooltip"]').tooltip();
-        
         // Get references to form elements
         const profileForm = document.querySelector('form');
         const tfaSwitch = document.getElementById('tfa_switch');
         const mfaSwitch = document.getElementById('mfa_switch');
         const saveButton = document.querySelector('button[name="save"]');
+
+        $('[data-toggle="popover"]').popover();
 
         // Initial states storage
         const initialStates = {
