@@ -58,7 +58,7 @@
                     <!-- Modified authentication toggle switches -->
                     <div class="form-group">
                         <label for="tfa_switch" class="col-sm-3 control-label">
-                        Two Factor Authentication
+                            2FA
                             <span data-toggle="tooltip" title="Two Factor Authentication" class="ml-2">
                                 <i class="fa fa-info-circle"></i>
                             </span>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="form-group">
                         <label for="mfa_switch" class="col-sm-3 control-label">
-                        Multi Factor Authentication
+                            MFA
                             <span data-toggle="tooltip" title="Multi Factor Authentication" class="ml-2">
                                 <i class="fa fa-info-circle"></i>
                             </span>
@@ -103,7 +103,7 @@
     document.addEventListener('DOMContentLoaded', function () {
 
         $('[data-toggle="tooltip"]').tooltip();
-
+        
         // Get references to form elements
         const profileForm = document.querySelector('form');
         const tfaSwitch = document.getElementById('tfa_switch');
