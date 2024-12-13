@@ -73,13 +73,21 @@ $data = array_slice($data, 0, 5);
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+<?php include 'includes/header.php' ?>
+
 <style>
     .swal2-shown,
     .swal2-height-auto {
         padding: 0 !important;
     }
+    .app-image {
+        max-width: 80%; /* Adjust the percentage as needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+
 </style>
-<?php include 'includes/header.php' ?>
+</head>
 
 <body>
 
