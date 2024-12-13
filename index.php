@@ -104,8 +104,6 @@ $data = array_slice($data, 0, 5);
         .swal2-height-auto {
             padding: 0 !important;
         }
-
-    
     </style>
 </head>
 
@@ -350,32 +348,35 @@ $data = array_slice($data, 0, 5);
     <!-- DEPARTMENT nd -->
 
     <div class="container-xxl py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Description Column -->
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-start px-3">Our App</h6>
-                <h1 class="mb-4">Download Our App</h1>
-                <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
-                    directly from your mobile device.</p>
-                <div class="d-flex">
-                    <a href="https://play.google.com/store/apps/details?id=com.example.app"
-                        class="btn btn-primary me-3">
-                        <i class="fab fa-google-play"></i> Google Play
-                    </a>
-                   
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Description Column -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title bg-white text-start px-3">Our App</h6>
+                    <h1 class="mb-4">Download Our App</h1>
+                    <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
+                        directly from your mobile device.</p>
+                    <div class="d-flex">
+                        <a href="admin/<?php echo htmlspecialchars($highestVersionData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
+                            class="btn btn-primary me-3">
+                            <i class="fab fa-google-play"></i> Download Version
+                            <?php echo htmlspecialchars($highestVersionData['version'], ENT_QUOTES, 'UTF-8'); ?>
+                        </a>
+
+                    </div>
                 </div>
-            </div>
-            <!-- Image Column -->
-            <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
-                <div class="d-flex justify-content-center">
-                    <img src="images/image_app_one.jpg" alt="Mobile App Preview" class="img-fluid rounded shadow me-3" style="max-width: 300px; max-height: 450px;">
-                    <img src="images/image_app_two.jpg" alt="Mobile App Preview" class="img-fluid rounded shadow" style="max-width: 300px; max-height: 450px;">
+                <!-- Image Column -->
+                <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="d-flex justify-content-center">
+                        <img src="images/image_app_one.jpg" alt="Mobile App Preview"
+                            class="img-fluid rounded shadow me-3" style="max-width: 300px; max-height: 450px;">
+                        <img src="images/image_app_two.jpg" alt="Mobile App Preview" class="img-fluid rounded shadow"
+                            style="max-width: 300px; max-height: 450px;">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
