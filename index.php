@@ -88,9 +88,8 @@ $data = array_slice($data, 0, 5);
             height: 300px;
             /* Set a fixed height */
             overflow: hidden;
-            left: 0;
-        right: 0;
-
+            margin-left: auto;
+            /* Align container to the right */
         }
 
         .app-image {
@@ -364,42 +363,36 @@ $data = array_slice($data, 0, 5);
     <!-- DEPARTMENT nd -->
 
     <!-- App Download Section Start -->
-    <!-- App Download Section Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Description Column -->
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-start px-3">Our App</h6>
-                <h1 class="mb-4">Download Our App</h1>
-                <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
-                    directly from your mobile device.</p>
-                <div class="d-flex">
-                    <a href="https://play.google.com/store/apps/details?id=com.example.app"
-                        class="btn btn-primary me-3">
-                        <i class="fab fa-google-play"></i> Google Play
-                    </a>
-                    <a href="https://apps.apple.com/us/app/example-app/id123456789" class="btn btn-primary">
-                        <i class="fab fa-apple"></i> App Store
-                    </a>
-                </div>
-            </div>
-            <!-- Image Column -->
-            <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
-                <div class="row">
-                   
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s" style="min-height: 350px;">
-                        <a class="position-relative d-block h-100 overflow-hidden" href="">
-                            <img class="img-fluid position-absolute w-100 h-100" src="images/image_app_two.jpg" alt="App Overlay"
-                                style="object-fit: cover;">
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Description Column -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title bg-white text-start px-3">Our App</h6>
+                    <h1 class="mb-4">Download Our App</h1>
+                    <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
+                        directly from your mobile device.</p>
+                    <div class="d-flex">
+                        <a href="https://play.google.com/store/apps/details?id=com.example.app"
+                            class="btn btn-primary me-3">
+                            <i class="fab fa-google-play"></i> Google Play
                         </a>
+                        <a href="https://apps.apple.com/us/app/example-app/id123456789" class="btn btn-primary">
+                            <i class="fab fa-apple"></i> App Store
+                        </a>
+                    </div>
+                </div>
+                <!-- Image Column -->
+                <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="image-layer-container">
+                        <img src="images/image_app_one.jpg" alt="App Preview" class="img-fluid app-image layer1">
+                        <img src="images/image_app_two.jpg" alt="App Overlay" class="img-fluid app-image layer2">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- App Download Section End -->
+
 
 
     <!-- News Start -->
