@@ -74,42 +74,52 @@ $data = array_slice($data, 0, 5);
 <html lang="en">
 
 <head>
-<?php include 'includes/header.php' ?>
+    <?php include 'includes/header.php' ?>
 
-<style>
-    .swal2-shown,
-    .swal2-height-auto {
-        padding: 0 !important;
-    }
-    .image-layer-container {
-        position: relative;
-        width: 100%;
-        height: 300px; /* Set a fixed height */
-        overflow: hidden;
-    }
+    <style>
+        .swal2-shown,
+        .swal2-height-auto {
+            padding: 0 !important;
+        }
 
-    .app-image {
-        position: absolute;
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain; /* Ensure the entire image is visible */
-    }
+        .image-layer-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            /* Set a fixed height */
+            overflow: hidden;
+            margin-left: auto;
+            /* Align container to the right */
+        }
 
-    .layer1 {
-        top: 0;
-        left: 0;
-        z-index: 1;
-        transform: translate(-10%, 0); /* Slightly offset for effect */
-    }
+        .app-image {
+            position: absolute;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            /* Ensure the entire image is visible */
+        }
 
-    .layer2 {
-        top: 10%;
-        left: 10%;
-        z-index: 2;
-        transform: translate(10%, 10%); /* Offset to create overlap */
-        opacity: 0.8; /* Optional: add transparency for effect */
-    }
-</style>
+        .layer1 {
+            top: 0;
+            right: 0;
+            /* Align to the right */
+            z-index: 1;
+            transform: translate(-10%, 0);
+            /* Slightly offset for effect */
+        }
+
+        .layer2 {
+            top: 10%;
+            right: 10%;
+            /* Align to the right with offset */
+            z-index: 2;
+            transform: translate(10%, 10%);
+            /* Offset to create overlap */
+            opacity: 0.8;
+            /* Optional: add transparency for effect */
+        }
+    </style>
 </head>
 
 <body>
@@ -352,36 +362,36 @@ $data = array_slice($data, 0, 5);
     </div>
     <!-- DEPARTMENT nd -->
 
-
-<!-- App Download Section Start -->
-<!-- App Download Section Start -->
-<div class="container-xxl py-5 bg-light">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Description Column -->
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-start px-3">Our App</h6>
-                <h1 class="mb-4">Download Our App</h1>
-                <p class="mb-4">Stay connected on the go! Download our app to access all features and updates directly from your mobile device.</p>
-                <div class="d-flex">
-                    <a href="https://play.google.com/store/apps/details?id=com.example.app" class="btn btn-primary me-3">
-                        <i class="fab fa-google-play"></i> Google Play
-                    </a>
-                    <a href="https://apps.apple.com/us/app/example-app/id123456789" class="btn btn-primary">
-                        <i class="fab fa-apple"></i> App Store
-                    </a>
+    <!-- App Download Section Start -->
+    <div class="container-xxl py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Description Column -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title bg-white text-start px-3">Our App</h6>
+                    <h1 class="mb-4">Download Our App</h1>
+                    <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
+                        directly from your mobile device.</p>
+                    <div class="d-flex">
+                        <a href="https://play.google.com/store/apps/details?id=com.example.app"
+                            class="btn btn-primary me-3">
+                            <i class="fab fa-google-play"></i> Google Play
+                        </a>
+                        <a href="https://apps.apple.com/us/app/example-app/id123456789" class="btn btn-primary">
+                            <i class="fab fa-apple"></i> App Store
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <!-- Image Column -->
-            <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
-                <div class="image-layer-container">
-                    <img src="images/image_app_two.jpg" alt="App Preview" class="img-fluid app-image layer1">
-                    <img src="images/image_app_two.jpg" alt="App Overlay" class="img-fluid app-image layer2">
+                <!-- Image Column -->
+                <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="image-layer-container">
+                        <img src="images/image_app_one.jpg" alt="App Preview" class="img-fluid app-image layer1">
+                        <img src="images/image_app_two.jpg" alt="App Overlay" class="img-fluid app-image layer2">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -408,7 +418,8 @@ $data = array_slice($data, 0, 5);
                                     </figure>
                                     <div class="probootstrap-text">
                                         <h3 class="news-title">
-                                            <?php echo htmlspecialchars($news['news_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                            <?php echo htmlspecialchars($news['news_title'], ENT_QUOTES, 'UTF-8'); ?>
+                                        </h3>
                                         <p class="news-description">
                                             <?php echo htmlspecialchars(strip_tags($news['news_description']), ENT_QUOTES, 'UTF-8'); ?>
                                         </p>
@@ -449,7 +460,8 @@ $data = array_slice($data, 0, 5);
                                         <div class="probootstrap-text"
                                             style="border-top: 1px solid silver; border-left: 1px solid silver; border-right: 1px solid silver; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
                                             <h3 class="event-title">
-                                                <?php echo htmlspecialchars($event['event_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                                <?php echo htmlspecialchars($event['event_title'], ENT_QUOTES, 'UTF-8'); ?>
+                                            </h3>
                                             <p class="event-description">
                                                 <?php echo htmlspecialchars(strip_tags($event['event_description']), ENT_QUOTES, 'UTF-8'); ?>
                                             </p>
@@ -494,7 +506,8 @@ $data = array_slice($data, 0, 5);
                                         <div class="probootstrap-text"
                                             style="border-top: 1px solid silver; border-left: 1px solid silver; border-right: 1px solid silver; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
                                             <h3 class="job-title">
-                                                <?php echo htmlspecialchars($job['job_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                                <?php echo htmlspecialchars($job['job_title'], ENT_QUOTES, 'UTF-8'); ?>
+                                            </h3>
                                             <p class="event-description">
                                                 <?php echo htmlspecialchars(strip_tags($job['job_description']), ENT_QUOTES, 'UTF-8'); ?>
                                             </p>
