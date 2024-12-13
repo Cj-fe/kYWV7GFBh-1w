@@ -331,7 +331,8 @@ $data = array_slice($data, 0, 5);
 
 
 <!-- App Download Section Start -->
-<div class="container-xxl py-5">
+<!-- App Download Section Start -->
+<div class="container-xxl py-5 bg-light">
     <div class="container">
         <div class="row align-items-center">
             <!-- Description Column -->
@@ -355,6 +356,14 @@ $data = array_slice($data, 0, 5);
         </div>
     </div>
 </div>
+<!-- App Download Section End -->
+
+<style>
+    .app-image {
+        max-width: 80%; /* Adjust the percentage as needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+</style>
 <!-- App Download Section End -->
 
 
