@@ -83,42 +83,34 @@ $data = array_slice($data, 0, 5);
         }
 
         .image-layer-container {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            /* Set a fixed height */
-            overflow: hidden;
-            margin-left: auto;
-            /* Align container to the right */
-        }
+        position: relative;
+        width: 100%;
+        height: 300px; /* Set a fixed height */
+        overflow: hidden;
+    }
 
-        .app-image {
-            position: absolute;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            /* Ensure the entire image is visible */
-        }
+    .app-image {
+        position: absolute;
+        max-width: 80%; /* Adjust width as needed */
+        max-height: 100%;
+        object-fit: contain; /* Ensure the entire image is visible */
+        left: 0;
+        right: 0;
+        margin: auto; /* Center horizontally */
+    }
 
-        .layer1 {
-            top: 0;
-            right: 0;
-            /* Align to the right */
-            z-index: 1;
-            transform: translate(-10%, 0);
-            /* Slightly offset for effect */
-        }
+    .layer1 {
+        top: 0;
+        z-index: 1;
+        transform: translateY(-10%); /* Slightly offset for effect */
+    }
 
-        .layer2 {
-            top: 10%;
-            right: 10%;
-            /* Align to the right with offset */
-            z-index: 2;
-            transform: translate(10%, 10%);
-            /* Offset to create overlap */
-            opacity: 0.8;
-            /* Optional: add transparency for effect */
-        }
+    .layer2 {
+        top: 10%;
+        z-index: 2;
+        transform: translateY(10%); /* Offset to create overlap */
+        opacity: 0.8; /* Optional: add transparency for effect */
+    }
     </style>
 </head>
 
