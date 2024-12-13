@@ -387,12 +387,7 @@ $data = array_slice($data, 0, 5);
             <!-- Image Column -->
             <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.1s" style="min-height: 350px;">
-                        <a class="position-relative d-block h-100 overflow-hidden" href="">
-                            <img class="img-fluid position-absolute w-100 h-100" src="images/image_app_one.jpg" alt="App Preview"
-                                style="object-fit: cover;">
-                        </a>
-                    </div>
+                   
                     <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s" style="min-height: 350px;">
                         <a class="position-relative d-block h-100 overflow-hidden" href="">
                             <img class="img-fluid position-absolute w-100 h-100" src="images/image_app_two.jpg" alt="App Overlay"
