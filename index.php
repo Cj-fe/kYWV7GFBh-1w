@@ -323,7 +323,7 @@ $data = array_slice($data, 0, 5);
 
 
 <!-- App Download Section Start -->
-<div class="container-xxl py-5 bg-light">
+<div class="container-xxl py-5">
     <div class="container">
         <div class="row align-items-center">
             <!-- Description Column -->
