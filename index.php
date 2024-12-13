@@ -81,20 +81,33 @@ $data = array_slice($data, 0, 5);
     .swal2-height-auto {
         padding: 0 !important;
     }
-    .app-image-container {
+    .image-layer-container {
         position: relative;
-        width: 100%; /* Full width of the column */
-        height: 300px; /* Set a fixed height */
-        overflow: hidden; /* Hide overflow */
+        width: 100%;
+        height: 300px; /* Adjust height as needed */
+        overflow: hidden;
     }
 
     .app-image {
         position: absolute;
+        width: 80%; /* Adjust width as needed */
+        height: auto;
+        object-fit: cover;
+    }
+
+    .layer1 {
         top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        height: 100%; /* Full height of the container */
-        object-fit: cover; /* Cover the container while maintaining aspect ratio */
+        left: 0;
+        z-index: 1;
+        transform: translate(-10%, 0); /* Slightly offset for effect */
+    }
+
+    .layer2 {
+        top: 10%;
+        left: 10%;
+        z-index: 2;
+        transform: translate(10%, 10%); /* Offset to create overlap */
+        opacity: 0.8; /* Optional: add transparency for effect */
     }
 </style>
 </head>
