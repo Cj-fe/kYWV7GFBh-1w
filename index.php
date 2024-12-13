@@ -81,11 +81,21 @@ $data = array_slice($data, 0, 5);
     .swal2-height-auto {
         padding: 0 !important;
     }
-    .app-image {
-        max-width: 80%; /* Adjust the percentage as needed */
-        height: auto; /* Maintain aspect ratio */
+    .app-image-container {
+        position: relative;
+        width: 100%; /* Full width of the column */
+        height: 300px; /* Set a fixed height */
+        overflow: hidden; /* Hide overflow */
     }
 
+    .app-image {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 100%; /* Full height of the container */
+        object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    }
 </style>
 </head>
 
@@ -357,15 +367,7 @@ $data = array_slice($data, 0, 5);
         </div>
     </div>
 </div>
-<!-- App Download Section End -->
 
-<style>
-    .app-image {
-        max-width: 80%; /* Adjust the percentage as needed */
-        height: auto; /* Maintain aspect ratio */
-    }
-</style>
-<!-- App Download Section End -->
 
 
     <!-- News Start -->
