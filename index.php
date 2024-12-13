@@ -341,6 +341,7 @@ $data = array_slice($data, 0, 5);
 
 
 <!-- App Download Section Start -->
+<!-- App Download Section Start -->
 <div class="container-xxl py-5 bg-light">
     <div class="container">
         <div class="row align-items-center">
@@ -360,8 +361,9 @@ $data = array_slice($data, 0, 5);
             </div>
             <!-- Image Column -->
             <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
-                <div class="app-image-container">
-                    <img src="images/image_app_one.jpg" alt="App Preview" class="img-fluid app-image">
+                <div class="image-layer-container">
+                    <img src="images/image_app_two.jpg" alt="App Preview" class="img-fluid app-image layer1">
+                    <img src="images/image_app_two.jpg" alt="App Overlay" class="img-fluid app-image layer2">
                 </div>
             </div>
         </div>
