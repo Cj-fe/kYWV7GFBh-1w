@@ -358,12 +358,11 @@ $data = array_slice($data, 0, 5);
                     <h1 class="mb-4">Download Our App</h1>
                     <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
                         directly from your mobile device.</p>
-                        <div class="d-flex">
-    <a href="admin/<?php echo htmlspecialchars($highestVersionData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
+                    <div class="d-flex">
+                    <a href="admin/<?php echo htmlspecialchars($highestVersionData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
        class="btn btn-primary me-3">
        <i class="fab fa-google-play"></i> Download Version <?php echo htmlspecialchars($highestVersionData['version'], ENT_QUOTES, 'UTF-8'); ?>
     </a>
-</div>
                     </div>
                 </div>
                 <!-- Image Column -->
