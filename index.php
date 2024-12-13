@@ -82,43 +82,7 @@ $data = array_slice($data, 0, 5);
             padding: 0 !important;
         }
 
-        .image-layer-container {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            /* Set a fixed height */
-            overflow: hidden;
-            margin-left: auto;
-            /* Align container to the right */
-        }
-
-        .app-image {
-            position: absolute;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            /* Ensure the entire image is visible */
-        }
-
-        .layer1 {
-            top: 0;
-            right: 0;
-            /* Align to the right */
-            z-index: 1;
-            transform: translate(-10%, 0);
-            /* Slightly offset for effect */
-        }
-
-        .layer2 {
-            top: 10%;
-            right: 10%;
-            /* Align to the right with offset */
-            z-index: 2;
-            transform: translate(10%, 10%);
-            /* Offset to create overlap */
-            opacity: 0.8;
-            /* Optional: add transparency for effect */
-        }
+    
     </style>
 </head>
 
@@ -363,41 +327,33 @@ $data = array_slice($data, 0, 5);
     <!-- DEPARTMENT nd -->
 
     <!-- App Download Section Start -->
-    <div class="container-xxl py-5 category">
-    <div class="container">
-        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="section-title bg-white text-center px-3">Our App</h6>
-            <h1 class="mb-5">Download Our App</h1>
-        </div>
-        <div class="row g-3">
-            <div class="col-lg-7 col-md-6">
-                <div class="row g-3">
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.1s">
-                        <a class="position-relative d-block overflow-hidden" href="https://play.google.com/store/apps/details?id=com.example.app">
-                            <img class="img-fluid" src="images/google_play.png" alt="Google Play">
-                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
-                                <h5 class="m-0">Google Play</h5>
-                            </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Description Column -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title bg-white text-start px-3">Our App</h6>
+                    <h1 class="mb-4">Download Our App</h1>
+                    <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
+                        directly from your mobile device.</p>
+                    <div class="d-flex">
+                        <a href="https://play.google.com/store/apps/details?id=com.example.app"
+                            class="btn btn-primary me-3">
+                            <i class="fab fa-google-play"></i> Google Play
                         </a>
-                    </div>
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
-                        <a class="position-relative d-block overflow-hidden" href="https://apps.apple.com/us/app/example-app/id123456789">
-                            <img class="img-fluid" src="images/app_store.png" alt="App Store">
-                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
-                                <h5 class="m-0">App Store</h5>
-                            </div>
+                        <a href="https://apps.apple.com/us/app/example-app/id123456789" class="btn btn-primary">
+                            <i class="fab fa-apple"></i> App Store
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
-                <a class="position-relative d-block h-100 overflow-hidden" href="#">
-                    <img class="img-fluid position-absolute w-100 h-100" src="images/image_app_one.jpg" alt="App Preview" style="object-fit: cover;">
-                </a>
+                <!-- Image Column -->
+                <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
+
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 
 
     <!-- News Start -->
