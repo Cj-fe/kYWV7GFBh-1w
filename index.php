@@ -338,11 +338,9 @@ $data = array_slice($data, 0, 5);
                 <div class="d-flex">
                     <a href="https://play.google.com/store/apps/details?id=com.example.app"
                         class="btn btn-primary me-3">
-                        <i class="fab fa-google-play"></i> Google Play
+                        <i class="fab fa-google-play"></i> Download
                     </a>
-                    <a href="https://apps.apple.com/us/app/example-app/id123456789" class="btn btn-primary">
-                        <i class="fab fa-apple"></i> App Store
-                    </a>
+                   
                 </div>
             </div>
             <!-- Image Column -->
