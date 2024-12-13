@@ -322,32 +322,39 @@ $data = array_slice($data, 0, 5);
     <!-- DEPARTMENT nd -->
 
 
-<!-- App Download Section Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Description Column -->
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-start px-3">Our App</h6>
-                <h1 class="mb-4">Download Our App</h1>
-                <p class="mb-4">Stay connected on the go! Download our app to access all features and updates directly from your mobile device.</p>
-                <div class="d-flex">
-                    <a href="https://play.google.com/store/apps/details?id=com.example.app" class="btn btn-primary me-3">
-                        <i class="fab fa-google-play"></i> Google Play
-                    </a>
-                    <a href="https://apps.apple.com/us/app/example-app/id123456789" class="btn btn-primary">
-                        <i class="fab fa-apple"></i> App Store
-                    </a>
+    <!-- App Download Section Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Description Column -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h6 class="section-title bg-white text-start px-3">Our App</h6>
+                    <h1 class="mb-4">Download Our App</h1>
+                    <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
+                        directly from your mobile device.</p>
+                    <!-- Image Layering Section Start -->
+                    <div class="container-xxl py-5 bg-light">
+                        <div class="container position-relative" style="height: 400px;">
+                            <!-- Background Image -->
+                            <img src="images/image_app_one.jpg" alt="Background Image"
+                                class="img-fluid position-absolute top-0 start-0" style="width: 50%; height: auto;">
+
+                            <!-- Foreground Image -->
+                            <img src="images/image_app_one.jpg" alt="Foreground Image"
+                                class="img-fluid position-absolute"
+                                style="right: 0; top: 50%; transform: translateY(-50%); width: 30%; height: auto;">
+                        </div>
+                    </div>
+                    <!-- Image Layering Section End -->
                 </div>
-            </div>
-            <!-- Image Column -->
-            <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
-                <img src="homepage/img/app-preview.png" alt="App Preview" class="img-fluid">
+                <!-- Image Column -->
+                <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <img src="homepage/img/app-preview.png" alt="App Preview" class="img-fluid">
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- App Download Section End -->
+    <!-- App Download Section End -->
 
 
     <!-- News Start -->
@@ -373,7 +380,8 @@ $data = array_slice($data, 0, 5);
                                     </figure>
                                     <div class="probootstrap-text">
                                         <h3 class="news-title">
-                                            <?php echo htmlspecialchars($news['news_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                            <?php echo htmlspecialchars($news['news_title'], ENT_QUOTES, 'UTF-8'); ?>
+                                        </h3>
                                         <p class="news-description">
                                             <?php echo htmlspecialchars(strip_tags($news['news_description']), ENT_QUOTES, 'UTF-8'); ?>
                                         </p>
@@ -414,7 +422,8 @@ $data = array_slice($data, 0, 5);
                                         <div class="probootstrap-text"
                                             style="border-top: 1px solid silver; border-left: 1px solid silver; border-right: 1px solid silver; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
                                             <h3 class="event-title">
-                                                <?php echo htmlspecialchars($event['event_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                                <?php echo htmlspecialchars($event['event_title'], ENT_QUOTES, 'UTF-8'); ?>
+                                            </h3>
                                             <p class="event-description">
                                                 <?php echo htmlspecialchars(strip_tags($event['event_description']), ENT_QUOTES, 'UTF-8'); ?>
                                             </p>
@@ -459,7 +468,8 @@ $data = array_slice($data, 0, 5);
                                         <div class="probootstrap-text"
                                             style="border-top: 1px solid silver; border-left: 1px solid silver; border-right: 1px solid silver; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
                                             <h3 class="job-title">
-                                                <?php echo htmlspecialchars($job['job_title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                                <?php echo htmlspecialchars($job['job_title'], ENT_QUOTES, 'UTF-8'); ?>
+                                            </h3>
                                             <p class="event-description">
                                                 <?php echo htmlspecialchars(strip_tags($job['job_description']), ENT_QUOTES, 'UTF-8'); ?>
                                             </p>
