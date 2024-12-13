@@ -326,7 +326,6 @@ $data = array_slice($data, 0, 5);
     </div>
     <!-- DEPARTMENT nd -->
 
-    <!-- App Download Section Start -->
     <div class="container-xxl py-5">
     <div class="container">
         <div class="row align-items-center">
@@ -348,7 +347,7 @@ $data = array_slice($data, 0, 5);
             </div>
             <!-- Image Column -->
             <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
-                <img src="images/image_app_one.jpg" alt="Mobile App Preview" class="img-fluid rounded shadow" style="max-width: 400px; height: auto;">
+                <img src="images/image_app_one.jpg" alt="Mobile App Preview" class="img-fluid rounded shadow" style="max-width: 400px; max-height: 300px;">
             </div>
         </div>
     </div>
