@@ -84,15 +84,15 @@ $data = array_slice($data, 0, 5);
     .image-layer-container {
         position: relative;
         width: 100%;
-        height: 300px; /* Adjust height as needed */
+        height: 300px; /* Set a fixed height */
         overflow: hidden;
     }
 
     .app-image {
         position: absolute;
-        width: 80%; /* Adjust width as needed */
-        height: auto;
-        object-fit: cover;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* Ensure the entire image is visible */
     }
 
     .layer1 {
