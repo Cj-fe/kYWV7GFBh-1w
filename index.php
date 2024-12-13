@@ -62,7 +62,28 @@ $data = json_decode($firebase->retrieve("news"), true) ?? [];
 $eventData = json_decode($firebase->retrieve("event"), true) ?? [];
 $jobData = json_decode($firebase->retrieve("job"), true) ?? [];
 
-$applicationData = json_decode($firebase->retrieve("application"), true);
+// Retrieve all application data
+$applications = json_decode($firebase->retrieve("application"), true);
+
+// Initialize variables to track the highest version
+$highestVersion = null;
+$highestVersionData = null;
+
+// Iterate through each application entry
+foreach ($applications as $application) {
+    // Compare version numbers
+    if ($highestVersion === null || version_compare($application['version'], $highestVersion, '>')) {
+        $highestVersion = $application['version'];
+        $highestVersionData = $application;
+    }
+}
+
+// Ensure the highest version data is found
+if (!$highestVersionData) {
+    // Handle the error, e.g., log it or display a message
+    echo "No valid application data found.";
+    exit();
+}
 
 // Sort and slice data as needed
 usort($jobData, function ($a, $b): int {
@@ -337,11 +358,12 @@ $data = array_slice($data, 0, 5);
                     <h1 class="mb-4">Download Our App</h1>
                     <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
                         directly from your mobile device.</p>
-                    <div class="d-flex">
-                        <a href="<?php echo htmlspecialchars($applicationData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
-                            class="btn btn-primary me-3">
-                            <i class="fab fa-google-play"></i> Download
-                        </a>
+                        <div class="d-flex">
+    <a href="admin/<?php echo htmlspecialchars($highestVersionData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
+       class="btn btn-primary me-3">
+       <i class="fab fa-google-play"></i> Download Version <?php echo htmlspecialchars($highestVersionData['version'], ENT_QUOTES, 'UTF-8'); ?>
+    </a>
+</div>
                     </div>
                 </div>
                 <!-- Image Column -->
