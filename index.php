@@ -16,7 +16,6 @@ $firebase = new firebaseRDB($databaseURL);
 $adminData = $firebase->retrieve("admin");
 $adminData = json_decode($adminData, true);
 
-$applicationData = json_decode($firebase->retrieve("application"), true);
 
 // Ensure admin data is retrieved
 if (!$adminData || !isset($adminData[$adminNodeKey])) {
@@ -57,17 +56,13 @@ if (isset($_SESSION['alumni'])) {
     exit();
 }
 
-// Ensure application data is retrieved
-if (!$applicationData) {
-    // Handle the error, e.g., log it or display a message
-    echo "Application data could not be retrieved.";
-    exit();
-}
 
 // Retrieve data from Firebase
 $data = json_decode($firebase->retrieve("news"), true) ?? [];
 $eventData = json_decode($firebase->retrieve("event"), true) ?? [];
 $jobData = json_decode($firebase->retrieve("job"), true) ?? [];
+
+$applicationData = json_decode($firebase->retrieve("application"), true);
 
 // Sort and slice data as needed
 usort($jobData, function ($a, $b): int {
@@ -343,7 +338,7 @@ $data = array_slice($data, 0, 5);
                     <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
                         directly from your mobile device.</p>
                     <div class="d-flex">
-                        <a href="admin/<?php echo htmlspecialchars($applicationData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
+                        <a href="<?php echo htmlspecialchars($applicationData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
                             class="btn btn-primary me-3">
                             <i class="fab fa-google-play"></i> Download
                         </a>
