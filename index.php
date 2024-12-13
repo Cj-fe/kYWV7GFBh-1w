@@ -358,7 +358,7 @@ $data = array_slice($data, 0, 5);
                         directly from your mobile device.</p>
                     <div class="d-flex" >
                         <a href="admin/<?php echo htmlspecialchars($highestVersionData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
-                        style="padding:30px;" class="btn btn-primary me-3">
+                        style="padding:10px;" class="btn btn-primary me-3">
                             <i class="fab fa-android"></i>&nbsp; &nbsp;Download Version
                             <?php echo htmlspecialchars($highestVersionData['version'], ENT_QUOTES, 'UTF-8'); ?>
                         </a>
