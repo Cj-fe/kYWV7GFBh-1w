@@ -322,6 +322,34 @@ $data = array_slice($data, 0, 5);
     <!-- DEPARTMENT nd -->
 
 
+    <!-- App Download Section Start -->
+<div class="container-xxl py-5 bg-light">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center px-3">Our App</h6>
+            <h1 class="mb-5">Download Our App</h1>
+            <p class="mb-4">Stay connected on the go! Download our app to access all features and updates directly from your mobile device.</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="app-download text-center">
+                    <img src="homepage/img/app-preview.png" alt="App Preview" class="img-fluid mb-4">
+                    <div class="d-flex justify-content-center">
+                        <a href="https://play.google.com/store/apps/details?id=com.example.app" class="btn btn-primary me-3">
+                            <i class="fab fa-google-play"></i> Google Play
+                        </a>
+                        <a href="https://apps.apple.com/us/app/example-app/id123456789" class="btn btn-primary">
+                            <i class="fab fa-apple"></i> App Store
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- App Download Section End -->
+
+
     <!-- News Start -->
 
     </style>
