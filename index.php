@@ -359,7 +359,7 @@ $data = array_slice($data, 0, 5);
                     <div class="d-flex">
                         <a href="admin/<?php echo htmlspecialchars($highestVersionData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
                             class="btn btn-primary me-3">
-                            <i class="fa fa-android"></i> Download Version
+                             Download Version
                             <?php echo htmlspecialchars($highestVersionData['version'], ENT_QUOTES, 'UTF-8'); ?>
                         </a>
 
