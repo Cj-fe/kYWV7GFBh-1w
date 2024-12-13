@@ -363,36 +363,41 @@ $data = array_slice($data, 0, 5);
     <!-- DEPARTMENT nd -->
 
     <!-- App Download Section Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Description Column -->
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="section-title bg-white text-start px-3">Our App</h6>
-                    <h1 class="mb-4">Download Our App</h1>
-                    <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
-                        directly from your mobile device.</p>
-                    <div class="d-flex">
-                        <a href="https://play.google.com/store/apps/details?id=com.example.app"
-                            class="btn btn-primary me-3">
-                            <i class="fab fa-google-play"></i> Google Play
-                        </a>
-                        <a href="https://apps.apple.com/us/app/example-app/id123456789" class="btn btn-primary">
-                            <i class="fab fa-apple"></i> App Store
+    <div class="container-xxl py-5 category">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center px-3">Our App</h6>
+            <h1 class="mb-5">Download Our App</h1>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-7 col-md-6">
+                <div class="row g-3">
+                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.1s">
+                        <a class="position-relative d-block overflow-hidden" href="https://play.google.com/store/apps/details?id=com.example.app">
+                            <img class="img-fluid" src="images/google_play.png" alt="Google Play">
+                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                <h5 class="m-0">Google Play</h5>
+                            </div>
                         </a>
                     </div>
-                </div>
-                <!-- Image Column -->
-                <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="image-layer-container">
-                        <img src="images/image_app_one.jpg" alt="App Preview" class="img-fluid app-image layer1">
-                        <img src="images/image_app_two.jpg" alt="App Overlay" class="img-fluid app-image layer2">
+                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
+                        <a class="position-relative d-block overflow-hidden" href="https://apps.apple.com/us/app/example-app/id123456789">
+                            <img class="img-fluid" src="images/app_store.png" alt="App Store">
+                            <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
+                                <h5 class="m-0">App Store</h5>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
+                <a class="position-relative d-block h-100 overflow-hidden" href="#">
+                    <img class="img-fluid position-absolute w-100 h-100" src="images/image_app_one.jpg" alt="App Preview" style="object-fit: cover;">
+                </a>
+            </div>
         </div>
     </div>
-
+</div>
 
 
     <!-- News Start -->
