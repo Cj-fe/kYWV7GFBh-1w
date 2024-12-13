@@ -356,7 +356,7 @@ $data = array_slice($data, 0, 5);
                     <h1 class="mb-4">Download Our App</h1>
                     <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
                         directly from your mobile device.</p>
-                    <div class="d-flex">
+                    <div class="d-flex" style="padding:11px;">
                         <a href="admin/<?php echo htmlspecialchars($highestVersionData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
                             class="btn btn-primary me-3">
                             <i class="fab fa-android"></i>&nbsp; &nbsp;Download Version
