@@ -93,12 +93,14 @@ $data = array_slice($data, 0, 5);
         }
 
         .app-image {
-            position: absolute;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            /* Ensure the entire image is visible */
-        }
+        position: absolute;
+        max-width: 80%; /* Adjust width as needed */
+        max-height: 100%;
+        object-fit: contain; /* Ensure the entire image is visible */
+        left: 0;
+        right: 0;
+        margin: auto; /* Center horizontally */
+    }
 
         .layer1 {
             top: 0;
