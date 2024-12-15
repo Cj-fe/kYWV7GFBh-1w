@@ -224,31 +224,36 @@
       const removeSelectedButton = document.getElementById('removeSelectedButton');
 
       showModalButton.addEventListener('click', function () {
-        // Clear previous data
-        modalTableBody.innerHTML = '';
-        // Clone rows from outside table and append to modal table
-        Array.from(outsideTableBody.rows).forEach(row => {
-          // Clone the row
-          const clonedRow = row.cloneNode(true);
-          // Remove any existing checkbox if mistakenly added
-          const existingCheckbox = clonedRow.querySelector('td:first-child input[type="checkbox"]');
-          if (existingCheckbox) {
-            existingCheckbox.remove();
-          }
-          // Add checkbox to the first cell
-          const checkboxCell = document.createElement('td');
-          const checkbox = document.createElement('input');
-          checkbox.type = 'checkbox';
-          checkbox.className = 'modal-checkbox';
-          checkbox.dataset.id = row.cells[1].textContent.trim(); // Assuming student ID is in the second cell
-          checkboxCell.appendChild(checkbox);
-          clonedRow.insertBefore(checkboxCell, clonedRow.cells[0]);
-          // Append the modified row to modal table
-          modalTableBody.appendChild(clonedRow);
-        });
-        // Show the modal
-        $('#dataModal').modal('show');
-      });
+  // Clear previous data
+  modalTableBody.innerHTML = '';
+  // Clone rows from outside table and append to modal table
+  Array.from(outsideTableBody.rows).forEach(row => {
+    // Clone the row
+    const clonedRow = row.cloneNode(true);
+    // Remove the Alumni ID cell (first cell)
+    clonedRow.deleteCell(0);
+
+    // Remove any existing checkbox if mistakenly added
+    const existingCheckbox = clonedRow.querySelector('td:first-child input[type="checkbox"]');
+    if (existingCheckbox) {
+      existingCheckbox.remove();
+    }
+
+    // Add checkbox to the first cell
+    const checkboxCell = document.createElement('td');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.className = 'modal-checkbox';
+    checkbox.dataset.id = row.cells[1].textContent.trim(); // Assuming student ID is in the second cell
+    checkboxCell.appendChild(checkbox);
+    clonedRow.insertBefore(checkboxCell, clonedRow.cells[0]);
+
+    // Append the modified row to modal table
+    modalTableBody.appendChild(clonedRow);
+  });
+  // Show the modal
+  $('#dataModal').modal('show');
+});
 
       removeSelectedButton.addEventListener('click', function () {
         // Remove selected rows from modal table
