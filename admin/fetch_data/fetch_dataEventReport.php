@@ -43,7 +43,6 @@ if (is_array($eventParticipationData) && is_array($alumniData) && is_array($even
             if ((!$filterEventId || $eventId == $filterEventId) && (!$filterCourse || $filterCourse == $courseId) && (!$filterBatch || $filterBatch == $batchId)) {
                 echo "<tr>
                     <td style='display:none;'><input type='checkbox' class='modal-checkbox' data-id='" . htmlspecialchars($id) . "'></td>
-                    <td>" . htmlspecialchars($alumni['studentid']) . "</td>
                     <td>" . htmlspecialchars($alumniName) . "</td>
                     <td>" . htmlspecialchars($courseName) . "</td>
                     <td>" . htmlspecialchars($batchYear) . "</td>
