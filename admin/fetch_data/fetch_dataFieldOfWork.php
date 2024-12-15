@@ -23,15 +23,23 @@ if (is_array($alumniData) && count($alumniData) > 0) {
             continue;
         }
 
-        // Count based on work status
-        if ($workStatus === 'Employed') {
-            $status_html = '<span class="label label-success" style="font-size: 12px !important; padding: 5px 20px !important; background: #4caf50 !important">EMPLOYED</span>';
-            $employedCount++;
-        } elseif ($workStatus === 'Unemployed') {
-            $status_html = '<span class="label label-danger" style="font-size: 12px !important; padding: 5px 20px !important; background: #ff5252 !important">UNEMPLOYED</span>';
-            $unemployedCount++;
-        } else {
-            $status_html = '<span class="label label-default" style="font-size: 12px !important; padding: 5px 20px !important; background: #b0bec5 !important">UNKNOWN</span>';
+        // Enhanced work status handling
+        switch ($workStatus) {
+            case 'Employed':
+                $status_html = '<span class="label label-success" style="font-size: 12px !important; padding: 5px 20px !important; background: #4caf50 !important">EMPLOYED</span>';
+                $employedCount++;
+                break;
+            case 'Unemployed':
+                $status_html = '<span class="label label-danger" style="font-size: 12px !important; padding: 5px 20px !important; background: #ff5252 !important">UNEMPLOYED</span>';
+                $unemployedCount++;
+                break;
+            default:
+                // Custom work status handling
+                $status_html = sprintf(
+                    '<span class="label label-info" style="font-size: 12px !important; padding: 5px 20px !important; background: #03a9f4 !important">%s</span>', 
+                    htmlspecialchars(strtoupper($workStatus))
+                );
+                break;
         }
         $totalCount++;
 
