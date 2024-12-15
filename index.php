@@ -104,11 +104,6 @@ $data = array_slice($data, 0, 5);
         .swal2-height-auto {
             padding: 0 !important;
         }
-        @media screen (max-width: 767px) { /* Adjust the max-width as needed for your breakpoint */
-        .hide-on-mobile {
-            display: none !important;
-        }
-    }
     </style>
 </head>
 
