@@ -104,6 +104,11 @@ $data = array_slice($data, 0, 5);
         .swal2-height-auto {
             padding: 0 !important;
         }
+        @media screen (max-width: 767px) { /* Adjust the max-width as needed for your breakpoint */
+        .hide-on-mobile {
+            display: none;
+        }
+    }
     </style>
 </head>
 
@@ -369,7 +374,7 @@ $data = array_slice($data, 0, 5);
                 <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
                     <div class="d-flex flex-column flex-lg-row justify-content-center">
                         <img src="images/image_app_one.jpg" alt="Mobile App Preview"
-                            class="img-fluid rounded shadow me-lg-3 mb-3 mb-lg-0"
+                            class="img-fluid rounded shadow me-lg-3 mb-3 mb-lg-0 hide-on-mobile"
                             style="max-width: 300px; max-height: 450px;">
                         <img src="images/image_app_two.jpg" alt="Mobile App Preview" class="img-fluid rounded shadow"
                             style="max-width: 300px; max-height: 450px;">
