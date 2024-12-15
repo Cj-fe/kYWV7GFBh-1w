@@ -503,7 +503,7 @@ $data = json_decode($data, true); // Decode JSON data into associative arrays
                     <thead>
                         <tr>
                             <th></th> <!-- Checkbox column -->
-                            <th>Alumni ID</th>
+        
                             <th>Name</th>
                             <th>Course</th>
                             <th>Batch</th>
