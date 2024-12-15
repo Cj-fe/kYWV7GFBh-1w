@@ -356,9 +356,9 @@ $data = array_slice($data, 0, 5);
                     <h1 class="mb-4">Download Our App</h1>
                     <p class="mb-4">Stay connected on the go! Download our app to access all features and updates
                         directly from your mobile device.</p>
-                    <div class="d-flex" >
+                    <div class="d-flex">
                         <a href="admin/<?php echo htmlspecialchars($highestVersionData['apk_file_path'], ENT_QUOTES, 'UTF-8'); ?>"
-                        style="padding:10px;" class="btn btn-primary me-3">
+                            style="padding:10px;" class="btn btn-primary me-3">
                             <i class="fab fa-android"></i>&nbsp; &nbsp;Download Version
                             <?php echo htmlspecialchars($highestVersionData['version'], ENT_QUOTES, 'UTF-8'); ?>
                         </a>
@@ -367,9 +367,10 @@ $data = array_slice($data, 0, 5);
                 </div>
                 <!-- Image Column -->
                 <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex flex-column flex-lg-row justify-content-center">
                         <img src="images/image_app_one.jpg" alt="Mobile App Preview"
-                            class="img-fluid rounded shadow me-3" style="max-width: 300px; max-height: 450px;">
+                            class="img-fluid rounded shadow me-lg-3 mb-3 mb-lg-0"
+                            style="max-width: 300px; max-height: 450px;">
                         <img src="images/image_app_two.jpg" alt="Mobile App Preview" class="img-fluid rounded shadow"
                             style="max-width: 300px; max-height: 450px;">
                     </div>
