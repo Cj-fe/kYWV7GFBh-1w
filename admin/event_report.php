@@ -233,18 +233,13 @@
     // Remove the Alumni ID cell (first cell)
     clonedRow.deleteCell(0);
 
-    // Remove any existing checkbox if mistakenly added
-    const existingCheckbox = clonedRow.querySelector('td:first-child input[type="checkbox"]');
-    if (existingCheckbox) {
-      existingCheckbox.remove();
-    }
-
     // Add checkbox to the first cell
     const checkboxCell = document.createElement('td');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.className = 'modal-checkbox';
-    checkbox.dataset.id = row.cells[1].textContent.trim(); // Assuming student ID is in the second cell
+    // Assuming the Name is now the first cell after removing Alumni ID
+    checkbox.dataset.id = row.cells[1].textContent.trim(); 
     checkboxCell.appendChild(checkbox);
     clonedRow.insertBefore(checkboxCell, clonedRow.cells[0]);
 
