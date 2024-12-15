@@ -106,7 +106,7 @@ $data = array_slice($data, 0, 5);
         }
 
         /* Add this CSS to your existing styles */
-        @media (max-width: 768px) {
+        @media screen (max-width: 768px) {
             .hide-on-mobile {
                 display: none;
             }
