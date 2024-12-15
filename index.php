@@ -367,14 +367,13 @@ $data = array_slice($data, 0, 5);
                 </div>
                 <!-- Image Column -->
                 <div class="col-lg-6 text-center wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="d-flex flex-column flex-lg-row justify-content-center">
-                        <img src="images/image_app_one.jpg" alt="Mobile App Preview"
-                            class="img-fluid rounded shadow me-lg-3 mb-3 mb-lg-0"
-                            style="max-width: 300px; max-height: 450px;">
-                        <img src="images/image_app_two.jpg" alt="Mobile App Preview" class="img-fluid rounded shadow"
-                            style="max-width: 300px; max-height: 450px;">
-                    </div>
-                </div>
+    <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center">
+        <img src="images/image_app_one.jpg" alt="Mobile App Preview"
+            class="img-fluid rounded shadow me-lg-3 mb-4 mb-lg-0" style="max-width: 300px; aspect-ratio: 2 / 3;">
+        <img src="images/image_app_two.jpg" alt="Mobile App Preview"
+            class="img-fluid rounded shadow" style="max-width: 300px; aspect-ratio: 2 / 3;">
+    </div>
+</div>
             </div>
         </div>
     </div>
