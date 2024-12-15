@@ -150,6 +150,7 @@
         <p>Commission on Higher Education</p>
         <p><b>MADRIDEJOS COMMUNITY COLLEGE</b></p>
         <p>Crossing Bunakan, Madridejos, Cebu</p>
+        <p>Johnchristianfariola@gmail | #09096437668</p>
       </center>
       <img src="../images/madridejos.png" class="right" alt="">
     </div>
