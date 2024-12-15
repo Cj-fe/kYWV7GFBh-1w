@@ -106,7 +106,7 @@ $data = array_slice($data, 0, 5);
         }
         @media screen (max-width: 767px) { /* Adjust the max-width as needed for your breakpoint */
         .hide-on-mobile {
-            display: none;
+            display: none !important;
         }
     }
     </style>
