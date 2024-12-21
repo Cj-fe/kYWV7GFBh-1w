@@ -163,8 +163,8 @@
         });
       }
 
-      // Open edit modal when edit button is clicked
-      $('.open-modal').click(function () {
+      // Use event delegation for the Edit button
+      $(document).on('click', '.open-modal', function () {
         var id = $(this).data('id');
         console.log('Edit button clicked for ID:', id);
 
@@ -213,8 +213,8 @@
         });
       });
 
-      // Open delete modal when delete button is clicked
-      $('.open-delete').click(function () {
+      // Use event delegation for the Delete button
+      $(document).on('click', '.open-delete', function () {
         var id = $(this).data('id');
         console.log('Delete button clicked for ID:', id);
 
@@ -242,10 +242,7 @@
           }
         });
       });
-    });
-  </script>
-  <script>
-    $(document).ready(function () {
+
       $('#addSurveyForm').on('submit', function (event) {
         event.preventDefault();
         var formData = $(this).serialize();
@@ -317,7 +314,6 @@
           }
         });
       });
-
 
       function showAlert(type, message) {
         Swal.fire({
