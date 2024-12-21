@@ -172,18 +172,17 @@ $(document).ready(function () {
 
   function initializeCKEditor(elementId) {
     if (window.CKEDITOR && CKEDITOR.replace) {
-      // Destroy existing instance if it exists
       if (currentEditors[elementId]) {
         currentEditors[elementId].destroy();
       }
-      // Create new instance
       currentEditors[elementId] = CKEDITOR.replace(elementId);
     } else {
       console.error('CKEditor is not defined or replace method is missing.');
     }
   }
 
-  $('.open-modal').click(function () {
+  // Use event delegation for the Edit button
+  $(document).on('click', '.open-modal', function () {
     var id = $(this).data('id');
     fetcheventData(id, function (response) {
       $('#editId').val(id);
@@ -198,10 +197,8 @@ $(document).ready(function () {
       $('#edit_statusActive').prop('checked', response.status === 'Active');
       $('#edit_statusArchive').prop('checked', response.status === 'Archive');
 
-      // Initialize Select2
       $('#edit_job_categories').select2();
 
-      // Populate job categories
       if (response.job_categories && Array.isArray(response.job_categories)) {
         $('#edit_job_categories').val(response.job_categories).trigger('change');
       }
@@ -218,7 +215,6 @@ $(document).ready(function () {
         $('#imagePreviewImgLogo2').hide();
       }
 
-      // Set the textarea values before initializing CKEditor
       $('#edit_description').val(response.job_description);
       $('#edit_expertise_specification').val(response.expertise_specification);
       $('#edit_about_the_role').val(response.about_the_role);
@@ -236,7 +232,6 @@ $(document).ready(function () {
 
       $('#editModal').modal('show');
 
-      // Use a setTimeout to ensure the modal is fully shown before initializing CKEditor
       setTimeout(function () {
         initializeCKEditor('edit_description');
         initializeCKEditor('edit_expertise_specification');
@@ -248,7 +243,6 @@ $(document).ready(function () {
   });
 
   $('#editModal').on('hidden.bs.modal', function () {
-    // Destroy all CKEditor instances when the modal is closed
     for (var elementId in currentEditors) {
       if (currentEditors.hasOwnProperty(elementId)) {
         currentEditors[elementId].destroy();
@@ -257,25 +251,21 @@ $(document).ready(function () {
     }
   });
 
-  // Open delete modal when delete button is clicked
-  $('.open-delete').click(function () {
+  // Use event delegation for the Delete button
+  $(document).on('click', '.open-delete', function () {
     var id = $(this).data('id');
 
-    // Make an AJAX request to fetch job details
     $.ajax({
       url: 'job_row.php',
       type: 'GET',
       data: { id: id },
       dataType: 'json',
       success: function (response) {
-        // Populate modal with alumni name
-        $('.deleteId').val(id); // Update value of deleteId input field
+        $('.deleteId').val(id);
         $('.deleteTitle').text(response.job_title);
 
-        // Show the delete confirmation modal
         $('#deleteModal').modal('show');
 
-        // Store the ID in a data attribute of the delete button
         $('.btn-confirm-delete').data('id', id);
       },
       error: function (xhr, status, error) {
@@ -285,21 +275,20 @@ $(document).ready(function () {
   });
 
   $('#addJobForm').on('submit', function (event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
 
-    var formData = new FormData(this); // Create FormData object
+    var formData = new FormData(this);
 
-    // Manually handle multiple select if needed
-    var jobCategories = $('#job_categories').val(); // Get the selected categories
-    formData.append('job_categories', JSON.stringify(jobCategories)); // Convert to JSON string
+    var jobCategories = $('#job_categories').val();
+    formData.append('job_categories', JSON.stringify(jobCategories));
 
     $.ajax({
       type: 'POST',
-      url: 'job_add.php', // The URL of your PHP script for adding the job
+      url: 'job_add.php',
       data: formData,
-      contentType: false, // Important for file upload
-      processData: false, // Important for file upload
-      dataType: 'json', // Expect JSON response from server
+      contentType: false,
+      processData: false,
+      dataType: 'json',
       success: function (response) {
         if (response.status === 'success') {
           showAlert('success', response.message);
@@ -314,16 +303,16 @@ $(document).ready(function () {
   });
 
   $('#deleteJobForm').on('submit', function (event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
 
-    var formData = new FormData(this); // Create FormData object
+    var formData = new FormData(this);
 
     $.ajax({
       type: 'POST',
-      url: 'job_delete.php', // The URL of your PHP script for adding news
+      url: 'job_delete.php',
       data: formData,
-      contentType: false, // Important for file upload
-      processData: false, // Important for file upload
+      contentType: false,
+      processData: false,
       dataType: 'json',
       success: function (response) {
         if (response.status === 'success') {
@@ -342,7 +331,6 @@ $(document).ready(function () {
     event.preventDefault();
     var formData = new FormData(this);
     
-    // Get the updated content from CKEditor instances
     formData.set('edit_description', currentEditors['edit_description'].getData());
     formData.set('edit_expertise_specification', currentEditors['edit_expertise_specification'].getData());
     formData.set('edit_about_the_role', currentEditors['edit_about_the_role'].getData());
