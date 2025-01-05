@@ -29,16 +29,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $course_id = htmlspecialchars($_POST['course'] ?? '');
     $batch_id = htmlspecialchars($_POST['batch'] ?? '');
     $studentid = htmlspecialchars($_POST['studentid'] ?? '');
-    $work_status = htmlspecialchars($_POST['work_status'] ?? '');
     $barangay = htmlspecialchars($_POST['barangay'] ?? '');
     $graduation_year = htmlspecialchars($_POST['graduation_year'] ?? '');
+
+    // Handle work status
+    $selected_work_status = htmlspecialchars($_POST['work_status'] ?? '');
+    $other_work_status = htmlspecialchars($_POST['other_work_status'] ?? '');
+    $work_status = ($selected_work_status === 'Other') ? $other_work_status : $selected_work_status;
 
     // Handle file upload
     $profileImage = $_FILES['profileImage'] ?? null;
     $uploadDir = 'uploads/';
     $profile_url = '';
+    
     if ($profileImage && $profileImage['error'] === UPLOAD_ERR_OK) {
-        $uploadFile = $uploadDir . basename($profileImage['name']);
+        // Generate unique filename
+        $fileExtension = pathinfo($profileImage['name'], PATHINFO_EXTENSION);
+        $uniqueFilename = uniqid('profile_', true) . '.' . $fileExtension;
+        $uploadFile = $uploadDir . $uniqueFilename;
+
+        // Create directory if it doesn't exist
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
         if (move_uploaded_file($profileImage['tmp_name'], $uploadFile)) {
             $profile_url = $uploadFile;
         }
@@ -64,34 +78,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'zipcode' => $zipcode,
         'email' => $email,
         'contactnumber' => $contactnumber,
-        'course' => $course_id, // Use the course ID
-        'batch' => $batch_id, // Use the batch ID
+        'course' => $course_id,
+        'batch' => $batch_id,
         'work_status' => $work_status,
+        'selected_work_status' => $selected_work_status,
+        'other_work_status' => $other_work_status,
         'barangay' => $barangay,
         'profile_url' => $profile_url,
         'forms_completed' => true,
         'date_responded' => date('F j, Y'),
-        'studentid' => $alumni_id, // Use the Firebase ID as the studentid
+        'studentid' => $alumni_id,
         'graduation_year' => $graduation_year
     ];
 
-    // Conditionally add employment-related fields if the status is "Employed"
-    if ($work_status === 'Employed') {
+    // Add employment-related fields if status is "Employed"
+    if ($selected_work_status === 'Employed') {
         $employmentFields = [
-            'first_employment_date', 'date_for_current_employment', 'type_of_work', 'work_position',
-            'current_monthly_income', 'work_related', 'work_classification', 'name_company',
-            'work_employment_status', 'employment_location', 'job_satisfaction'
+            'name_company' => htmlspecialchars($_POST['name_company'] ?? ''),
+            'first_employment_date' => htmlspecialchars($_POST['first_employment_date'] ?? ''),
+            'date_for_current_employment' => htmlspecialchars($_POST['date_for_current_employment'] ?? ''),
+            'type_of_work' => htmlspecialchars($_POST['type_of_work'] ?? ''),
+            'work_position' => htmlspecialchars($_POST['work_position'] ?? ''),
+            'work_employment_status' => htmlspecialchars($_POST['work_employment_status'] ?? ''),
+            'employment_location' => htmlspecialchars($_POST['employment_location'] ?? ''),
+            'current_monthly_income' => htmlspecialchars($_POST['current_monthly_income'] ?? ''),
+            'job_satisfaction' => htmlspecialchars($_POST['job_satisfaction'] ?? ''),
+            'work_related' => htmlspecialchars($_POST['work_related'] ?? ''),
+            'work_classification' => htmlspecialchars($_POST['work_classification'] ?? '')
         ];
-        foreach ($employmentFields as $field) {
-            $firebaseUpdateData[$field] = htmlspecialchars($_POST[$field] ?? '');
-        }
+        
+        $firebaseUpdateData = array_merge($firebaseUpdateData, $employmentFields);
     }
 
     // Initialize the insert data array for MySQL
     $mysqlInsertData = [
         'unique_id' => $alumni_id,
         'id_number' => $alumni_id,
-        'fullname' => $firstname . ' ' . $middlename . ' ' . $lastname,
+        'fullname' => $firstname . ' ' . ($middlename ? $middlename . ' ' : '') . $lastname,
         'email' => $email,
         'contact' => $contactnumber,
         'sex' => $gender,
@@ -99,8 +122,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'year_graduated' => $graduation_year,
         'admission' => $batch_year,
         'program_graduated' => $course_name,
-        'is_verified' => 1, // Assuming new applicants are not verified by default
-        'password' => $_SESSION['user']['password'] // Add the password from the session
+        'is_verified' => 1,
+        'password' => $_SESSION['user']['password']
     ];
 
     try {
@@ -112,7 +135,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$mysqlConn) {
             throw new Exception('Failed to connect to MySQL database.');
         }
-        $mysqlQuery = "INSERT INTO applicant (" . implode(", ", array_keys($mysqlInsertData)) . ") VALUES ('" . implode("', '", array_map([$mysqlConn, 'real_escape_string'], array_values($mysqlInsertData))) . "')";
+
+        $mysqlQuery = "INSERT INTO applicant (" . implode(", ", array_keys($mysqlInsertData)) . ") 
+                       VALUES ('" . implode("', '", array_map([$mysqlConn, 'real_escape_string'], array_values($mysqlInsertData))) . "')";
+        
         $mysqlResult = $mysqlConn->query($mysqlQuery);
         if (!$mysqlResult) {
             throw new Exception('Failed to insert into MySQL database: ' . $mysqlConn->error);
@@ -121,18 +147,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Update the session data
         $_SESSION['user'] = array_merge($_SESSION['user'], $firebaseUpdateData);
-
-        // Set a flag indicating the form has been completed
         $_SESSION['forms_completed'] = true;
 
-        echo json_encode(['status' => 'success', 'message' => 'Profile updated successfully']);
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Profile updated successfully',
+            'redirect' => 'index.php'
+        ]);
         exit();
+
     } catch (Exception $e) {
         error_log("Error updating profile: " . $e->getMessage());
-        echo json_encode(['status' => 'error', 'message' => 'Failed to update profile. Please try again.']);
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Failed to update profile: ' . $e->getMessage()
+        ]);
         exit();
     }
 }
 
-// If it's not a POST request, display the form
+// If it's not a POST request, redirect to the form page
+header('Location: profile_form.php');
+exit();
 ?>
