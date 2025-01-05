@@ -34,8 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle work status
     $selected_work_status = htmlspecialchars($_POST['work_status'] ?? '');
-    $other_work_status = htmlspecialchars($_POST['other_work_status'] ?? '');
-    $work_status = ($selected_work_status === 'Other') ? $other_work_status : $selected_work_status;
+    if ($selected_work_status === 'Other') {
+        // If "Other" is selected, use the value from other_work_status input
+        $work_status = htmlspecialchars($_POST['other_work_status'] ?? '');
+    } else {
+        // Otherwise, use the selected value from the dropdown
+        $work_status = $selected_work_status;
+    }
 
     // Handle file upload
     $profileImage = $_FILES['profileImage'] ?? null;
@@ -81,8 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'course' => $course_id,
         'batch' => $batch_id,
         'work_status' => $work_status,
-        'selected_work_status' => $selected_work_status,
-        'other_work_status' => $other_work_status,
         'barangay' => $barangay,
         'profile_url' => $profile_url,
         'forms_completed' => true,
