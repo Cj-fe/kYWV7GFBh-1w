@@ -325,6 +325,7 @@
                                             <option>Select Status</option>
                                             <option value="Employed" <?php echo (getValue($current_user, 'work_status') == 'Employed') ? 'selected' : ''; ?>>Employed</option>
                                             <option value="Unemployed" <?php echo (getValue($current_user, 'work_status') == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
+                                            <option value="Other" <?php echo (getValue($current_user, 'work_status') == 'Other') ? 'selected' : ''; ?>>Other</option>
                                         </select>
                                     </div>
                                 </div>
