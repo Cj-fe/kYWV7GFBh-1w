@@ -67,6 +67,9 @@
         .dropdown-menu {
             transform: translate(0) !important;
         }
+        #other_work_status {
+    display: none;
+}
     </style>
 </head>
 
@@ -345,7 +348,8 @@
                                     <div class="nk-datapk-ctm form-elet-mg" id="data_1">
                                         <div class="input-group date nk-int-st">
                                             <span class="input-group-addon"></span>
-                                            <input type="text" class="form-control" name="other_work_status"
+                                            <input type="text" class="form-control" id="other_work_status"
+                                                name="other_work_status"
                                                 value="<?php echo getValue($current_user, 'work_status'); ?>">
                                         </div>
                                     </div>
@@ -359,7 +363,8 @@
                                     <div class="nk-datapk-ctm form-elet-mg" id="data_1">
                                         <div class="input-group date nk-int-st">
                                             <span class="input-group-addon"></span>
-                                            <input type="date" class="form-control" id="first_employment_date" name="first_employment_date"
+                                            <input type="date" class="form-control" id="first_employment_date"
+                                                name="first_employment_date"
                                                 value="<?php echo getValue($current_user, 'first_employment_date'); ?>">
                                         </div>
                                     </div>
@@ -373,7 +378,8 @@
                                     <div class="nk-datapk-ctm" id="data_1">
                                         <div class="input-group date nk-int-st">
                                             <span class="input-group-addon"></span>
-                                            <input type="date" class="form-control" id="date_for_current_employment" name="date_for_current_employment"
+                                            <input type="date" class="form-control" id="date_for_current_employment"
+                                                name="date_for_current_employment"
                                                 value="<?php echo getValue($current_user, 'date_for_current_employment'); ?>">
                                         </div>
                                     </div>
@@ -449,7 +455,7 @@
                                     <div class="nk-int-st">
                                         <select id="job_satisfaction" name="job_satisfaction"
                                             class="form-control selectpicker">
-                                            <option >Unspecified</option>
+                                            <option>Unspecified</option>
                                             <option value="Very Satisfied" <?php echo (getValue($current_user, 'job_satisfaction') == 'Very Satisfied') ? 'selected' : ''; ?>>Very
                                                 Satisfied</option>
                                             <option value="Satisfied" <?php echo (getValue($current_user, 'job_satisfaction') == 'Satisfied') ? 'selected' : ''; ?>>Satisfied
@@ -471,7 +477,7 @@
                                     <div class="nk-int-st">
                                         <select id="related_to_course" name="work_related"
                                             class="form-control selectpicker">
-                                            <option >Unspecified</option>
+                                            <option>Unspecified</option>
                                             <option value="Yes" <?php echo (getValue($current_user, 'related_to_course') == 'Yes') ? 'selected' : ''; ?>>Yes</option>
                                             <option value="No" <?php echo (getValue($current_user, 'related_to_course') == 'No') ? 'selected' : ''; ?>>No</option>
                                         </select>
@@ -978,7 +984,7 @@
             document.getElementById('monthly_income'),
             document.getElementById('date_for_current_employment'),
             document.getElementById('first_employment_date'),
-            
+
             // Add other fields here
         ];
 
@@ -996,4 +1002,22 @@
         workStatusSelect.addEventListener('change', toggleFields);
     });
 
+    document.addEventListener('DOMContentLoaded', function () {
+    const workStatusSelect = document.getElementById('work_status');
+    const otherWorkStatusField = document.getElementById('other_work_status').closest('.col-lg-4');
+
+    function toggleFields() {
+        const selectedStatus = workStatusSelect.value;
+        const isEmployedOrUnemployed = selectedStatus === 'Employed' || selectedStatus === 'Unemployed';
+
+        // Toggle visibility of the "Specify Your Work Status" field
+        otherWorkStatusField.style.display = isEmployedOrUnemployed ? 'none' : 'block';
+    }
+
+    // Initial toggle based on the current value
+    toggleFields();
+
+    // Listen for changes on the work status select
+    workStatusSelect.addEventListener('change', toggleFields);
+});
 </script>
