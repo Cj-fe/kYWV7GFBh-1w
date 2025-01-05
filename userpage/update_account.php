@@ -1009,10 +1009,10 @@
 
     function toggleFields() {
         const selectedStatus = workStatusSelect.value;
-        const isEmployedOrUnemployed = selectedStatus === 'Employed' || selectedStatus === 'Unemployed';
+        const isOther = selectedStatus === 'Other';
 
         // Toggle visibility of the "Specify Your Work Status" field
-        otherWorkStatusField.style.display = isEmployedOrUnemployed ? 'none' : 'block';
+        otherWorkStatusField.style.display = isOther ? 'block' : 'none';
     }
 
     // Initial toggle based on the current value
