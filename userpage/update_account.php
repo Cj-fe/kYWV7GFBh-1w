@@ -327,13 +327,10 @@
                                     <div class="nk-int-st">
                                         <select id="work_status" name="work_status" class="form-control selectpicker">
                                             <option>Select Status</option>
-                                            <?php
-                                            $current_work_status = getValue($current_user, 'work_status');
-                                            ?>
                                             <option value="Employed" <?php echo ($current_work_status == 'Employed') ? 'selected' : ''; ?>>Employed</option>
                                             <option value="Unemployed" <?php echo ($current_work_status == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
-                                            <option value="Unemployed">Other</option>
-                                            <?php if (!in_array($current_work_status, ['Employed', 'Unemployed', '', 'N/A'])): ?>
+                                            <option value="Other" <?php echo ($current_work_status == 'Other') ? 'selected' : ''; ?>>Other</option>
+                                            <?php if (!in_array($current_work_status, ['Employed', 'Unemployed', 'Other', '', 'N/A'])): ?>
                                                 <option value="<?php echo $current_work_status; ?>" selected>
                                                     <?php echo $current_work_status; ?>
                                                 </option>
@@ -1005,21 +1002,21 @@
     });
 
     document.addEventListener('DOMContentLoaded', function () {
-    const workStatusSelect = document.getElementById('work_status');
-    const otherWorkStatusField = document.getElementById('other_work_status').closest('.col-lg-4');
+        const workStatusSelect = document.getElementById('work_status');
+        const otherWorkStatusField = document.getElementById('other_work_status').closest('.col-lg-4');
 
-    function toggleFields() {
-        const selectedStatus = workStatusSelect.value;
-        const isOther = selectedStatus === 'Other';
+        function toggleFields() {
+            const selectedStatus = workStatusSelect.value;
+            const isOther = selectedStatus === 'Other';
 
-        // Toggle visibility of the "Specify Your Work Status" field
-        otherWorkStatusField.style.display = isOther ? 'block' : 'none';
-    }
+            // Toggle visibility of the "Specify Your Work Status" field
+            otherWorkStatusField.style.display = isOther ? 'block' : 'none';
+        }
 
-    // Initial toggle based on the current value
-    toggleFields();
+        // Initial toggle based on the current value
+        toggleFields();
 
-    // Listen for changes on the work status select
-    workStatusSelect.addEventListener('change', toggleFields);
-});
+        // Listen for changes on the work status select
+        workStatusSelect.addEventListener('change', toggleFields);
+    });
 </script>
