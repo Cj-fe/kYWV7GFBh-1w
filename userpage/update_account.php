@@ -320,14 +320,19 @@
                                 <div class="form-group">
                                     <label for="work_status" class="form-label"><i class="fas fa-briefcase icon"></i>
                                         Employment Status</label>
-                                    <div class="nk-int-st">
-                                        <select id="work_status" name="work_status" class="form-control selectpicker">
-                                            <option>Select Status</option>
-                                            <option value="Employed" <?php echo (getValue($current_user, 'work_status') == 'Employed') ? 'selected' : ''; ?>>Employed</option>
-                                            <option value="Unemployed" <?php echo (getValue($current_user, 'work_status') == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
-                                            <option value="<?php echo getValue($current_user, 'work_status'); ?>" <?php echo (getValue($current_user, 'work_status') == 'Other') ? 'selected' : ''; ?>><?php echo getValue($current_user, 'work_status'); ?></option>
-                                        </select>
-                                    </div>
+                                        <div class="nk-int-st">
+    <select id="work_status" name="work_status" class="form-control selectpicker">
+        <option>Select Status</option>
+        <?php 
+        $current_work_status = getValue($current_user, 'work_status');
+        ?>
+        <option value="Employed" <?php echo ($current_work_status == 'Employed') ? 'selected' : ''; ?>>Employed</option>
+        <option value="Unemployed" <?php echo ($current_work_status == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
+        <?php if (!in_array($current_work_status, ['Employed', 'Unemployed', '', 'N/A'])): ?>
+            <option value="<?php echo $current_work_status; ?>" selected><?php echo $current_work_status; ?></option>
+        <?php endif; ?>
+    </select>
+</div>
                                 </div>
                             </div>
 
