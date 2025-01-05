@@ -73,14 +73,14 @@
     $categories = json_decode($categoriesData, true);
     ?>
 
-    
+
 </head>
 
 <body style="background:white; ">
 
     <?php include '../includes/navbar.php' ?>
 
-    
+
 
     <div class="form-container">
         <form action="update_profile.php" method="POST" class="form" id="alumniForm" enctype="multipart/form-data">
@@ -134,7 +134,7 @@
                         </select>
                     </div>
                     <div class="input-field">
-                        <label>Province</label>
+                        <label>City</label>
                         <select id="provinceSelect" name="state" class="form-control selectpicker"
                             data-live-search="true"
                             data-current-value="<?php echo htmlspecialchars($_SESSION['user']['state']); ?>" required>
@@ -142,7 +142,7 @@
                         </select>
                     </div>
                     <div class="input-field">
-                        <label>City</label>
+                        <label>Province</label>
                         <select id="citySelect" name="city" class="form-control selectpicker" data-live-search="true"
                             data-current-value="<?php echo htmlspecialchars($_SESSION['user']['city']); ?>" required>
                             <option value="">Select a province first</option>
@@ -260,6 +260,7 @@
                             <option value="">Select Status</option>
                             <option value="Employed">Employed</option>
                             <option value="Unemployed">Unemployed</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                     <div class="input-field">
@@ -356,7 +357,7 @@
         </form>
     </div>
 
-   
+
     <?php include 'includes/terms_and_condition.php' ?>
 
 
