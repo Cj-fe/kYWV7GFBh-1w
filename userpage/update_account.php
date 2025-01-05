@@ -970,6 +970,13 @@
         const workStatusSelect = document.getElementById('work_status');
         const fieldsToToggle = [
             document.getElementById('company_name'),
+            document.getElementById('employment_location'),
+            document.getElementById('type_of_work'),
+            document.getElementById('work_position'),
+            document.getElementById('monthly_income'),
+            document.getElementById('date_for_current_employment'),
+            document.getElementById('first_employment_date'),
+            
             // Add other fields here
         ];
 
