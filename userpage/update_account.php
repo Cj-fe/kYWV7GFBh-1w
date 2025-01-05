@@ -344,7 +344,7 @@
                                     <div class="nk-datapk-ctm form-elet-mg" id="data_1">
                                         <div class="input-group date nk-int-st">
                                             <span class="input-group-addon"></span>
-                                            <input type="date" class="form-control" name="other_work_status"
+                                            <input type="text" class="form-control" name="other_work_status"
                                                 value="<?php echo getValue($current_user, 'work_status'); ?>">
                                         </div>
                                     </div>
