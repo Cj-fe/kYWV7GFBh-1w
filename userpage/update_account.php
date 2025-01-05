@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -43,7 +42,8 @@
         }
     }
 
-    function formatDate($date) {
+    function formatDate($date)
+    {
         if (empty($date) || $date == 'N/A') {
             return 'N/A';
         }
@@ -53,7 +53,7 @@
         }
         return date("Y-m-d", $timestamp); // Format for HTML5 date input
     }
-    
+
 
     $birthdate = getValue($current_user, 'birthdate');
     $birthdateFormatted = formatDate($birthdate);
@@ -320,19 +320,34 @@
                                 <div class="form-group">
                                     <label for="work_status" class="form-label"><i class="fas fa-briefcase icon"></i>
                                         Employment Status</label>
-                                        <div class="nk-int-st">
-    <select id="work_status" name="work_status" class="form-control selectpicker">
-        <option>Select Status</option>
-        <?php 
-        $current_work_status = getValue($current_user, 'work_status');
-        ?>
-        <option value="Employed" <?php echo ($current_work_status == 'Employed') ? 'selected' : ''; ?>>Employed</option>
-        <option value="Unemployed" <?php echo ($current_work_status == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
-        <?php if (!in_array($current_work_status, ['Employed', 'Unemployed', '', 'N/A'])): ?>
-            <option value="<?php echo $current_work_status; ?>" selected><?php echo $current_work_status; ?></option>
-        <?php endif; ?>
-    </select>
-</div>
+                                    <div class="nk-int-st">
+                                        <select id="work_status" name="work_status" class="form-control selectpicker">
+                                            <option>Select Status</option>
+                                            <?php
+                                            $current_work_status = getValue($current_user, 'work_status');
+                                            ?>
+                                            <option value="Employed" <?php echo ($current_work_status == 'Employed') ? 'selected' : ''; ?>>Employed</option>
+                                            <option value="Unemployed" <?php echo ($current_work_status == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
+                                            <?php if (!in_array($current_work_status, ['Employed', 'Unemployed', '', 'N/A'])): ?>
+                                                <option value="<?php echo $current_work_status; ?>" selected>
+                                                    <?php echo $current_work_status; ?></option>
+                                            <?php endif; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="other_work_status" class="form-label"><i
+                                            class="fas fa-calendar-alt icon"></i> Specify Your Work Status</label>
+                                    <div class="nk-datapk-ctm form-elet-mg" id="data_1">
+                                        <div class="input-group date nk-int-st">
+                                            <span class="input-group-addon"></span>
+                                            <input type="date" class="form-control" name="other_work_status"
+                                                value="<?php echo getValue($current_user, 'work_status'); ?>">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
