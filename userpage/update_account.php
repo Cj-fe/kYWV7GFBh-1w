@@ -976,9 +976,6 @@
             document.getElementById('monthly_income'),
             document.getElementById('date_for_current_employment'),
             document.getElementById('first_employment_date'),
-            document.getElementById('work_classification'),
-            document.getElementById('related_to_course'),
-            document.getElementById('job_satisfaction')
             
             // Add other fields here
         ];
