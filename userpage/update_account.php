@@ -449,6 +449,7 @@
                                     <div class="nk-int-st">
                                         <select id="job_satisfaction" name="job_satisfaction"
                                             class="form-control selectpicker">
+                                            <option >Unspecified</option>
                                             <option value="Very Satisfied" <?php echo (getValue($current_user, 'job_satisfaction') == 'Very Satisfied') ? 'selected' : ''; ?>>Very
                                                 Satisfied</option>
                                             <option value="Satisfied" <?php echo (getValue($current_user, 'job_satisfaction') == 'Satisfied') ? 'selected' : ''; ?>>Satisfied
