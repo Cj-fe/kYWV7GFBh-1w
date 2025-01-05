@@ -73,9 +73,8 @@
     $categories = json_decode($categoriesData, true);
     ?>
 
-    <style>
-        /* Custom styles for work status section */
-        .work-status-wrapper {
+<style>
+      .work-status-wrapper {
             display: flex;
             gap: 15px;
             align-items: flex-end;
@@ -102,7 +101,6 @@
                 opacity: 0;
                 transform: translateX(-20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -115,7 +113,7 @@
                 gap: 10px;
             }
         }
-    </style>
+</style>
 </head>
 
 <body style="background:white; ">
@@ -296,22 +294,26 @@
                         </select>
                     </div>
 
-                    <div class="work-status-wrapper">
-                        <div class="work-status-select">
-                            <label>Current Work Status</label>
-                            <select class="form-control" name="work_status" id="work-status" required>
-                                <option value="">Select Status</option>
-                                <option value="Employed">Employed</option>
-                                <option value="Unemployed">Unemployed</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div id="other-work-status-container">
+                    <div class="input-field">
+                        <label>Current Work Status</label>
+                        <select class="form-control" name="work_status" id="work-status" required>
+                            <option value="">Select Status</option>
+                            <option value="Employed">Employed</option>
+                            <option value="Unemployed">Unemployed</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                    <div id="other-work-status-container">
                             <label>Specify Other Work Status</label>
-                            <input type="text" class="form-control" id="other-work-status" name="other_work_status"
-                                placeholder="Please specify">
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="other-work-status" 
+                                   name="other_work_status" 
+                                   placeholder="Please specify">
                         </div>
                     </div>
+                    
                     <div class="input-field">
                         <label>Name of the Organization/Company</label>
                         <input type="text" class="form-control" id="name_company" name="name_company">
@@ -432,7 +434,6 @@
             myModal.show();
         });
     });
-
     document.addEventListener('DOMContentLoaded', function() {
             // Work status functionality
             const workStatusSelect = document.getElementById('work-status');
