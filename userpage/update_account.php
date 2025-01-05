@@ -978,7 +978,7 @@
             document.getElementById('first_employment_date'),
             document.getElementById('work_classification'),
             document.getElementById('related_to_course'),
-            document.getElementById('job_satisfaction'),
+            document.getElementById('job_satisfaction')
             
             // Add other fields here
         ];
