@@ -73,7 +73,49 @@
     $categories = json_decode($categoriesData, true);
     ?>
 
+    <style>
+        /* Custom styles for work status section */
+        .work-status-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
 
+        .work-status-select {
+            flex: 1;
+        }
+
+        #other-work-status-container {
+            flex: 1;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        #other-work-status-container.visible {
+            display: block;
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .work-status-wrapper {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body style="background:white; ">
@@ -254,14 +296,21 @@
                         </select>
                     </div>
 
-                    <div class="input-field">
-                        <label>Current Work Status</label>
-                        <select class="form-control" name="work_status" id="work-status" required>
-                            <option value="">Select Status</option>
-                            <option value="Employed">Employed</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Other">Other</option>
-                        </select>
+                    <div class="work-status-wrapper">
+                        <div class="work-status-select">
+                            <label>Current Work Status</label>
+                            <select class="form-control" name="work_status" id="work-status" required>
+                                <option value="">Select Status</option>
+                                <option value="Employed">Employed</option>
+                                <option value="Unemployed">Unemployed</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div id="other-work-status-container">
+                            <label>Specify Other Work Status</label>
+                            <input type="text" class="form-control" id="other-work-status" name="other_work_status"
+                                placeholder="Please specify">
+                        </div>
                     </div>
                     <div class="input-field">
                         <label>Name of the Organization/Company</label>
