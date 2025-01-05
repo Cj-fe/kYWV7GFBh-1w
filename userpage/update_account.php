@@ -328,6 +328,7 @@
                                             ?>
                                             <option value="Employed" <?php echo ($current_work_status == 'Employed') ? 'selected' : ''; ?>>Employed</option>
                                             <option value="Unemployed" <?php echo ($current_work_status == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
+                                            <option value="Other" <?php echo (!in_array(getValue($current_user, 'work_status'), ['Employed', 'Unemployed'])) ? 'selected' : ''; ?>>Other</option>
                                             <?php if (!in_array($current_work_status, ['Employed', 'Unemployed', '', 'N/A'])): ?>
                                                 <option value="<?php echo $current_work_status; ?>" selected>
                                                     <?php echo $current_work_status; ?>
@@ -996,4 +997,23 @@
         workStatusSelect.addEventListener('change', toggleFields);
     });
 
+    document.addEventListener('DOMContentLoaded', function () {
+        const workStatusSelect = document.getElementById('work_status');
+        const otherWorkStatusInput = document.querySelector('input[name="other_work_status"]');
+
+        function toggleOtherWorkStatus() {
+            if (workStatusSelect.value === 'Other') {
+                otherWorkStatusInput.disabled = false;
+            } else {
+                otherWorkStatusInput.disabled = true;
+                otherWorkStatusInput.value = ''; // Clear the input if not "Other"
+            }
+        }
+
+        // Initial toggle based on the current value
+        toggleOtherWorkStatus();
+
+        // Listen for changes on the work status select
+        workStatusSelect.addEventListener('change', toggleOtherWorkStatus);
+    });
 </script>
