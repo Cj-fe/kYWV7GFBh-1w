@@ -305,12 +305,12 @@
                     </div>
                     <div class="input-field">
                     <div id="other-work-status-container">
-                            <label>Specify Your</label>
+                            <label>Specify Your Status</label>
                             <input type="text" 
                                    class="form-control" 
                                    id="other-work-status" 
                                    name="other_work_status" 
-                                   placeholder="Please specify">
+                                   placeholder="E.g, Business Owner, Freelancer">
                         </div>
                     </div>
                     
