@@ -432,5 +432,56 @@
             myModal.show();
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+            // Work status functionality
+            const workStatusSelect = document.getElementById('work-status');
+            const otherContainer = document.getElementById('other-work-status-container');
+            const otherInput = document.getElementById('other-work-status');
+
+            workStatusSelect.addEventListener('change', function() {
+                if (this.value === 'Other') {
+                    otherContainer.classList.add('visible');
+                    otherInput.required = true;
+                } else {
+                    otherContainer.classList.remove('visible');
+                    otherInput.required = false;
+                    setTimeout(() => {
+                        otherInput.value = '';
+                    }, 300);
+                }
+
+                // Show/hide employment-related fields based on work status
+                const employmentFields = document.querySelectorAll('.employment-related');
+                employmentFields.forEach(field => {
+                    field.style.display = (this.value === 'Employed') ? 'block' : 'none';
+                    const inputs = field.querySelectorAll('input, select');
+                    inputs.forEach(input => {
+                        input.required = (this.value === 'Employed');
+                    });
+                });
+            });
+
+            // Form validation
+            document.getElementById('alumniForm').addEventListener('submit', function(e) {
+                if (workStatusSelect.value === 'Other' && !otherInput.value.trim()) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Please specify your work status',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                    otherInput.focus();
+                }
+            });
+
+            // Initialize employment fields visibility
+            const initialWorkStatus = workStatusSelect.value;
+            const employmentFields = document.querySelectorAll('.employment-related');
+            employmentFields.forEach(field => {
+                field.style.display = (initialWorkStatus === 'Employed') ? 'block' : 'none';
+            });
+        });
 </script>
 <?php include 'includes/script.php' ?>
