@@ -471,6 +471,7 @@
                                     <div class="nk-int-st">
                                         <select id="related_to_course" name="work_related"
                                             class="form-control selectpicker">
+                                            <option >Unspecified</option>
                                             <option value="Yes" <?php echo (getValue($current_user, 'related_to_course') == 'Yes') ? 'selected' : ''; ?>>Yes</option>
                                             <option value="No" <?php echo (getValue($current_user, 'related_to_course') == 'No') ? 'selected' : ''; ?>>No</option>
                                         </select>
