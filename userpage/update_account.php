@@ -67,9 +67,10 @@
         .dropdown-menu {
             transform: translate(0) !important;
         }
+
         #other_work_status {
-    display: none;
-}
+            display: none;
+        }
     </style>
 </head>
 
@@ -331,6 +332,7 @@
                                             ?>
                                             <option value="Employed" <?php echo ($current_work_status == 'Employed') ? 'selected' : ''; ?>>Employed</option>
                                             <option value="Unemployed" <?php echo ($current_work_status == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
+                                            <option value="Unemployed">Other</option>
                                             <?php if (!in_array($current_work_status, ['Employed', 'Unemployed', '', 'N/A'])): ?>
                                                 <option value="<?php echo $current_work_status; ?>" selected>
                                                     <?php echo $current_work_status; ?>
@@ -1008,10 +1010,10 @@
 
     function toggleFields() {
         const selectedStatus = workStatusSelect.value;
-        const isEmployedOrUnemployed = selectedStatus === 'Employed' || selectedStatus === 'Unemployed';
+        const isOther = selectedStatus === 'Other';
 
         // Toggle visibility of the "Specify Your Work Status" field
-        otherWorkStatusField.style.display = isEmployedOrUnemployed ? 'none' : 'block';
+        otherWorkStatusField.style.display = isOther ? 'block' : 'none';
     }
 
     // Initial toggle based on the current value
