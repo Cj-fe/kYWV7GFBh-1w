@@ -28,20 +28,13 @@ function sanitize_input($data, $is_html = false) {
 
 // Helper function to format date
 function format_date($date) {
-    // Try to parse the date
     $parsed_date = date_parse_from_format("d/m/Y", $date);
-    
-    // If parsing fails, try another common format
     if ($parsed_date['error_count'] > 0) {
         $parsed_date = date_parse($date);
     }
-    
-    // If we successfully parsed the date, format it as YYYY-MM-DD
     if ($parsed_date['error_count'] == 0) {
         return sprintf("%04d-%02d-%02d", $parsed_date['year'], $parsed_date['month'], $parsed_date['day']);
     }
-    
-    // If all parsing attempts fail, return null
     return null;
 }
 
@@ -50,11 +43,8 @@ function handle_file_upload($file_input_name, $target_dir) {
     if (!empty($_FILES[$file_input_name]['name'])) {
         $target_file = $target_dir . basename($_FILES[$file_input_name]['name']);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        
-        // Check if the file is an image
         $check = getimagesize($_FILES[$file_input_name]['tmp_name']);
         if($check !== false) {
-            // Move the uploaded file to the target directory
             if (move_uploaded_file($_FILES[$file_input_name]['tmp_name'], $target_file)) {
                 return $target_file;
             }
@@ -93,7 +83,7 @@ if ($cover_photo) {
 $fields = [
     'firstname', 'middlename', 'lastname', 'gender', 'civilstatus',
     'state', 'city', 'barangay', 'contactnumber', 'reserve_email', 'addressline1',
-    'zipcode', 'work_status', 'first_employment_date', 'date_for_current_employment',
+    'zipcode', 'first_employment_date', 'date_for_current_employment',
     'name_company', 'employment_location', 'type_of_work', 'work_position',
     'current_monthly_income', 'job_satisfaction', 'work_related',
     'major', 'graduation_year', 'work_classification', 'bio'
@@ -101,12 +91,25 @@ $fields = [
 
 foreach ($fields as $field) {
     if (isset($_POST[$field])) {
-        // If the field is 'bio', allow HTML content without encoding it
         $new_value = sanitize_input($_POST[$field], $field === 'bio');
         if (!isset($_SESSION['user'][$field]) || $_SESSION['user'][$field] !== $new_value) {
             $update_data[$field] = $new_value;
             $updated_fields[] = ucfirst(str_replace('_', ' ', $field));
         }
+    }
+}
+
+// Handle work status and other work status
+if (isset($_POST['work_status'])) {
+    $work_status = sanitize_input($_POST['work_status']);
+    $other_work_status = sanitize_input($_POST['other_work_status']);
+
+    if (!empty($other_work_status)) {
+        $update_data['work_status'] = $other_work_status;
+        $updated_fields[] = 'Work Status';
+    } else {
+        $update_data['work_status'] = $work_status;
+        $updated_fields[] = 'Work Status';
     }
 }
 
@@ -140,7 +143,6 @@ try {
         if (isset($update_data[$field])) {
             $name_parts[$field] = $update_data[$field];
         } else {
-            // If a name part wasn't updated, fetch it from the session
             $name_parts[$field] = $_SESSION['user'][$field] ?? '';
         }
     }
@@ -239,4 +241,3 @@ try {
 // Redirect back to the main page
 header('Location: update_account.php');
 exit();
-?>
