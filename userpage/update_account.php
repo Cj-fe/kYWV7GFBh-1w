@@ -330,7 +330,8 @@
                                             <option value="Unemployed" <?php echo ($current_work_status == 'Unemployed') ? 'selected' : ''; ?>>Unemployed</option>
                                             <?php if (!in_array($current_work_status, ['Employed', 'Unemployed', '', 'N/A'])): ?>
                                                 <option value="<?php echo $current_work_status; ?>" selected>
-                                                    <?php echo $current_work_status; ?></option>
+                                                    <?php echo $current_work_status; ?>
+                                                </option>
                                             <?php endif; ?>
                                         </select>
                                     </div>
@@ -358,7 +359,7 @@
                                     <div class="nk-datapk-ctm form-elet-mg" id="data_1">
                                         <div class="input-group date nk-int-st">
                                             <span class="input-group-addon"></span>
-                                            <input type="date" class="form-control" name="first_employment_date"
+                                            <input type="date" class="form-control" id="first_employment_date" name="first_employment_date"
                                                 value="<?php echo getValue($current_user, 'first_employment_date'); ?>">
                                         </div>
                                     </div>
@@ -372,7 +373,7 @@
                                     <div class="nk-datapk-ctm" id="data_1">
                                         <div class="input-group date nk-int-st">
                                             <span class="input-group-addon"></span>
-                                            <input type="date" class="form-control" name="date_for_current_employment"
+                                            <input type="date" class="form-control" id="date_for_current_employment" name="date_for_current_employment"
                                                 value="<?php echo getValue($current_user, 'date_for_current_employment'); ?>">
                                         </div>
                                     </div>
@@ -962,6 +963,28 @@
             };
             reader.readAsDataURL(file);
         }
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const workStatusSelect = document.getElementById('work_status');
+        const fieldsToToggle = [
+            document.getElementById('company_name'),
+            // Add other fields here
+        ];
+
+        function toggleFields() {
+            const isEmployed = workStatusSelect.value === 'Employed';
+            fieldsToToggle.forEach(field => {
+                field.disabled = !isEmployed;
+            });
+        }
+
+        // Initial toggle based on the current value
+        toggleFields();
+
+        // Listen for changes on the work status select
+        workStatusSelect.addEventListener('change', toggleFields);
     });
 
 </script>
