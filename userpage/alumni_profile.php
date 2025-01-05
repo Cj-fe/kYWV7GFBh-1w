@@ -305,7 +305,7 @@
                     </div>
                     <div class="input-field">
                     <div id="other-work-status-container">
-                            <label>Specify Other Work Status</label>
+                            <label>Specify Your</label>
                             <input type="text" 
                                    class="form-control" 
                                    id="other-work-status" 
