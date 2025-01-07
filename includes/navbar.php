@@ -40,6 +40,7 @@
 
                 <a href="https://mccdocumenttracker.com/" class="nav-item nav-link ' . ($current_page == 'https://mccdocumenttracker.com/' ? 'active' : '') . '">MCC DOCUMENT TRACKER</a>
 
+                <a href="job.php" class="nav-item nav-link ' . ($current_page == '../UserManual/index.php' ? 'active' : '') . '">User Manual</a>
 
                <!-- <a href="contact.php" class="nav-item nav-link ' . ($current_page == 'contact.php' ? 'active' : '') . '">Contact</a> -->
             </div>

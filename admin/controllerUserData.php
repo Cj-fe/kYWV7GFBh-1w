@@ -10,7 +10,8 @@ $firebase = new firebaseRDB($databaseURL);
 $email = "";
 $errors = array();
 
-function debug_log($message) {
+function debug_log($message)
+{
     error_log(print_r($message, true));
 }
 
