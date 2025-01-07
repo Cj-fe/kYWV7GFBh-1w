@@ -398,9 +398,7 @@
                         <li class="nav-item">
                             <a href="#quickstart" class="nav-link" data-content="quickstart">Quick Start</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#installation" class="nav-link" data-content="installation">Installation</a>
-                        </li>
+
                     </ul>
                 </div>
 
