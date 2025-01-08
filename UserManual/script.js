@@ -467,14 +467,7 @@ function loadContent(contentId) {
                     <li><strong>Design:</strong> User profile icon with label</li>
                 </ul>
 
-                <h2>Status Bar Information</h2>
-                <p>The top status bar provides essential system information:</p>
-                <ul class="indented-list">
-                    <li><strong>Network:</strong> Signal strength indicators for cellular and WiFi</li>
-                    <li><strong>Time:</strong> Digital clock display (8:06)</li>
-                    <li><strong>System:</strong> Battery percentage (98%) with charging status</li>
-                    <li><strong>Data Speed:</strong> Current data transfer rate display (8.60 KB/s)</li>
-                </ul>
+              
                 `;
             break;
 
