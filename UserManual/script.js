@@ -325,6 +325,7 @@ function loadContent(contentId) {
                     <div class="screenshot-container">
                     <img src="../images/image_app_one.jpg"  class="screenshot">
                     </div>
+                    <h2>Welcome Banner Section</h2>
                 `; 
             break;
 
