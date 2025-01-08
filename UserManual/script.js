@@ -605,9 +605,9 @@ function loadContent(contentId) {
                         <h1>Profile Section</h1>
             <p>This comprehensive user guide covers the alumni networking platform's profile and settings management system. The interface combines professional networking features with user-friendly account management tools, allowing users to maintain their alumni connections, manage friend requests, and control their account settings. The system emphasizes security and privacy while providing essential networking capabilities for the alumni community.</p>
              <div class="screenshot-container">
-                       <img src="../images/462588815_531403673262956_7916832849504136991_n.jpg"  class="screenshot">
-                       <img src="../images/462588544_973569267995944_524597433170579580_n.jpg"  class="screenshot">
-                       <img src="../images/472305734_663735619320854_595268016498003519_n.jpg"  class="screenshot">
+                       <img src="../images/472461470_1137935721272619_1962759033296015635_n.jpg"  class="screenshot">
+                       <img src="../images/462587509_2106971339754211_8781171268156923390_n.jpg"  class="screenshot">
+                       <img src="../images/472398637_1661172377768236_518045878340346332_n.jpg"  class="screenshot">
             </div>
                         
             <ol class="indented-list">
