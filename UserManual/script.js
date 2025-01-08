@@ -326,7 +326,8 @@ function loadContent(contentId) {
                     <div class="screenshot-container">
                     <img  src="../images/image_app_one.jpg"  class="screenshot">
                     </div>
-                    <h2>Welcome Banner Section</h2>
+                    <h2>Purpose and Design</h2>
+                    <p>The homepage is thoughtfully designed to provide immediate access to vital information while maintaining a clean, user-friendly layout. It welcomes users with a personalized greeting and presents information in clearly organized sections, making navigation intuitive and efficient. The blue color scheme creates a professional yet approachable atmosphere, while the clear categorization helps users quickly find what they're looking for.</p>
                 `; 
             break;
 
