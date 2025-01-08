@@ -638,15 +638,7 @@ function loadContent(contentId) {
                     <li>Navigate settings using the back arrow</li>
                 </ul>
                 </li>
-                <li>Security Features
-                <ul>
-                    <li>Log out option available at the bottom of profile</li>
-                    <li>View and manage Virtual ID for secure connections</li>
-                    <li>Control who can send you friend requests</li>
-                    <li>Update account information regularly for security</li>
-                    <li>Monitor verified status and badges</li>
-                </ul>
-                </li>
+            
                 <li>Navigation Tips
                 <ul>
                     <li>Use the purple back arrow to return to previous screens</li>
