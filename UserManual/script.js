@@ -337,8 +337,7 @@ function loadContent(contentId) {
                     <h1>Home Page</h1>
                     <p>What Happened Next is a comprehensive information and community platform designed to keep users connected with local news, events, job opportunities, and community engagement. The homepage serves as a centralized hub that combines essential features with an intuitive user interface, making it easy for users to stay informed and engaged with their community</p>
                   <div class="screenshot-container">
-                        <img src="../images/image_app_one.jpg" class="screenshot" id="home-image">
-                        
+                      
                     </div>
                     <button class="view-image-btn" data-image-src="../images/image_app_one.jpg">View Image</button>
                     <h2>Purpose and Design</h2>
