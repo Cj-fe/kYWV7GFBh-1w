@@ -470,6 +470,13 @@ function loadContent(contentId) {
             break;
         case 'forum':
             content.innerHTML = `
+             <h1>Navigation and Layout</h1>
+             <p>Welcome to our vibrant community forum - a space designed for meaningful discussions, knowledge sharing, and collaborative learning! This platform enables members to engage in diverse conversations across multiple topics.</p>
+             <div class="screenshot-container">
+                       <img src="../images/462587315_568750512637376_3657400423828773038_n.jpg"  class="screenshot">
+                       <img src="../images/462562498_580301538110408_8486396023419738187_n (1).jpg"  class="screenshot">
+                       <img src="../images/462586812_950376430310923_8737803355523657319_n.jpg"  class="screenshot">
+                   </div>
            <h2>Navigation and Layout</h2>
                 <ul class="indented-list">
                     <li>The forum has 4 main tabs: Topic, Popular, Saved, and Your Forum</li>

@@ -34,11 +34,11 @@
                     all-in-one solution to foster a thriving alumni community.</p>
 
                 <div class="screenshot-container">
-                    <img src="../images/462587315_568750512637376_3657400423828773038_n.jpg" alt="Dashboard Overview"
+                    <img src="../images/462571977_614774214358872_2649699996402682080_n.jpg" 
                         class="screenshot">
-                    <img src="../images/462562498_580301538110408_8486396023419738187_n (1).jpg"
-                        alt="Dashboard Overview" class="screenshot">
-                    <img src="../images/462586812_950376430310923_8737803355523657319_n.jpg" alt="Dashboard Overview"
+                    <img src="../images/467785480_1119173199947684_4056799777118444299_n.jpg"
+                         class="screenshot">
+                    <img src="../images/462581271_1282575839643063_6541738543695778540_n.jpg" 
                         class="screenshot">
                 </div>
 
