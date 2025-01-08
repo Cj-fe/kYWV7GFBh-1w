@@ -338,8 +338,10 @@ function loadContent(contentId) {
                     <p>What Happened Next is a comprehensive information and community platform designed to keep users connected with local news, events, job opportunities, and community engagement. The homepage serves as a centralized hub that combines essential features with an intuitive user interface, making it easy for users to stay informed and engaged with their community</p>
                   <div class="screenshot-container">
                         <img src="../images/image_app_one.jpg" class="screenshot" id="home-image">
-                        <button class="view-image-btn" data-image-src="../images/image_app_one.jpg">View Image</button>
+                        <
                     </div>
+
+                    button class="view-image-btn" data-image-src="../images/image_app_one.jpg">View Image</button>
                     <h2>Purpose and Design</h2>
                     <p>The homepage is thoughtfully designed to provide immediate access to vital information while maintaining a clean, user-friendly layout. It welcomes users with a personalized greeting and presents information in clearly organized sections, making navigation intuitive and efficient. The blue color scheme creates a professional yet approachable atmosphere, while the clear categorization helps users quickly find what they're looking for.</p>
                 `;
