@@ -321,7 +321,7 @@ function loadContent(contentId) {
             break;
             case 'home':
                 content.innerHTML = `
-                    <h1>Home Page User Manual</h1>
+                    <h1>Home Page</h1>
                     <div class="screenshot-container">
                     <img src="../images/image_app_one.jpg"  class="screenshot">
                     </div>
