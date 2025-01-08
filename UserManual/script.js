@@ -1,155 +1,155 @@
-   // Mobile menu toggle functionality
-   const menuToggle = document.querySelector('.menu-toggle');
-   const sidebar = document.querySelector('.sidebar');
-   const overlay = document.querySelector('.sidebar-overlay');
-   const body = document.body;
+// Mobile menu toggle functionality
+const menuToggle = document.querySelector('.menu-toggle');
+const sidebar = document.querySelector('.sidebar');
+const overlay = document.querySelector('.sidebar-overlay');
+const body = document.body;
 
-   function toggleSidebar() {
-       sidebar.classList.toggle('active');
-       overlay.classList.toggle('active');
-       body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
-   }
+function toggleSidebar() {
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+    body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+}
 
-   menuToggle.addEventListener('click', toggleSidebar);
-   overlay.addEventListener('click', toggleSidebar);
+menuToggle.addEventListener('click', toggleSidebar);
+overlay.addEventListener('click', toggleSidebar);
 
-   // Close sidebar when clicking a link (mobile)
-   const navLinks = document.querySelectorAll('.nav-link');
-   navLinks.forEach(link => {
-       link.addEventListener('click', () => {
-           if (window.innerWidth <= 768) {
-               toggleSidebar();
-           }
-           navLinks.forEach(l => l.classList.remove('active'));
-           link.classList.add('active');
-           loadContent(link.dataset.content);
-       });
-   });
+// Close sidebar when clicking a link (mobile)
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            toggleSidebar();
+        }
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        loadContent(link.dataset.content);
+    });
+});
 
-   // Handle resize events
-   window.addEventListener('resize', () => {
-       if (window.innerWidth > 768) {
-           sidebar.classList.remove('active');
-           overlay.classList.remove('active');
-           body.style.overflow = '';
-       }
-   });
+// Handle resize events
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+    }
+});
 
-   // Image Viewer functionality
-   const imageViewer = {
-       overlay: document.querySelector('.image-viewer-overlay'),
-       image: document.querySelector('.viewer-image'),
-       closeBtn: document.querySelector('.close-viewer'),
-       prevBtn: document.querySelector('.prev-btn'),
-       nextBtn: document.querySelector('.next-btn'),
-       images: [],
-       currentIndex: 0,
-       touchStartX: 0,
-       touchEndX: 0,
+// Image Viewer functionality
+const imageViewer = {
+    overlay: document.querySelector('.image-viewer-overlay'),
+    image: document.querySelector('.viewer-image'),
+    closeBtn: document.querySelector('.close-viewer'),
+    prevBtn: document.querySelector('.prev-btn'),
+    nextBtn: document.querySelector('.next-btn'),
+    images: [],
+    currentIndex: 0,
+    touchStartX: 0,
+    touchEndX: 0,
 
-       init() {
-           // Get all screenshots
-           this.images = Array.from(document.querySelectorAll('.screenshot'));
+    init() {
+        // Get all screenshots
+        this.images = Array.from(document.querySelectorAll('.screenshot'));
 
-           // Add click handlers to all screenshots
-           this.images.forEach((img, index) => {
-               img.addEventListener('click', () => this.open(index));
-           });
+        // Add click handlers to all screenshots
+        this.images.forEach((img, index) => {
+            img.addEventListener('click', () => this.open(index));
+        });
 
-           // Add event listeners for controls
-           this.closeBtn.addEventListener('click', () => this.close());
-           this.prevBtn.addEventListener('click', () => this.navigate(-1));
-           this.nextBtn.addEventListener('click', () => this.navigate(1));
+        // Add event listeners for controls
+        this.closeBtn.addEventListener('click', () => this.close());
+        this.prevBtn.addEventListener('click', () => this.navigate(-1));
+        this.nextBtn.addEventListener('click', () => this.navigate(1));
 
-           // Add keyboard navigation
-           document.addEventListener('keydown', (e) => {
-               if (!this.overlay.style.display || this.overlay.style.display === 'none') return;
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!this.overlay.style.display || this.overlay.style.display === 'none') return;
 
-               switch (e.key) {
-                   case 'Escape':
-                       this.close();
-                       break;
-                   case 'ArrowLeft':
-                       this.navigate(-1);
-                       break;
-                   case 'ArrowRight':
-                       this.navigate(1);
-                       break;
-               }
-           });
+            switch (e.key) {
+                case 'Escape':
+                    this.close();
+                    break;
+                case 'ArrowLeft':
+                    this.navigate(-1);
+                    break;
+                case 'ArrowRight':
+                    this.navigate(1);
+                    break;
+            }
+        });
 
-           // Add touch events for mobile swipe
-           this.overlay.addEventListener('touchstart', (e) => {
-               this.touchStartX = e.touches[0].clientX;
-           });
+        // Add touch events for mobile swipe
+        this.overlay.addEventListener('touchstart', (e) => {
+            this.touchStartX = e.touches[0].clientX;
+        });
 
-           this.overlay.addEventListener('touchend', (e) => {
-               this.touchEndX = e.changedTouches[0].clientX;
-               this.handleSwipe();
-           });
+        this.overlay.addEventListener('touchend', (e) => {
+            this.touchEndX = e.changedTouches[0].clientX;
+            this.handleSwipe();
+        });
 
-           // Close on overlay click (but not on image click)
-           this.overlay.addEventListener('click', (e) => {
-               if (e.target === this.overlay) {
-                   this.close();
-               }
-           });
-       },
+        // Close on overlay click (but not on image click)
+        this.overlay.addEventListener('click', (e) => {
+            if (e.target === this.overlay) {
+                this.close();
+            }
+        });
+    },
 
-       open(index) {
-           this.currentIndex = index;
-           this.updateImage();
-           this.overlay.style.display = 'flex';
-           document.body.style.overflow = 'hidden';
-       },
+    open(index) {
+        this.currentIndex = index;
+        this.updateImage();
+        this.overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    },
 
-       close() {
-           this.overlay.style.display = 'none';
-           document.body.style.overflow = '';
-       },
+    close() {
+        this.overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    },
 
-       navigate(direction) {
-           this.currentIndex = (this.currentIndex + direction + this.images.length) % this.images.length;
-           this.updateImage();
-       },
+    navigate(direction) {
+        this.currentIndex = (this.currentIndex + direction + this.images.length) % this.images.length;
+        this.updateImage();
+    },
 
-       updateImage() {
-           const currentImg = this.images[this.currentIndex];
-           this.image.src = currentImg.src;
-           this.image.alt = currentImg.alt;
+    updateImage() {
+        const currentImg = this.images[this.currentIndex];
+        this.image.src = currentImg.src;
+        this.image.alt = currentImg.alt;
 
-           // Update navigation button visibility
-           this.prevBtn.style.display = this.images.length > 1 ? 'block' : 'none';
-           this.nextBtn.style.display = this.images.length > 1 ? 'block' : 'none';
-       },
+        // Update navigation button visibility
+        this.prevBtn.style.display = this.images.length > 1 ? 'block' : 'none';
+        this.nextBtn.style.display = this.images.length > 1 ? 'block' : 'none';
+    },
 
-       handleSwipe() {
-           const swipeThreshold = 50; // minimum distance for swipe
-           const swipeDistance = this.touchEndX - this.touchStartX;
+    handleSwipe() {
+        const swipeThreshold = 50; // minimum distance for swipe
+        const swipeDistance = this.touchEndX - this.touchStartX;
 
-           if (Math.abs(swipeDistance) > swipeThreshold) {
-               if (swipeDistance > 0) {
-                   // Swipe right - show previous image
-                   this.navigate(-1);
-               } else {
-                   // Swipe left - show next image
-                   this.navigate(1);
-               }
-           }
-       }
-   };
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe right - show previous image
+                this.navigate(-1);
+            } else {
+                // Swipe left - show next image
+                this.navigate(1);
+            }
+        }
+    }
+};
 
-   // Initialize the image viewer when DOM is loaded
-   document.addEventListener('DOMContentLoaded', () => {
-       imageViewer.init();
-   });
+// Initialize the image viewer when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    imageViewer.init();
+});
 
-   // Function to load content dynamically
-   function loadContent(contentId) {
-       const content = document.getElementById('content');
-       switch (contentId) {
-           case 'introduction':
-               content.innerHTML = `
+// Function to load content dynamically
+function loadContent(contentId) {
+    const content = document.getElementById('content');
+    switch (contentId) {
+        case 'introduction':
+            content.innerHTML = `
                    <h1>Introduction</h1>
                    <p>This guide is designed to help you seamlessly navigate and utilize all the features and
                        functionalities of the MCC Alumni Application, a platform exclusively developed for the vibrant and
@@ -178,9 +178,9 @@
                    <p>Dive into the sections ahead to begin your journey with the MCC Alumni Application. Rediscover your
                        connections, explore opportunities, and continue contributing to the legacy of MCC.</p>
                `;
-               break;
-           case 'quickstart':
-               content.innerHTML = `
+            break;
+        case 'quickstart':
+            content.innerHTML = `
                    <h1>Quick Start</h1>
                    <p>Welcome to the Quick Start guide for the MCC Alumni Application. This section will help you get up and running in no time.</p>
                    <h2>Step 1: Download the App</h2>
@@ -318,9 +318,21 @@
                    <h3>Need Help?</h3>
                    <p>If you encounter any issues, refer to the Troubleshooting section or contact support for assistance.</p>
                `;
-               break;
-           // Add more cases for other sections if needed
-           default:
-               content.innerHTML = `<h1>Content Not Found</h1><p>The requested content could not be found.</p>`;
-       }
-   }
+            break;
+            case 'home':
+                content.innerHTML = `
+                
+                    <div class="screenshot-container">
+                    <img src="../images/image_app_one.jpg"  class="screenshot">
+                    <img src="../images/462581209_480895911697563_8410250235435675641_n.jpg"  class="screenshot">
+                    <img src="../images/462574929_1160860839050358_3134453183808623564_n (1).jpg"  class="screenshot">
+
+                    </div>
+                `; 
+            break;
+
+        // Add more cases for other sections if needed
+        default:
+            content.innerHTML = `<h1>Content Not Found</h1><p>The requested content could not be found.</p>`;
+    }
+}
