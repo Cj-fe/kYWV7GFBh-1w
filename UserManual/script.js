@@ -600,7 +600,66 @@ function loadContent(contentId) {
             `;
 
          break;
-        // Add more cases for other sections if needed
+         case 'profile':
+            content.innerHTML = `
+                        <h1>Profile Section</h1>
+            <p>This comprehensive user guide covers the alumni networking platform's profile and settings management system. The interface combines professional networking features with user-friendly account management tools, allowing users to maintain their alumni connections, manage friend requests, and control their account settings. The system emphasizes security and privacy while providing essential networking capabilities for the alumni community.</p>
+             <div class="screenshot-container">
+                       <img src="../images/462588815_531403673262956_7916832849504136991_n.jpg"  class="screenshot">
+                       <img src="../images/462588544_973569267995944_524597433170579580_n.jpg"  class="screenshot">
+                       <img src="../images/472305734_663735619320854_595268016498003519_n.jpg"  class="screenshot">
+            </div>
+                        
+            <ol class="indented-list">
+                <li>Profile Management
+                <ul>
+                    <li>Access your profile via the profile icon</li>
+                    <li>Review and update your bio information</li>
+                    <li>Add graduation batch details (e.g., "Batch 2019")</li>
+                    <li>Verify your account to receive the blue checkmark badge</li>
+                    <li>Copy your unique Virtual ID when needed for connections</li>
+                </ul>
+                </li>
+                <li>Friend Request System
+                <ul>
+                    <li>Navigate to the Friend Request section</li>
+                    <li>View pending requests with profile pictures</li>
+                    <li>Accept or decline incoming requests</li>
+                    <li>Send requests to other alumni</li>
+                    <li>Monitor "No requests yet" status when empty</li>
+                </ul>
+                </li>
+                <li>Account Settings
+                <ul>
+                    <li>Access Settings through the gear icon</li>
+                    <li>Use the search bar to find specific settings quickly</li>
+                    <li>Update account information under "Account"</li>
+                    <li>Manage profile visibility and privacy</li>
+                    <li>Navigate settings using the back arrow</li>
+                </ul>
+                </li>
+                <li>Security Features
+                <ul>
+                    <li>Log out option available at the bottom of profile</li>
+                    <li>View and manage Virtual ID for secure connections</li>
+                    <li>Control who can send you friend requests</li>
+                    <li>Update account information regularly for security</li>
+                    <li>Monitor verified status and badges</li>
+                </ul>
+                </li>
+                <li>Navigation Tips
+                <ul>
+                    <li>Use the purple back arrow to return to previous screens</li>
+                    <li>Access quick settings through the profile menu</li>
+                    <li>Search functionality available in both main interface and settings</li>
+                    <li>Easy access to friend requests and profile viewing</li>
+                    <li>One-tap options for common actions</li>
+                </ul>
+                </li>
+            </ol>
+            `;
+         break;
+
         default:
             content.innerHTML = `<h1>Content Not Found</h1><p>The requested content could not be found.</p>`;
     }
