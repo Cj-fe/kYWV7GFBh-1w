@@ -341,7 +341,7 @@ function loadContent(contentId) {
                     <p>The homepage is thoughtfully designed to provide immediate access to vital information while maintaining a clean, user-friendly layout. It welcomes users with a personalized greeting and presents information in clearly organized sections, making navigation intuitive and efficient. The blue color scheme creates a professional yet approachable atmosphere, while the clear categorization helps users quickly find what they're looking for.</p>
                    <h2>Welcome Banner Section</h2>
                     <p>The welcome banner serves as your personalized entry point to the application:</p>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Personal Greeting:</strong> Displays "Welcome, [Your Name]!" in large, friendly white text</li>
                         <li><strong>Visual Design:</strong> Features a vibrant blue background that creates an engaging atmosphere</li>
                         <li><strong>Professional Imagery:</strong> Includes an image of a professional holding a folder, conveying a business-friendly environment</li>
@@ -351,7 +351,7 @@ function loadContent(contentId) {
 
                     <h2>Search Navigation System</h2>
                     <p>The search functionality is designed for efficient content discovery:</p>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Search Bar Location:</strong> Positioned at the very top for immediate access</li>
                         <li><strong>Visual Design:</strong>
                             <ul>
@@ -374,7 +374,7 @@ function loadContent(contentId) {
                     <p>The category section offers four distinct pathways for different purposes:</p>
 
                     <h3>1. Event Category</h3>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Visual Identifier:</strong> Calendar icon with star and checkmark</li>
                         <li><strong>Purpose:</strong> Access all event-related content and schedules</li>
                         <li><strong>Design:</strong> Blue square background with white icon</li>
@@ -383,7 +383,7 @@ function loadContent(contentId) {
                     </ul>
 
                     <h3>2. Job Category</h3>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Visual Identifier:</strong> Briefcase icon with star accent</li>
                         <li><strong>Purpose:</strong> Gateway to employment opportunities</li>
                         <li><strong>Design:</strong> Blue square background with white icon</li>
@@ -392,7 +392,7 @@ function loadContent(contentId) {
                     </ul>
 
                     <h3>3. Gallery Category</h3>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Visual Identifier:</strong> Stacked photos/cards icon</li>
                         <li><strong>Purpose:</strong> Access to media collections and visual content</li>
                         <li><strong>Design:</strong> Blue square background with white icon</li>
@@ -401,7 +401,7 @@ function loadContent(contentId) {
                     </ul>
 
                     <h3>4. Survey Category</h3>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Visual Identifier:</strong> Clipboard with checklist icon</li>
                         <li><strong>Purpose:</strong> Access to feedback and opinion collection tools</li>
                         <li><strong>Design:</strong> Blue square background with white icon</li>
@@ -411,7 +411,7 @@ function loadContent(contentId) {
 
                     <h2>News Feed Section</h2>
                     <p>The news feed provides current information and updates:</p>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Section Header:</strong>
                             <ul>
                                 <li>"News" title on the left</li>
@@ -440,7 +440,7 @@ function loadContent(contentId) {
                     <p>The persistent navigation bar ensures easy access to core functions:</p>
 
                     <h3>1. Home Tab (Currently Selected)</h3>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Position:</strong> Leftmost position</li>
                         <li><strong>Indicator:</strong> Highlighted in purple to show active state</li>
                         <li><strong>Purpose:</strong> Return to main dashboard</li>
@@ -454,7 +454,7 @@ function loadContent(contentId) {
                     </ul>
 
                     <h3>3. Message Tab</h3>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Position:</strong> Second from right</li>
                         <li><strong>Purpose:</strong> Access communication features</li>
                         <li><strong>Design:</strong> Message icon with label</li>
@@ -469,7 +469,7 @@ function loadContent(contentId) {
 
                 <h2>Status Bar Information</h2>
                 <p>The top status bar provides essential system information:</p>
-                <ul>
+                <ul class="indented-list">
                     <li><strong>Network:</strong> Signal strength indicators for cellular and WiFi</li>
                     <li><strong>Time:</strong> Digital clock display (8:06)</li>
                     <li><strong>System:</strong> Battery percentage (98%) with charging status</li>
