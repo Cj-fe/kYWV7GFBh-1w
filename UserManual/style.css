@@ -371,3 +371,28 @@ ol,
   }
 }
 
+
+/* View Image Button Start Here */
+.view-image-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.view-image-btn:hover {
+  background-color: #005bb5; /* Darker shade of primary color */
+  transform: scale(1.05);
+}
+
+.view-image-btn:active {
+  transform: scale(0.95);
+}
