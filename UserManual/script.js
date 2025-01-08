@@ -473,10 +473,13 @@ function loadContent(contentId) {
              <h1>Navigation and Layout</h1>
              <p>Welcome to our vibrant community forum - a space designed for meaningful discussions, knowledge sharing, and collaborative learning! This platform enables members to engage in diverse conversations across multiple topics.</p>
              <div class="screenshot-container">
-                       <img src="../images/462587315_568750512637376_3657400423828773038_n.jpg"  class="screenshot">
-                       <img src="../images/462562498_580301538110408_8486396023419738187_n (1).jpg"  class="screenshot">
-                       <img src="../images/462586812_950376430310923_8737803355523657319_n.jpg"  class="screenshot">
-                   </div>
+                    <img src="../images/462571977_614774214358872_2649699996402682080_n.jpg" 
+                        class="screenshot">
+                    <img src="../images/467785480_1119173199947684_4056799777118444299_n.jpg"
+                         class="screenshot">
+                    <img src="../images/462581271_1282575839643063_6541738543695778540_n.jpg" 
+                        class="screenshot">
+                </div>
            <h2>Navigation and Layout</h2>
                 <ul class="indented-list">
                     <li>The forum has 4 main tabs: Topic, Popular, Saved, and Your Forum</li>

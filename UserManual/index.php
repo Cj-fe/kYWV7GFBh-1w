@@ -28,17 +28,18 @@
             <article class="article" id="content">
                 <!-- Default content (Introduction) -->
                 <h1>Introduction</h1>
-                <p>This guide is designed to help you seamlessly navigate and utilize all the features and functionalities of the MCC Alumni Application, a platform exclusively developed for the vibrant and
+                <p>This guide is designed to help you seamlessly navigate and utilize all the features and
+                    functionalities of the MCC Alumni Application, a platform exclusively developed for the vibrant and
                     accomplished alumni of Madridejos Community College. Whether you're reconnecting with former
                     classmates, networking with fellow alumni, or staying updated on campus events, this app provides an
                     all-in-one solution to foster a thriving alumni community.</p>
 
                 <div class="screenshot-container">
-                    <img src="../images/462571977_614774214358872_2649699996402682080_n.jpg" 
+                    <img src="../images/462587315_568750512637376_3657400423828773038_n.jpg" alt="Dashboard Overview"
                         class="screenshot">
-                    <img src="../images/467785480_1119173199947684_4056799777118444299_n.jpg"
-                         class="screenshot">
-                    <img src="../images/462581271_1282575839643063_6541738543695778540_n.jpg" 
+                    <img src="../images/462562498_580301538110408_8486396023419738187_n (1).jpg"
+                        alt="Dashboard Overview" class="screenshot">
+                    <img src="../images/462586812_950376430310923_8737803355523657319_n.jpg" alt="Dashboard Overview"
                         class="screenshot">
                 </div>
 
