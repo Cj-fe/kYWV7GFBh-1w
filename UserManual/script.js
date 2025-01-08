@@ -339,14 +339,142 @@ function loadContent(contentId) {
                     <button class="view-image-btn" data-image-src="../images/image_app_one.jpg">View Image</button>
                     <h2>Purpose and Design</h2>
                     <p>The homepage is thoughtfully designed to provide immediate access to vital information while maintaining a clean, user-friendly layout. It welcomes users with a personalized greeting and presents information in clearly organized sections, making navigation intuitive and efficient. The blue color scheme creates a professional yet approachable atmosphere, while the clear categorization helps users quickly find what they're looking for.</p>
-                    <h2>Core Features</h2>
-                    <p>The homepage integrates four essential pillars of community engagement:</p>
-                      <ul class="indented-list">
-                        <li><strong>Events Management:</strong> Stay updated with local happenings and important dates.</li>
-                        <li><strong>Job Opportunities:</strong> Access career prospects and employment listings.</li>
-                        <li><strong>Media Gallery:</strong> Browse through visual content and important moments.</li>
-                        <li><strong>Community Feedback:</strong> Participate in surveys to share your voice.</li>
+                   <h2>Welcome Banner Section</h2>
+                    <p>The welcome banner serves as your personalized entry point to the application:</p>
+                    <ul>
+                        <li><strong>Personal Greeting:</strong> Displays "Welcome, [Your Name]!" in large, friendly white text</li>
+                        <li><strong>Visual Design:</strong> Features a vibrant blue background that creates an engaging atmosphere</li>
+                        <li><strong>Professional Imagery:</strong> Includes an image of a professional holding a folder, conveying a business-friendly environment</li>
+                        <li><strong>NEWS Button:</strong> A prominent red button provides instant access to important updates</li>
+                        <li><strong>Accessibility:</strong> The banner spans the full width of the screen for optimal visibility</li>
                     </ul>
+
+                    <h2>Search Navigation System</h2>
+                    <p>The search functionality is designed for efficient content discovery:</p>
+                    <ul>
+                        <li><strong>Search Bar Location:</strong> Positioned at the very top for immediate access</li>
+                        <li><strong>Visual Design:</strong>
+                            <ul>
+                                <li>Purple-bordered rounded rectangle for easy identification</li>
+                                <li>Magnifying glass icon on the left side</li>
+                                <li>Light gray placeholder text reading "Search..."</li>
+                            </ul>
+                        </li>
+                        <li><strong>Interaction Method:</strong>
+                            <ul>
+                                <li>Tap anywhere in the search field to activate</li>
+                                <li>Keyboard appears automatically for immediate searching</li>
+                                <li>Full-width design makes it easy to tap</li>
+                            </ul>
+                        </li>
+                        <li><strong>Notification Access:</strong> Bell icon in the top-right corner for quick access to notifications</li>
+                    </ul>
+
+                    <h2>Category Navigation Hub</h2>
+                    <p>The category section offers four distinct pathways for different purposes:</p>
+
+                    <h3>1. Event Category</h3>
+                    <ul>
+                        <li><strong>Visual Identifier:</strong> Calendar icon with star and checkmark</li>
+                        <li><strong>Purpose:</strong> Access all event-related content and schedules</li>
+                        <li><strong>Design:</strong> Blue square background with white icon</li>
+                        <li><strong>Label:</strong> "Event" displayed in purple text below the icon</li>
+                        <li><strong>Functionality:</strong> Tap to access event listings and calendar</li>
+                    </ul>
+
+                    <h3>2. Job Category</h3>
+                    <ul>
+                        <li><strong>Visual Identifier:</strong> Briefcase icon with star accent</li>
+                        <li><strong>Purpose:</strong> Gateway to employment opportunities</li>
+                        <li><strong>Design:</strong> Blue square background with white icon</li>
+                        <li><strong>Label:</strong> "Job" displayed in purple text below the icon</li>
+                        <li><strong>Functionality:</strong> Tap to view job listings and career opportunities</li>
+                    </ul>
+
+                    <h3>3. Gallery Category</h3>
+                    <ul>
+                        <li><strong>Visual Identifier:</strong> Stacked photos/cards icon</li>
+                        <li><strong>Purpose:</strong> Access to media collections and visual content</li>
+                        <li><strong>Design:</strong> Blue square background with white icon</li>
+                        <li><strong>Label:</strong> "Gallery" displayed in purple text below the icon</li>
+                        <li><strong>Functionality:</strong> Tap to browse photo collections and media</li>
+                    </ul>
+
+                    <h3>4. Survey Category</h3>
+                    <ul>
+                        <li><strong>Visual Identifier:</strong> Clipboard with checklist icon</li>
+                        <li><strong>Purpose:</strong> Access to feedback and opinion collection tools</li>
+                        <li><strong>Design:</strong> Blue square background with white icon</li>
+                        <li><strong>Label:</strong> "Survey" displayed in purple text below the icon</li>
+                        <li><strong>Functionality:</strong> Tap to participate in surveys</li>
+                    </ul>
+
+                    <h2>News Feed Section</h2>
+                    <p>The news feed provides current information and updates:</p>
+                    <ul>
+                        <li><strong>Section Header:</strong>
+                            <ul>
+                                <li>"News" title on the left</li>
+                                <li>"List" view option on the right in red</li>
+                            </ul>
+                        </li>
+                        <li><strong>Article Cards:</strong>
+                            <ul>
+                                <li>Full-width cards with rounded corners</li>
+                                <li>Large featured images</li>
+                                <li>Clear, readable headlines</li>
+                                <li>Source attribution (e.g., madridejocebu.gov.ph)</li>
+                                <li>Smooth scrolling for multiple articles</li>
+                            </ul>
+                        </li>
+                        <li><strong>Content Display:</strong>
+                            <ul>
+                                <li>High-quality images that scale appropriately</li>
+                                <li>Text overlay on images for headlines</li>
+                                <li>Clear hierarchy of information</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h2>Bottom Navigation Bar</h2>
+                    <p>The persistent navigation bar ensures easy access to core functions:</p>
+
+                    <h3>1. Home Tab (Currently Selected)</h3>
+                    <ul>
+                        <li><strong>Position:</strong> Leftmost position</li>
+                        <li><strong>Indicator:</strong> Highlighted in purple to show active state</li>
+                        <li><strong>Purpose:</strong> Return to main dashboard</li>
+                    </ul>
+
+                    <h3>2. Forum Tab</h3>
+                    <ul>
+                        <li><strong>Position:</strong> Second from left</li>
+                        <li><strong>Purpose:</strong> Access community discussions</li>
+                        <li><strong>Design:</strong> Simple icon with label</li>
+                    </ul>
+
+                    <h3>3. Message Tab</h3>
+                    <ul>
+                        <li><strong>Position:</strong> Second from right</li>
+                        <li><strong>Purpose:</strong> Access communication features</li>
+                        <li><strong>Design:</strong> Message icon with label</li>
+                    </ul>
+
+                    <h3>4. Profile Tab</h3>
+                    <ul>
+                    <li><strong>Position:</strong> Rightmost position</li>
+                    <li><strong>Purpose:</strong> Access personal account settings</li>
+                    <li><strong>Design:</strong> User profile icon with label</li>
+                </ul>
+
+                <h2>Status Bar Information</h2>
+                <p>The top status bar provides essential system information:</p>
+                <ul>
+                    <li><strong>Network:</strong> Signal strength indicators for cellular and WiFi</li>
+                    <li><strong>Time:</strong> Digital clock display (8:06)</li>
+                    <li><strong>System:</strong> Battery percentage (98%) with charging status</li>
+                    <li><strong>Data Speed:</strong> Current data transfer rate display (8.60 KB/s)</li>
+                </ul>
                 `;
             break;
 
