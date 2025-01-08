@@ -13,7 +13,7 @@
     <header class="header">
         <div class="header-left">
             <button class="menu-toggle" aria-label="Toggle menu">☰</button>
-            <a href="#" class="logo">MCC ALUNI DOCS</a>
+            <a href="#" class="logo">MCC ALUMNI DOCS</a>
         </div>
     </header>
 
