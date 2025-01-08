@@ -321,7 +321,7 @@ function loadContent(contentId) {
             break;
             case 'home':
                 content.innerHTML = `
-                
+                    <h1>Quick Start</h1>
                     <div class="screenshot-container">
                     <img src="../images/image_app_one.jpg"  class="screenshot">
                     <img src="../images/462581209_480895911697563_8410250235435675641_n.jpg"  class="screenshot">
