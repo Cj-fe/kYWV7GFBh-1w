@@ -151,7 +151,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
+// Extend the imageViewer object to handle opening a specific image
+imageViewer.openImage = function(src) {
+    this.image.src = src;
+    this.overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+};
 // Function to load content dynamically
 function loadContent(contentId) {
     const content = document.getElementById('content');
