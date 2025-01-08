@@ -639,15 +639,6 @@ function loadContent(contentId) {
                 </ul>
                 </li>
             
-                <li>Navigation Tips
-                <ul>
-                    <li>Use the purple back arrow to return to previous screens</li>
-                    <li>Access quick settings through the profile menu</li>
-                    <li>Search functionality available in both main interface and settings</li>
-                    <li>Easy access to friend requests and profile viewing</li>
-                    <li>One-tap options for common actions</li>
-                </ul>
-                </li>
             </ol>
             `;
          break;
