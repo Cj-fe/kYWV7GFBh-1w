@@ -24,6 +24,9 @@ body {
   background-color: var(--bg-color);
   overflow-x: hidden;
 }
+p {
+  text-align: justify;
+}
 
 .layout {
   display: flex;
