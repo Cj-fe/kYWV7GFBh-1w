@@ -532,7 +532,74 @@ function loadContent(contentId) {
             `;
 
         break;
+        case 'message':
+            content.innerHTML = `
+            <h1>Forum Section</h1>
+            <p>This messaging platform is part of an alumni networking system for MCC (MCC ALUMNI), featuring a clean, modern interface with core communication functionalities. The interface allows users to engage through text messages, voice calls, and profile viewing, all presented in a user-friendly layout with a turquoise color scheme. Users can search for and connect with fellow alumni, initiate conversations, make voice calls (indicated by green accept and red decline buttons), and view detailed profiles that show shared connections. The system displays real-time status updates like "Waiting for answer..." during calls and includes standard messaging features such as read receipts, timestamps, and a message input field with attachment capabilities. It's designed to facilitate professional networking and communication within the MCC alumni community while maintaining a balance between accessibility and user privacy.</p>
+             <div class="screenshot-container">
+                       <img src="../images/462588815_531403673262956_7916832849504136991_n.jpg"  class="screenshot">
+                       <img src="../images/462588544_973569267995944_524597433170579580_n.jpg"  class="screenshot">
+                       <img src="../images/472305734_663735619320854_595268016498003519_n.jpg"  class="screenshot">
+            </div>
+            <h2>Step-by-Step Usage Guide</h2>
 
+                <ol class="indented-list">
+                    <li>Starting a Chat
+                        <ul class="indented-list">
+                            <li>Open the Chats section from the main menu</li>
+                            <li>Use the search bar at the top to find contacts</li>
+                            <li>Select a contact to begin messaging</li>
+                        </ul>
+                        <p><strong>What Happened Next:</strong> In this case, we see Joann Rebamonte initiated contact by sending "hillo" at 3:31 AM, and received a response "hhhh" from John Christian Fariola.</p>
+                    </li>
+
+                    <li>Making Voice Calls
+                        <ul class="indented-list">
+                            <li>Tap the purple phone icon in the top right corner to initiate a voice call</li>
+                            <li>Green button to accept calls, red button to decline</li>
+                            <li>Mute and chat options available during calls</li>
+                        </ul>
+                        <p><strong>What Happened Next:</strong> The interface shows a "Waiting for answer..." screen, indicating an attempted call that hasn't been answered yet.</p>
+                    </li>
+
+                    <li>Viewing Profiles
+                        <ul class="indented-list">
+                            <li>Click the "View Profile" button on any contact's page</li>
+                            <li>You can see shared connections (e.g., "You're Friends at MCC ALUMNI")</li>
+                            <li>Profile pictures and basic information are displayed</li>
+                        </ul>
+                        <p><strong>What Happened Next:</strong> The profile shows that both users are connected through MCC ALUMNI network.</p>
+                    </li>
+
+                    <li>Messaging Features
+                        <ul class="indented-list">
+                            <li>Type messages in the bottom text field marked "Type a message..."</li>
+                            <li>Use the paper clip icon for attachments</li>
+                            <li>Send button appears as a purple arrow</li>
+                            <li>Messages show timestamp and read status</li>
+                        </ul>
+                        <p><strong>What Happened Next:</strong> A simple text exchange occurred with casual greetings ("hillo" and "hhhh").</p>
+                    </li>
+
+                    <li>Navigation
+                        <ul class="indented-list">
+                            <li>Use the back arrow (purple) to return to previous screens</li>
+                            <li>Access notifications through the bell icon</li>
+                            <li>Maintain multiple conversations in the Chats section</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h2>Safety Tips</h2>
+                <ul class="indented-list">
+                    <li>Verify the identity of contacts through mutual connections</li>
+                    <li>Be cautious with sharing personal information</li>
+                    <li>Report any suspicious activity</li>
+                    <li>Keep communications professional, especially within alumni networks</li>
+                </ul>
+            `;
+
+         break;
         // Add more cases for other sections if needed
         default:
             content.innerHTML = `<h1>Content Not Found</h1><p>The requested content could not be found.</p>`;
