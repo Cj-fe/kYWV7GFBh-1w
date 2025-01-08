@@ -447,7 +447,7 @@ function loadContent(contentId) {
                     </ul>
 
                     <h3>2. Forum Tab</h3>
-                    <ul>
+                    <ul class="indented-list">
                         <li><strong>Position:</strong> Second from left</li>
                         <li><strong>Purpose:</strong> Access community discussions</li>
                         <li><strong>Design:</strong> Simple icon with label</li>
@@ -461,7 +461,7 @@ function loadContent(contentId) {
                     </ul>
 
                     <h3>4. Profile Tab</h3>
-                    <ul>
+                    <ul class="indented-list">
                     <li><strong>Position:</strong> Rightmost position</li>
                     <li><strong>Purpose:</strong> Access personal account settings</li>
                     <li><strong>Design:</strong> User profile icon with label</li>
