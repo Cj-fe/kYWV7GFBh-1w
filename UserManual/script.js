@@ -339,6 +339,8 @@ function loadContent(contentId) {
                     <button class="view-image-btn" data-image-src="../images/image_app_one.jpg">View Image</button>
                     <h2>Purpose and Design</h2>
                     <p>The homepage is thoughtfully designed to provide immediate access to vital information while maintaining a clean, user-friendly layout. It welcomes users with a personalized greeting and presents information in clearly organized sections, making navigation intuitive and efficient. The blue color scheme creates a professional yet approachable atmosphere, while the clear categorization helps users quickly find what they're looking for.</p>
+                     <h2>Core Features</h2>
+                     <p>The homepage integrates four essential pillars of community engagement:</p>
                 `;
             break;
 
