@@ -29,7 +29,7 @@
             </li>
         </ul>
     </div>
-
+<!--
     <div class="nav-group">
         <div class="nav-group-title">Advanced Features</div>
         <ul class="nav-items">
@@ -41,4 +41,5 @@
             </li>
         </ul>
     </div>
+-->
 </nav>
