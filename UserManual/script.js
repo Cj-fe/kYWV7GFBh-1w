@@ -327,8 +327,8 @@ function loadContent(contentId) {
                         <button class="carousel-btn prev" onclick="changeSlide(-1)">&#10094;</button>
                         <div class="carousel-images">
                             <img src="../images/image_app_one.jpg" class="carousel-image active">
-                            <img src="../images/another_image.jpg" class="carousel-image">
-                            <img src="../images/yet_another_image.jpg" class="carousel-image">
+                            <img src="../images/462581209_480895911697563_8410250235435675641_n.jpg" class="carousel-image">
+                            <img src="../images/462574929_1160860839050358_3134453183808623564_n (1).jpg" class="carousel-image">
                         </div>
                         <button class="carousel-btn next" onclick="changeSlide(1)">&#10095;</button>
                     </div>
