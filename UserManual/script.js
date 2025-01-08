@@ -157,9 +157,9 @@
                        classmates, networking with fellow alumni, or staying updated on campus events, this app provides an
                        all-in-one solution to foster a thriving alumni community.</p>
                    <div class="screenshot-container">
-                       <img src="../images/462587315_568750512637376_3657400423828773038_n.jpg" alt="Dashboard Overview" class="screenshot">
-                       <img src="../images/462562498_580301538110408_8486396023419738187_n (1).jpg" alt="Dashboard Overview" class="screenshot">
-                       <img src="../images/462586812_950376430310923_8737803355523657319_n.jpg" alt="Dashboard Overview" class="screenshot">
+                       <img src="../images/462587315_568750512637376_3657400423828773038_n.jpg"  class="screenshot">
+                       <img src="../images/462562498_580301538110408_8486396023419738187_n (1).jpg"  class="screenshot">
+                       <img src="../images/462586812_950376430310923_8737803355523657319_n.jpg"  class="screenshot">
                    </div>
                    <h2>Who Should Use This Manual?</h2>
                    <p>This user manual is for all MCC alumni who have downloaded the application and wish to make the most

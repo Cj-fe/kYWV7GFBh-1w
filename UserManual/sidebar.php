@@ -16,13 +16,13 @@
         <div class="nav-group-title">Core Concepts</div>
         <ul class="nav-items">
             <li class="nav-item">
-                <a href="#dashboard" class="nav-link" data-content="dashboard">Dashboard</a>
+                <a href="#home" class="nav-link" data-content="home">Home</a>
             </li>
             <li class="nav-item">
-                <a href="#projects" class="nav-link" data-content="projects">Projects</a>
+                <a href="#forum" class="nav-link" data-content="forum">Forum</a>
             </li>
             <li class="nav-item">
-                <a href="#settings" class="nav-link" data-content="settings">Settings</a>
+                <a href="#message" class="nav-link" data-content="message">Message</a>
             </li>
         </ul>
     </div>
