@@ -13,7 +13,7 @@
     </div>
 
     <div class="nav-group">
-        <div class="nav-group-title">Core Concepts</div>
+        <div class="nav-group-title">Bottom Navigation Bar</div>
         <ul class="nav-items">
             <li class="nav-item">
                 <a href="#home" class="nav-link" data-content="home">Home</a>
