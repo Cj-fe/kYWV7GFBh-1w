@@ -322,27 +322,12 @@ function loadContent(contentId) {
             case 'home':
                 content.innerHTML = `
                     <h1>Home Page</h1>
-                    <p>What Happened Next is a comprehensive information and community platform designed to keep users connected with local news, events, job opportunities, and community engagement. The homepage serves as a centralized hub that combines essential features with an intuitive user interface, making it easy for users to stay informed and engaged with their community.</p>
-                    <div class="carousel">
-                        <button class="carousel-btn prev" onclick="changeSlide(-1)">&#10094;</button>
-                        <div class="carousel-images">
-                            <img src="../images/image_app_one.jpg" class="carousel-image active">
-                            <img src="../images/462581209_480895911697563_8410250235435675641_n.jpg" class="carousel-image">
-                            <img src="../images/462574929_1160860839050358_3134453183808623564_n (1).jpg" class="carousel-image">
-                        </div>
-                        <button class="carousel-btn next" onclick="changeSlide(1)">&#10095;</button>
+                    <p>What Happened Next is a comprehensive information and community platform designed to keep users connected with local news, events, job opportunities, and community engagement. The homepage serves as a centralized hub that combines essential features with an intuitive user interface, making it easy for users to stay informed and engaged with their community</p>
+                    <div class="screenshot-container">
+                    <img  src="../images/image_app_one.jpg"  class="screenshot">
                     </div>
                     <h2>Welcome Banner Section</h2>
-                `;
-                function changeSlide(direction) {
-                    const images = document.querySelectorAll('.carousel-image');
-                    let activeIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
-                    images[activeIndex].classList.remove('active');
-                    activeIndex = (activeIndex + direction + images.length) % images.length;
-                    images[activeIndex].classList.add('active');
-                }
-                
-            
+                `; 
             break;
 
         // Add more cases for other sections if needed
