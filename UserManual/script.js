@@ -466,10 +466,62 @@ function loadContent(contentId) {
                     <li><strong>Purpose:</strong> Access personal account settings</li>
                     <li><strong>Design:</strong> User profile icon with label</li>
                 </ul>
-
-              
                 `;
             break;
+        case 'forum':
+            content.innerHTML = `
+           <h2>Navigation and Layout</h2>
+                <ul class="indented-list">
+                    <li>The forum has 4 main tabs: Topic, Popular, Saved, and Your Forum</li>
+                    <li>A notification bell icon is located in the top right corner</li>
+                    <li>A back arrow in the top left allows returning to the previous screen</li>
+                </ul>
+
+                <h2>Creating a New Forum Post</h2>
+                <ol class="indented-list">
+                    <li>Click the blue "+" button at the bottom right of the main forum screen</li>
+                    <li>Fill in the required fields:
+                        <ul class="indented-list">
+                            <li><strong>Topic Title:</strong> Enter a clear, descriptive title for your discussion</li>
+                            <li><strong>Description:</strong> Write a detailed description of your topic</li>
+                        </ul>
+                    </li>
+                    <li>Click the purple "POST FORUM" button to publish</li>
+                </ol>
+
+                <h2>Interacting with Posts</h2>
+                <ul class="indented-list">
+                    <li>Like posts using the thumbs up icon (shows count, e.g., "LIKE 0")</li>
+                    <li>Love posts using the heart icon (shows count, e.g., "LOVE 2")</li>
+                    <li>React with "HA" using the laughing emoji</li>
+                    <li>Comment on posts using the text field at the bottom ("Well, I think...")</li>
+                    <li>Posts show the author's name, time posted, and number of comments</li>
+                </ul>
+
+                <h2>Post Information Display</h2>
+                <ul class="indented-list">
+                    <li>Each post shows:
+                        <ul class="indented-list">
+                            <li>Author's profile picture and name</li>
+                            <li>Time posted (e.g., "4 weeks ago")</li>
+                            <li>Number of comments</li>
+                            <li>Timestamp (e.g., "2024-12-11 09:41:24")</li>
+                            <li>A heart icon to save/favorite the topic</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2>From the Example Post Shown</h2>
+                <ol class="indented-list">
+                    <li>The user Joann Rebamonte created a discussion about technology trends</li>
+                    <li>The post received 2 loves, 0 likes, and 1 comment</li>
+                    <li>A user named John Christian Fariola commented "haha" 4 days after the post</li>
+                    <li>The post discusses various technology trends including AI, Web3, blockchain, quantum computing, and 5G</li>
+                </ol>
+
+            `;
+
+        break;
 
         // Add more cases for other sections if needed
         default:
