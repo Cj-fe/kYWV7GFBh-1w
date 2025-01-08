@@ -24,6 +24,9 @@
             <li class="nav-item">
                 <a href="#message" class="nav-link" data-content="message">Message</a>
             </li>
+            <li class="nav-item">
+                <a href="#profile" class="nav-link" data-content="profile">Profile</a>
+            </li>
         </ul>
     </div>
 
