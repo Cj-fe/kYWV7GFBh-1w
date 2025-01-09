@@ -1,33 +1,43 @@
 <?php
-require_once '../includes/config.php';
 require_once '../includes/session.php';
+header('Content-Type: application/json');
 
-$firebase = new firebaseRDB($databaseURL);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_SESSION['alumni_id'] ?? null;
-    $current_password = $_POST['current_password'] ?? '';
-
-    if (!$user_id) {
-        echo json_encode(['success' => false, 'message' => 'User ID is missing']);
-        exit;
+try {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Invalid request method');
     }
 
-    // Retrieve the user's data from Firebase
-    $user_data = $firebase->retrieve("alumni/$user_id");
-    $user_data = json_decode($user_data, true);
-
-    if (!$user_data) {
-        echo json_encode(['success' => false, 'message' => 'User not found']);
-        exit;
+    // Check if user is logged in
+    if (!isset($_SESSION['alumni_id']) || !isset($_SESSION['user'])) {
+        throw new Exception('User not authenticated');
     }
 
-    // Verify the current password
-    if (password_verify($current_password, $user_data['password'])) {
-        echo json_encode(['success' => true]);
+    if (!isset($_POST['current_password']) || empty($_POST['current_password'])) {
+        throw new Exception('Current password is required');
+    }
+
+    $current_password = $_POST['current_password'];
+    $stored_password = $_SESSION['user']['password'];
+
+    // Verify the password
+    if (password_verify($current_password, $stored_password)) {
+        echo json_encode([
+            'success' => true,
+            'message' => 'Password verified successfully'
+        ]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Incorrect password']);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Incorrect password'
+        ]);
     }
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+
+} catch (Exception $e) {
+    error_log('Password validation error: ' . $e->getMessage());
+    
+    echo json_encode([
+        'success' => false,
+        'message' => 'An error occurred: ' . $e->getMessage(),
+        'error' => true
+    ]);
 }
