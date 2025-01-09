@@ -13,7 +13,7 @@
     $alumni_data = json_decode($alumni_data, true);
     
     // Assuming you have the current user's ID stored in a session variable
-    $current_user_id = $_SESSION['alumni_id'];
+    $current_user_id = $_SESSION['id'];
     $current_user = $alumni_data[$current_user_id] ?? null;
 
     if (!$current_user) {

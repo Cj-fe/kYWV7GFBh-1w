@@ -1,11 +1,11 @@
 <?php
 require_once '../includes/config.php';
 require_once '../includes/session.php';
-require_once '../includes/firebaseRDB.php';
+
 $firebase = new firebaseRDB($databaseURL);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_SESSION['alumni_id'] ?? null;
+    $user_id = $_SESSION['id'] ?? null;
     $current_password = $_POST['current_password'] ?? '';
 
     if (!$user_id) {
