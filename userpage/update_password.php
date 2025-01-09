@@ -4,8 +4,7 @@
 <head>
     <?php include 'includes/header.php'; ?>
     <?php
-    require_once '../includes/firebaseRDB.php';
-    require_once '../includes/config.php';
+
 
     $firebase = new firebaseRDB($databaseURL);
 
