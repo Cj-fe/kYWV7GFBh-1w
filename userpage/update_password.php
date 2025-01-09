@@ -1,6 +1,7 @@
 <?php include '../includes/session.php'; ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?php include 'includes/header.php'; ?>
     <?php
@@ -11,7 +12,7 @@
 
     $alumni_data = $firebase->retrieve("alumni");
     $alumni_data = json_decode($alumni_data, true);
-    
+
     // Assuming you have the current user's ID stored in a session variable
     $current_user_id = $_SESSION['alumni_id'];
     $current_user = $alumni_data[$current_user_id] ?? null;
@@ -84,7 +85,7 @@
         }
     </style>
     <!-- Font Awesome CSS -->
-  
+
 </head>
 
 <body>
@@ -123,8 +124,9 @@
                                         <i class="fas fa-lock icon"></i> New Password
                                     </label>
                                     <div class="nk-int-st password-input-wrapper">
-                                        <input type="password" id="new_password" name="new_password" class="form-control"
-                                            placeholder="New Password" oninput="checkPasswordMatch()">
+                                        <input type="password" id="new_password" name="new_password"
+                                            class="form-control" placeholder="New Password"
+                                            oninput="checkPasswordMatch()">
                                     </div>
                                 </div>
                             </div>
@@ -134,9 +136,11 @@
                                         <i class="fas fa-lock icon"></i> Confirm New Password
                                     </label>
                                     <div class="nk-int-st password-input-wrapper">
-                                        <input type="password" id="confirm_password" name="confirm_password" class="form-control"
-                                            placeholder="Confirm New Password" oninput="checkPasswordMatch()">
-                                        <i id="password-match-icon" class="fas fa-times-circle" style="display: none;"></i>
+                                        <input type="password" id="confirm_password" name="confirm_password"
+                                            class="form-control" placeholder="Confirm New Password"
+                                            oninput="checkPasswordMatch()">
+                                        <i id="password-match-icon" class="fas fa-times-circle"
+                                            style="display: none;"></i>
                                     </div>
                                 </div>
                             </div>
@@ -166,58 +170,90 @@
 
     <!-- Modal JavaScript -->
     <script>
-    document.getElementById('updateProfileForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        document.getElementById('passwordModal').style.display = 'block';
-    });
-
-    document.getElementsByClassName('close')[0].addEventListener('click', function() {
-        document.getElementById('passwordModal').style.display = 'none';
-    });
-
-    document.getElementById('passwordForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var currentPassword = document.getElementById('current_password').value;
-
-        fetch('validate_password.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'current_password=' + encodeURIComponent(currentPassword)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('passwordModal').style.display = 'none';
-                document.getElementById('updateProfileForm').submit();
-            } else {
-                alert(data.message || 'Password validation failed');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred during password validation');
+        document.getElementById('updateProfileForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            document.getElementById('passwordModal').style.display = 'block';
         });
-    });
 
-    function checkPasswordMatch() {
-        var newPassword = document.getElementById('new_password').value;
-        var confirmPassword = document.getElementById('confirm_password').value;
-        var icon = document.getElementById('password-match-icon');
+        document.getElementsByClassName('close')[0].addEventListener('click', function () {
+            document.getElementById('passwordModal').style.display = 'none';
+        });
 
-        if (newPassword === '' && confirmPassword === '') {
-            icon.style.display = 'none';
-        } else if (newPassword === confirmPassword) {
-            icon.className = 'fas fa-check-circle';
-            icon.style.display = 'inline';
-        } else {
-            icon.className = 'fas fa-times-circle';
-            icon.style.display = 'inline';
+        document.getElementById('passwordForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const submitButton = this.querySelector('button[type="submit"]');
+            const currentPassword = document.getElementById('current_password').value;
+            const errorDisplay = document.createElement('div');
+            errorDisplay.className = 'alert alert-danger';
+            errorDisplay.style.display = 'none';
+            this.appendChild(errorDisplay);
+
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+
+            // Clear any previous error messages
+            errorDisplay.style.display = 'none';
+
+            fetch('validate_password.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'current_password=' + encodeURIComponent(currentPassword)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Server response:', data); // For debugging
+
+                    if (data.success) {
+                        // Password verified successfully
+                        document.getElementById('passwordModal').style.display = 'none';
+                        document.getElementById('updateProfileForm').submit();
+                    } else {
+                        // Show error message
+                        errorDisplay.textContent = data.message || 'Verification failed';
+                        errorDisplay.style.display = 'block';
+                        document.getElementById('current_password').value = '';
+                        document.getElementById('current_password').focus();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    errorDisplay.textContent = 'An error occurred during verification. Please try again.';
+                    errorDisplay.style.display = 'block';
+                })
+                .finally(() => {
+                    // Reset button state
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Submit';
+                });
+        });
+
+        function checkPasswordMatch() {
+            var newPassword = document.getElementById('new_password').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
+            var icon = document.getElementById('password-match-icon');
+
+            if (newPassword === '' && confirmPassword === '') {
+                icon.style.display = 'none';
+            } else if (newPassword === confirmPassword) {
+                icon.className = 'fas fa-check-circle';
+                icon.style.display = 'inline';
+            } else {
+                icon.className = 'fas fa-times-circle';
+                icon.style.display = 'inline';
+            }
         }
-    }
     </script>
 
-    <?php include 'global_chatbox.php'?>
+    <?php include 'global_chatbox.php' ?>
 </body>
+
 </html>
