@@ -13,68 +13,54 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query to fetch all data from the applicant table
-$sql = "SELECT * FROM applicant";
+// Query to fetch data from the applicant table
+$sql = "SELECT * FROM applicant LIMIT 1"; // Limit 1 to fetch column metadata only
 $result = $conn->query($sql);
 
-// Fetch column names dynamically
-$columns = [];
 if ($result) {
+    echo "<h2>Detected Columns and Data Types:</h2>";
+    echo "<table border='1' cellpadding='8'>";
+    echo "<tr><th>Column Name</th><th>Data Type</th></tr>";
+
+    // Fetch metadata for all fields
     $fields = $result->fetch_fields();
     foreach ($fields as $field) {
-        $columns[] = $field->name;
+        // Display column name and data type
+        echo "<tr>";
+        echo "<td>" . htmlspecialchars($field->name) . "</td>";
+        echo "<td>" . htmlspecialchars(getMySQLDataType($field->type)) . "</td>";
+        echo "</tr>";
     }
+    echo "</table>";
+} else {
+    echo "Error fetching column metadata: " . $conn->error;
+}
+
+// Close the connection
+$conn->close();
+
+/**
+ * Helper function to map MySQL field types to human-readable data types
+ */
+function getMySQLDataType($type) {
+    $types = [
+        1 => "TINYINT",
+        2 => "SMALLINT",
+        3 => "INTEGER",
+        4 => "FLOAT",
+        5 => "DOUBLE",
+        7 => "TIMESTAMP",
+        8 => "BIGINT",
+        9 => "MEDIUMINT",
+        10 => "DATE",
+        11 => "TIME",
+        12 => "DATETIME",
+        13 => "YEAR",
+        16 => "BIT",
+        252 => "TEXT/BLOB",
+        253 => "VARCHAR",
+        254 => "CHAR",
+    ];
+    return $types[$type] ?? "UNKNOWN";
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Applicant Table</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-<body>
-    <h1>Applicant Table</h1>
-    <?php if ($result && $result->num_rows > 0): ?>
-        <table>
-            <thead>
-                <tr>
-                    <?php foreach ($columns as $column): ?>
-                        <th><?= htmlspecialchars($column) ?></th>
-                    <?php endforeach; ?>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <tr>
-                        <?php foreach ($columns as $column): ?>
-                            <td><?= htmlspecialchars($row[$column]) ?></td>
-                        <?php endforeach; ?>
-                        <td>
-                            <a href="delete.php?id=<?= htmlspecialchars($row['id']) ?>" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p>No records found in the applicant table.</p>
-    <?php endif; ?>
-    <?php $conn->close(); ?>
-</body>
-</html>
