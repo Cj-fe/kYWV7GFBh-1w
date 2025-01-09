@@ -1,45 +1,45 @@
-<?php 
-include '../includes/session.php';
-require_once '../includes/firebaseRDB.php';
-require_once '../includes/config.php';
-
-// Generate CSRF token if not exists
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-
-$firebase = new firebaseRDB($databaseURL);
-
-// Get current user data
-$current_user_id = $_SESSION['alumni_id'] ?? null;
-if ($current_user_id) {
-    $alumni_data = $firebase->retrieve("alumni");
-    $alumni_data = json_decode($alumni_data, true);
-    $current_user = $alumni_data[$current_user_id] ?? null;
-}
-
-if (!$current_user) {
-    header('Location: login.php');
-    exit;
-}
-?>
-
+<?php include '../includes/session.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
     <?php include 'includes/header.php'; ?>
+    <?php
+    require_once '../includes/firebaseRDB.php';
+    require_once '../includes/config.php';
+
+    $firebase = new firebaseRDB($databaseURL);
+
+    $alumni_data = $firebase->retrieve("alumni");
+    $alumni_data = json_decode($alumni_data, true);
     
-    <!-- Custom CSS -->
+    // Assuming you have the current user's ID stored in a session variable
+    $current_user_id = $_SESSION['alumni_id'];
+    $current_user = $alumni_data[$current_user_id] ?? null;
+
+    if (!$current_user) {
+        // Handle the case where the user is not found
+        echo "User not found";
+        exit;
+    }
+
+    function getValue($array, $key)
+    {
+        return isset($array[$key]) && !empty($array[$key]) ? $array[$key] : "N/A";
+    }
+    ?>
+
+    <!-- Modal CSS -->
     <style>
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 1;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.4);
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
         .modal-content {
@@ -48,7 +48,6 @@ if (!$current_user) {
             padding: 20px;
             border: 1px solid #888;
             width: 30%;
-            border-radius: 5px;
         }
 
         .close {
@@ -56,6 +55,12 @@ if (!$current_user) {
             float: right;
             font-size: 28px;
             font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
             cursor: pointer;
         }
 
@@ -70,28 +75,16 @@ if (!$current_user) {
             transform: translateY(-50%);
         }
 
-        .fa-check-circle { color: green; }
-        .fa-times-circle { color: red; }
-        
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
+        .fa-check-circle {
+            color: green;
         }
 
-        .alert-danger {
-            color: #721c24;
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-        }
-
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
+        .fa-times-circle {
+            color: red;
         }
     </style>
+    <!-- Font Awesome CSS -->
+  
 </head>
 
 <body>
@@ -101,16 +94,12 @@ if (!$current_user) {
     <div class="profile-content">
         <?php
         if (isset($_SESSION['update_message'])) {
-            $messageClass = strpos($_SESSION['update_message'], 'success') !== false ? 'alert-success' : 'alert-danger';
-            echo '<div class="alert ' . $messageClass . '">' . $_SESSION['update_message'] . '</div>';
+            echo '<div class="alert alert-info">' . $_SESSION['update_message'] . '</div>';
             unset($_SESSION['update_message']);
         }
         ?>
-
         <form id="updateProfileForm" action="edit_pass_account.php" method="POST">
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <input type="hidden" name="user_id" value="<?php echo $current_user_id; ?>">
-            
             <div id="personal-info" class="profile-section">
                 <h3>Username and Password</h3>
                 <div class="post-col" style="width:100% !important">
@@ -119,11 +108,12 @@ if (!$current_user) {
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label for="username" class="form-label">
-                                        <i class="fas fa-user icon"></i> Username
+                                        <i class="fas fa-user icon"></i> User Name
                                     </label>
                                     <div class="nk-int-st">
-                                        <input type="text" id="username" name="email" class="form-control" 
-                                               value="<?php echo htmlspecialchars($current_user['email'] ?? ''); ?>">
+                                        <input type="text" id="username" name="email" class="form-control"
+                                            placeholder="User Name"
+                                            value="<?php echo htmlspecialchars(getValue($current_user, 'email')); ?>">
                                     </div>
                                 </div>
                             </div>
@@ -133,55 +123,88 @@ if (!$current_user) {
                                         <i class="fas fa-lock icon"></i> New Password
                                     </label>
                                     <div class="nk-int-st password-input-wrapper">
-                                        <input type="password" id="new_password" name="new_password" 
-                                               class="form-control" placeholder="New Password" 
-                                               oninput="checkPasswordMatch()">
+                                        <input type="password" id="new_password" name="new_password" class="form-control"
+                                            placeholder="New Password" oninput="checkPasswordMatch()">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label for="confirm_password" class="form-label">
-                                        <i class="fas fa-lock icon"></i> Confirm Password
+                                        <i class="fas fa-lock icon"></i> Confirm New Password
                                     </label>
                                     <div class="nk-int-st password-input-wrapper">
-                                        <input type="password" id="confirm_password" name="confirm_password" 
-                                               class="form-control" placeholder="Confirm Password" 
-                                               oninput="checkPasswordMatch()">
-                                        <i id="password-match-icon" class="fas" style="display: none;"></i>
+                                        <input type="password" id="confirm_password" name="confirm_password" class="form-control"
+                                            placeholder="Confirm New Password" oninput="checkPasswordMatch()">
+                                        <i id="password-match-icon" class="fas fa-times-circle" style="display: none;"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="float:right">Update Changes</button>
+
+                <button type="submit" style="float:right" class="btn btn-primary">Update Changes</button>
             </div>
         </form>
     </div>
 
-    <!-- Password Verification Modal -->
+    <!-- Password Modal -->
     <div id="passwordModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Verify Current Password</h2>
+            <h2>Enter Your Current Password</h2>
             <form id="passwordForm">
                 <div class="form-group">
                     <label for="current_password">Current Password:</label>
-                    <input type="password" id="current_password" name="current_password" 
-                           class="form-control" required>
+                    <input type="password" id="current_password" name="current_password" class="form-control" required>
                 </div>
-                <div id="error-message" class="alert alert-danger" style="display: none;"></div>
-                <button type="submit" class="btn btn-primary">Verify Password</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
 
+    <!-- Modal JavaScript -->
     <script>
+    document.getElementById('updateProfileForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        document.getElementById('passwordModal').style.display = 'block';
+    });
+
+    document.getElementsByClassName('close')[0].addEventListener('click', function() {
+        document.getElementById('passwordModal').style.display = 'none';
+    });
+
+    document.getElementById('passwordForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var currentPassword = document.getElementById('current_password').value;
+
+        fetch('validate_password.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'current_password=' + encodeURIComponent(currentPassword)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('passwordModal').style.display = 'none';
+                document.getElementById('updateProfileForm').submit();
+            } else {
+                alert(data.message || 'Password validation failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred during password validation');
+        });
+    });
+
     function checkPasswordMatch() {
-        const newPassword = document.getElementById('new_password').value;
-        const confirmPassword = document.getElementById('confirm_password').value;
-        const icon = document.getElementById('password-match-icon');
+        var newPassword = document.getElementById('new_password').value;
+        var confirmPassword = document.getElementById('confirm_password').value;
+        var icon = document.getElementById('password-match-icon');
 
         if (newPassword === '' && confirmPassword === '') {
             icon.style.display = 'none';
@@ -191,73 +214,6 @@ if (!$current_user) {
         } else {
             icon.className = 'fas fa-times-circle';
             icon.style.display = 'inline';
-        }
-    }
-
-    document.getElementById('updateProfileForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        const newPassword = document.getElementById('new_password').value;
-        const confirmPassword = document.getElementById('confirm_password').value;
-
-        if (newPassword !== confirmPassword) {
-            alert('New passwords do not match!');
-            return;
-        }
-
-        document.getElementById('passwordModal').style.display = 'block';
-    });
-
-    document.querySelector('.close').addEventListener('click', function() {
-        document.getElementById('passwordModal').style.display = 'none';
-    });
-
-    document.getElementById('passwordForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        const submitButton = this.querySelector('button[type="submit"]');
-        const currentPassword = document.getElementById('current_password').value;
-        const errorDisplay = document.getElementById('error-message');
-
-        submitButton.disabled = true;
-        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
-        errorDisplay.style.display = 'none';
-
-        fetch('validate_password.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'current_password=' + encodeURIComponent(currentPassword),
-            credentials: 'same-origin'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('passwordModal').style.display = 'none';
-                document.getElementById('updateProfileForm').submit();
-            } else {
-                errorDisplay.textContent = data.message || 'Password verification failed';
-                errorDisplay.style.display = 'block';
-                document.getElementById('current_password').value = '';
-                document.getElementById('current_password').focus();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            errorDisplay.textContent = 'An error occurred during verification. Please try again.';
-            errorDisplay.style.display = 'block';
-        })
-        .finally(() => {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Verify Password';
-        });
-    });
-
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('passwordModal')) {
-            document.getElementById('passwordModal').style.display = 'none';
         }
     }
     </script>
