@@ -604,7 +604,7 @@
             color: #94a3b8;
         }
 
-           /* Loading Screen Styles */
+         /* Loading Screen Styles */
          #loading-screen {
             position: fixed;
             top: 0;
@@ -1218,7 +1218,8 @@
             type();
         });
 
-        const animation = lottie.loadAnimation({
+       // Initialize Lottie animation
+       const animation = lottie.loadAnimation({
             container: document.getElementById('lottie-animation'),
             renderer: 'svg',
             loop: true,
@@ -1226,13 +1227,15 @@
             path: 'JSON/loading.json' // Path to your Lottie animation JSON file
         });
 
-        // Hide loading screen after content is loaded
+        // Ensure loading screen is visible for at least 8 seconds
         window.addEventListener('load', () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            loadingScreen.classList.add('hidden');
             setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500); // Match this duration with the CSS transition
+                const loadingScreen = document.getElementById('loading-screen');
+                loadingScreen.classList.add('hidden');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500); // Match this duration with the CSS transition
+            }, 8000); // 8000 milliseconds = 8 seconds
         });
         </script>
 </body>
