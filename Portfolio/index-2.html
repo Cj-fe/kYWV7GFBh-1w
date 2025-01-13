@@ -604,8 +604,7 @@
             color: #94a3b8;
         }
 
-         /* Loading Screen Styles */
-         #loading-screen {
+        #loading-screen {
             position: fixed;
             top: 0;
             left: 0;
@@ -613,6 +612,7 @@
             height: 100%;
             background-color: var(--background);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 2000;
@@ -620,9 +620,14 @@
             transition: opacity 0.5s ease;
         }
 
+        #loading-logo {
+            width: 100px; /* Adjust size as needed */
+            margin-bottom: 20px; /* Space between logo and animation */
+        }
+
         #lottie-animation {
-            width: 250px; /* Adjust size as needed */
-            height: 250px; /* Adjust size as needed */
+            width: 150px; /* Adjust size as needed */
+            height: 150px; /* Adjust size as needed */
         }
 
         .hidden {
@@ -877,9 +882,9 @@
 <body>
 
     <div id="loading-screen">
+        <img id="loading-logo" src="Img/Brown_and_Beige_Simple_Minimalist_Coffee_Shop_Circle_Logo-removebg-preview.png" alt="Logo">
         <div id="lottie-animation"></div>
     </div>
-
 
 
     <nav class="navbar custom-navbar">
@@ -1218,8 +1223,7 @@
             type();
         });
 
-       // Initialize Lottie animation
-       const animation = lottie.loadAnimation({
+        const animation = lottie.loadAnimation({
             container: document.getElementById('lottie-animation'),
             renderer: 'svg',
             loop: true,
