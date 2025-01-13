@@ -32,6 +32,7 @@
             overflow-x: hidden;
             width: 100%;
             position: relative;
+
         }
 
         body {
@@ -408,6 +409,216 @@
             color: var(--secondary);
         }
 
+
+        /*==========Portfolio==========*/
+
+        #portfolio {
+            scroll-margin-top: 80px;
+        }
+
+        .portfolio-section {
+            background: var(--background);
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .gradient-heading {
+            font-size: calc(1.8rem + 1vw);
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .filter-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            background: var(--glass);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            color: #94a3b8;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+        }
+
+        .filter-btn:hover:not(.active) {
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .portfolio-card {
+            background: var(--glass);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .portfolio-image {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-card:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(99, 102, 241, 0.95), rgba(139, 92, 246, 0.95));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-card:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .portfolio-card:hover .overlay-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .tech-stack {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin: 1rem 0;
+        }
+
+        .portfolio-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .content-wrapper h4 {
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content-wrapper p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+           /* Loading Screen Styles */
+           #loading-screen {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: var(--background);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 2000;
+            }
+
+
         /* Mobile Styles */
         @media (max-width: 991.98px) {
             .custom-hamburger {
@@ -527,20 +738,40 @@
                 max-width: 300px;
                 margin: 0 auto;
             }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                padding: 0 1rem;
+                gap: 1rem;
+            }
+
+            .filter-buttons {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+            }
+
         }
 
         /* For even smaller screens */
-@media (max-width: 480px) {
-    .skills-grid {
-        gap: 0.75rem;
-    }
+        @media (max-width: 480px) {
+            .skills-grid {
+                gap: 0.75rem;
+            }
 
-    .skill-item {
-        min-width: 80px;
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-    }
-}
+            .skill-item {
+                min-width: 80px;
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+        }
 
         /* Animations */
         @keyframes gradientBorder {
@@ -597,10 +828,47 @@
             transform: translateY(20px);
             transition: all 0.3s ease-out;
         }
+
+        /* Typing Animation Styles */
+        .typing {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--text-primary);
+            animation: typing 4s steps(30, end), blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: var(--text-primary);
+            }
+        }
     </style>
 </head>
 
 <body>
+
+    <div id="loading-screen">
+        <div id="lottie-animation"></div>
+    </div>
+
+
     <nav class="navbar custom-navbar">
         <div class="nav-container">
             <a class="navbar-brand" href="#">
@@ -618,15 +886,18 @@
                 <li><a href="#" class="active">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
+
             </ul>
         </div>
     </nav>
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Hi, I'm John Christian Fariola</h1>
-            <p>Frontend Developer passionate about creating beautiful and functional web experiences. Specialized in
+            <h1>Hi, I'm John Christian Fariola | </h1>
+            <h1><span class="typing">Frontend Developer</span></h1>
+            <p> passionate about creating beautiful and functional web experiences. Specialized in
                 crafting modern, responsive websites with attention to detail and user experience.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary">Hire Me</a>
@@ -725,61 +996,230 @@
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Mobile menu functionality
-        const hamburger = document.querySelector('.custom-hamburger');
-        const navLinks = document.querySelector('.custom-nav-links');
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('show');
-            document.body.style.overflow = navLinks.classList.contains('show') ? 'hidden' : '';
-        });
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h2 class="gradient-heading">Featured Projects</h2>
+                <p class="text-secondary">Transforming ideas into digital experiences</p>
+            </div>
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('show')) {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('show');
-                document.body.style.overflow = '';
-            }
-        });
+            <!-- Filter Buttons -->
+            <div class="filter-wrapper">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="web">Web Development</button>
+                    <button class="filter-btn" data-filter="app">Applications</button>
+                </div>
+            </div>
 
-        // Close mobile menu when window is resized above mobile breakpoint
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 991.98) {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('show');
-                document.body.style.overflow = '';
-            }
-        });
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-card" data-category="web">
+                    <div class="portfolio-image">
+                        <img src="Img/image.png" alt="MCC Alumni Tracker" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="overlay-content">
+                                <h3>MCC Alumni Tracker</h3>
+                                <p class="tech-stack">PHP • MySQL • Bootstrap</p>
+                                <div class="portfolio-links">
+                                    <a href="#" class="project-link" target="_blank">
+                                        <span>View Project</span>
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="project-link" target="_blank">
+                                        <span>Source Code</span>
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="content-wrapper">
+                            <h4>MCC Alumni Tracker</h4>
+                            <p>A comprehensive alumni management system for tracking and connecting graduates.</p>
+                            <div class="project-tags">
+                                <span class="tag">Web Development</span>
+                                <span class="tag">Database</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        // Intersection Observer for scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                <!-- Portfolio Item 2 (You can duplicate this structure for more projects) -->
+                <div class="portfolio-card" data-category="app">
+                    <div class="portfolio-image">
+                        <img src="Img/image.png" alt="Project 2" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <div class="overlay-content">
+                                <h3>Project 2</h3>
+                                <p class="tech-stack">React • Node.js • MongoDB</p>
+                                <div class="portfolio-links">
+                                    <a href="#" class="project-link" target="_blank">
+                                        <span>View Project</span>
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="project-link" target="_blank">
+                                        <span>Source Code</span>
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="content-wrapper">
+                            <h4>Project 2</h4>
+                            <p>Description of your second project goes here.</p>
+                            <div class="project-tags">
+                                <span class="tag">Application</span>
+                                <span class="tag">Full Stack</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    // Handle staggered animations
-                    const staggerItems = entry.target.querySelectorAll('.stagger-animation > *');
-                    staggerItems.forEach((item, index) => {
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'translateY(0)';
-                        }, 200 * index);
-                    });
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.5/lottie.min.js"></script>
+        <script>
+            // Mobile menu functionality
+            const hamburger = document.querySelector('.custom-hamburger');
+            const navLinks = document.querySelector('.custom-nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('show');
+                document.body.style.overflow = navLinks.classList.contains('show') ? 'hidden' : '';
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('show')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('show');
+                    document.body.style.overflow = '';
                 }
             });
-        }, {
-            threshold: 0.1
+
+            // Close mobile menu when window is resized above mobile breakpoint
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 991.98) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+
+                        // Handle staggered animations
+                        const staggerItems = entry.target.querySelectorAll('.stagger-animation > *');
+                        staggerItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 200 * index);
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            // Observe elements with animate-on-scroll class
+            document.querySelectorAll('.animate-on-scroll').forEach(element => {
+                observer.observe(element);
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const portfolioItems = document.querySelectorAll('.portfolio-card');
+
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Remove active class from all buttons
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        // Add active class to clicked button
+                        button.classList.add('active');
+
+                        const filter = button.getAttribute('data-filter');
+
+                        portfolioItems.forEach(item => {
+                            if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    const navbarHeight = 30; // Adjust this value to match your navbar height + desired padding
+
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+            const typingElement = document.querySelector('.typing');
+            const text = typingElement.textContent;
+            let index = 0;
+            let isDeleting = false;
+
+            function type() {
+                if (isDeleting) {
+                    typingElement.textContent = text.substring(0, index--);
+                    if (index < 0) {
+                        isDeleting = false;
+                        index = 0;
+                    }
+                } else {
+                    typingElement.textContent = text.substring(0, index++);
+                    if (index > text.length) {
+                        isDeleting = true;
+                        index = text.length;
+                    }
+                }
+                setTimeout(type, isDeleting ? 100 : 200);
+            }
+
+            type();
         });
 
-        // Observe elements with animate-on-scroll class
-        document.querySelectorAll('.animate-on-scroll').forEach(element => {
-            observer.observe(element);
-        });
-    </script>
+
+        const animation = lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'JSON/loading.json' // Path to your Lottie animation JSON file
+            });
+
+            // Hide loading screen after content is loaded
+            window.addEventListener('load', () => {
+                const loadingScreen = document.getElementById('loading-screen');
+                loadingScreen.style.display = 'none';
+            });
+        </script>
 </body>
 
 </html>
