@@ -1105,142 +1105,114 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.5/lottie.min.js"></script>
         <script>
-            // Mobile menu functionality
-            const hamburger = document.querySelector('.custom-hamburger');
-            const navLinks = document.querySelector('.custom-nav-links');
-
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('show');
-                document.body.style.overflow = navLinks.classList.contains('show') ? 'hidden' : '';
-            });
-
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('show')) {
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-            });
-
-            // Close mobile menu when window is resized above mobile breakpoint
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 991.98) {
-                    hamburger.classList.remove('active');
-                    navLinks.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
-            });
-
-            // Intersection Observer for scroll animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-
-                        // Handle staggered animations
-                        const staggerItems = entry.target.querySelectorAll('.stagger-animation > *');
-                        staggerItems.forEach((item, index) => {
-                            setTimeout(() => {
-                                item.style.opacity = '1';
-                                item.style.transform = 'translateY(0)';
-                            }, 200 * index);
-                        });
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            // Observe elements with animate-on-scroll class
-            document.querySelectorAll('.animate-on-scroll').forEach(element => {
-                observer.observe(element);
-            });
-
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', () => {
+                const hamburger = document.querySelector('.custom-hamburger');
+                const navLinks = document.querySelector('.custom-nav-links');
                 const filterButtons = document.querySelectorAll('.filter-btn');
                 const portfolioItems = document.querySelectorAll('.portfolio-card');
-
+                const typingElement = document.querySelector('.typing');
+                const text = typingElement.textContent;
+                let index = 0;
+                let isDeleting = false;
+        
+                // Mobile menu functionality
+                const toggleNav = () => {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('show');
+                    document.body.style.overflow = navLinks.classList.contains('show') ? 'hidden' : '';
+                };
+        
+                hamburger.addEventListener('click', toggleNav);
+        
+                document.addEventListener('click', (e) => {
+                    if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('show')) {
+                        toggleNav();
+                    }
+                });
+        
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 991.98) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('show');
+                        document.body.style.overflow = '';
+                    }
+                });
+        
+                // Intersection Observer for scroll animations
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            entry.target.querySelectorAll('.stagger-animation > *').forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.style.opacity = '1';
+                                    item.style.transform = 'translateY(0)';
+                                }, 200 * index);
+                            });
+                        }
+                    });
+                }, { threshold: 0.1 });
+        
+                document.querySelectorAll('.animate-on-scroll').forEach(element => observer.observe(element));
+        
+                // Portfolio filter functionality
                 filterButtons.forEach(button => {
                     button.addEventListener('click', () => {
-                        // Remove active class from all buttons
                         filterButtons.forEach(btn => btn.classList.remove('active'));
-                        // Add active class to clicked button
                         button.classList.add('active');
-
                         const filter = button.getAttribute('data-filter');
-
                         portfolioItems.forEach(item => {
-                            if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                                item.style.display = 'block';
-                            } else {
-                                item.style.display = 'none';
-                            }
+                            item.style.display = (filter === 'all' || item.getAttribute('data-category') === filter) ? 'block' : 'none';
                         });
                     });
                 });
-            });
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    const navbarHeight = 30; // Adjust this value to match your navbar height + desired padding
-
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+        
+                // Smooth scrolling for anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        const navbarHeight = 30;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                     });
                 });
-            });
-
-            document.addEventListener('DOMContentLoaded', function () {
-            const typingElement = document.querySelector('.typing');
-            const text = typingElement.textContent;
-            let index = 0;
-            let isDeleting = false;
-
-            function type() {
-                if (isDeleting) {
-                    typingElement.textContent = text.substring(0, index--);
+        
+                // Typing animation
+                const type = () => {
+                    typingElement.textContent = isDeleting ? text.substring(0, index--) : text.substring(0, index++);
                     if (index < 0) {
                         isDeleting = false;
                         index = 0;
-                    }
-                } else {
-                    typingElement.textContent = text.substring(0, index++);
-                    if (index > text.length) {
+                    } else if (index > text.length) {
                         isDeleting = true;
                         index = text.length;
                     }
-                }
-                setTimeout(type, isDeleting ? 100 : 200);
-            }
-
-            type();
-        });
-
-        const animation = lottie.loadAnimation({
-            container: document.getElementById('lottie-animation'),
-            renderer: 'svg',
-            loop: true,
-            autoplay: true,
-            path: 'JSON/loading.json' // Path to your Lottie animation JSON file
-        });
-
-        // Ensure loading screen is visible for at least 8 seconds
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loadingScreen = document.getElementById('loading-screen');
-                loadingScreen.classList.add('hidden');
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500); // Match this duration with the CSS transition
-            }, 3000); // 8000 milliseconds = 8 seconds
-        });
+                    setTimeout(type, isDeleting ? 100 : 200);
+                };
+        
+                type();
+        
+                // Initialize Lottie animation
+                lottie.loadAnimation({
+                    container: document.getElementById('lottie-animation'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: 'JSON/loading.json'
+                });
+        
+                // Loading screen
+                window.addEventListener('load', () => {
+                    setTimeout(() => {
+                        const loadingScreen = document.getElementById('loading-screen');
+                        loadingScreen.classList.add('hidden');
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 500);
+                    }, 3000);
+                });
+            });
         </script>
 </body>
 
