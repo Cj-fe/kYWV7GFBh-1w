@@ -96,7 +96,19 @@
             renderer: 'svg',
             loop: true,
             autoplay: true,
-            path: 'sleeping_sloth.json' // Path to your sleeping_sloth.json file
+            path: '/sleeping_sloth.json' // Using absolute path from root
+        });
+        
+        // Fallback if the absolute path doesn't work
+        animation.addEventListener('data_failed', function() {
+            console.log('Failed to load animation with absolute path, trying relative path...');
+            animation = bodymovin.loadAnimation({
+                container: document.getElementById('lottie-container'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'sleeping_sloth.json' // Try relative path as fallback
+            });
         });
     </script>
 </body>
