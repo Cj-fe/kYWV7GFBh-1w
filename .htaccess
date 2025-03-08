@@ -1,7 +1,7 @@
 # Enable the rewrite engine
 RewriteEngine On
 
-# Base directory - adjust if your site is in a subdirectory
+# Set the base directory - important for proper path resolution
 RewriteBase /
 
 # If the requested URL is a directory that doesn't exist
@@ -13,13 +13,56 @@ RewriteCond %{REQUEST_FILENAME} !-f
 # Then redirect to index.html
 RewriteRule ^(.*)$ index.html [L,QSA]
 
-# Also explicitly handle 404 errors
+# Handle all common error codes and redirect to index.html
+ErrorDocument 400 /index.html
+ErrorDocument 401 /index.html
+ErrorDocument 403 /index.html
 ErrorDocument 404 /index.html
+ErrorDocument 500 /index.html
+ErrorDocument 502 /index.html
+ErrorDocument 503 /index.html
+ErrorDocument 504 /index.html
 
 # Prevent directory listing
 Options -Indexes
 
-# If you're still having issues, try this more aggressive approach:
-# This will redirect ALL requests that don't match an existing file to index.html
-# Uncomment the line below if the above rules aren't working
-# RewriteRule ^.*$ index.html [L,QSA]
+# Force HTTPS (uncomment if you have SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Handle access to .htaccess and other sensitive files
+<FilesMatch "^\.ht">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Block access to sensitive directories 
+# Uncomment and customize if needed
+# RedirectMatch 403 ^/(\.git|\.svn|bin|includes|node_modules)/.*$
+
+# Allow direct access to specific file types even in protected directories
+# Useful for CSS, JS, and image files that need to be accessible
+<FilesMatch "\.(css|js|gif|jpg|jpeg|png|svg|ico|woff|woff2|ttf|eot|json)$">
+    Order deny,allow
+    Allow from all
+</FilesMatch>
+
+# Set the proper MIME type for JSON files (important for Lottie animations)
+AddType application/json .json
+
+# Add caching for static assets including Lottie JSON files
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Cache Lottie JSON files for 1 week
+    ExpiresByType application/json "access plus 1 week"
+    
+    # Cache other static assets
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
