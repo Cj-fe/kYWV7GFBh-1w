@@ -1,0 +1,44 @@
+# Enable the rewrite engine
+RewriteEngine On
+
+# If the requested resource doesn't exist as a file
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# And if the requested resource doesn't exist as a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Then redirect to index.html
+RewriteRule ^(.*)$ index.html [L]
+
+# Custom 404 error page
+ErrorDocument 404 /index.html
+
+# Prevent directory listing
+Options -Indexes
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Enable CORS (Optional - if you need cross-origin requests)
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+# Compress text files for faster loading (Optional)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>
+
+# Cache control (Optional - for better performance)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
