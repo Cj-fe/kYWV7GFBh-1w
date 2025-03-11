@@ -4,26 +4,40 @@ $username = "u510162695_mccalumni_root";
 $password = "1Mccalumni_root";
 $database = "u510162695_mccalumni";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
+// Create connection to MySQL (without selecting a database)
+$conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle database drop request
+// Handle Create Database request
+if (isset($_POST['create_db'])) {
+    $create_query = "CREATE DATABASE $database";
+    if ($conn->query($create_query) === TRUE) {
+        echo "Database <strong>$database</strong> created successfully!";
+    } else {
+        echo "Error creating database: " . $conn->error;
+    }
+    exit;
+}
+
+// Select the database
+$conn->select_db($database);
+
+// Handle Drop Database request
 if (isset($_POST['drop_db'])) {
     $drop_query = "DROP DATABASE $database";
     if ($conn->query($drop_query) === TRUE) {
-        echo "Database dropped successfully!";
+        echo "Database <strong>$database</strong> dropped successfully!";
     } else {
         echo "Error dropping database: " . $conn->error;
     }
     exit;
 }
 
-// Handle database import request
+// Handle Import Database request
 if (isset($_POST['import_db'])) {
     if (isset($_FILES['sql_file']) && $_FILES['sql_file']['error'] == 0) {
         $sql_file = $_FILES['sql_file']['tmp_name'];
@@ -43,7 +57,7 @@ if (isset($_POST['import_db'])) {
     exit;
 }
 
-// Get all table names
+// Display all tables
 $tables_result = $conn->query("SHOW TABLES");
 
 if ($tables_result->num_rows > 0) {
@@ -84,7 +98,13 @@ if ($tables_result->num_rows > 0) {
 $conn->close();
 ?>
 
-<!-- Buttons for Drop & Import -->
+<!-- Buttons for Create, Drop & Import -->
+<form method="post">
+    <button type="submit" name="create_db">
+        Create Database
+    </button>
+</form>
+
 <form method="post">
     <button type="submit" name="drop_db" onclick="return confirm('Are you sure you want to drop the database?');">
         Drop Database

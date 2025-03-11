@@ -1,117 +1,71 @@
-<?php
-$servername = "localhost"; // Change if needed
-$username = "u510162695_mccalumni_root";
-$password = "1Mccalumni_root";
-$database = "u510162695_mccalumni";
+# HTID:23422420: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE 
+# Enable the rewrite engine
+RewriteEngine On
 
-// Create connection to MySQL (without selecting a database)
-$conn = new mysqli($servername, $username, $password);
+# Set the base directory - important for proper path resolution
+RewriteBase /
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+# If the requested URL is a directory that doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-d
 
-// Handle Create Database request
-if (isset($_POST['create_db'])) {
-    $create_query = "CREATE DATABASE $database";
-    if ($conn->query($create_query) === TRUE) {
-        echo "Database <strong>$database</strong> created successfully!";
-    } else {
-        echo "Error creating database: " . $conn->error;
-    }
-    exit;
-}
+# And if the requested URL is not a file
+RewriteCond %{REQUEST_FILENAME} !-f
 
-// Select the database
-$conn->select_db($database);
+# Then redirect to index.html
+RewriteRule ^(.*)$ index.html [L,QSA]
 
-// Handle Drop Database request
-if (isset($_POST['drop_db'])) {
-    $drop_query = "DROP DATABASE $database";
-    if ($conn->query($drop_query) === TRUE) {
-        echo "Database <strong>$database</strong> dropped successfully!";
-    } else {
-        echo "Error dropping database: " . $conn->error;
-    }
-    exit;
-}
+# Handle all common error codes and redirect to index.html
+ErrorDocument 400 /index.html
+ErrorDocument 401 /index.html
+ErrorDocument 403 /index.html
+ErrorDocument 404 /index.html
+ErrorDocument 500 /index.html
+ErrorDocument 502 /index.html
+ErrorDocument 503 /index.html
+ErrorDocument 504 /index.html
 
-// Handle Import Database request
-if (isset($_POST['import_db'])) {
-    if (isset($_FILES['sql_file']) && $_FILES['sql_file']['error'] == 0) {
-        $sql_file = $_FILES['sql_file']['tmp_name'];
-        $sql_content = file_get_contents($sql_file);
+# Prevent directory listing
+Options -Indexes
 
-        // Execute SQL queries
-        $queries = explode(";", $sql_content);
-        foreach ($queries as $query) {
-            if (trim($query) != "") {
-                $conn->query($query);
-            }
-        }
-        echo "Database imported successfully!";
-    } else {
-        echo "Error uploading SQL file.";
-    }
-    exit;
-}
+# Force HTTPS (uncomment if you have SSL)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-// Display all tables
-$tables_result = $conn->query("SHOW TABLES");
+# Handle access to .htaccess and other sensitive files
+<FilesMatch "^\.ht">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
 
-if ($tables_result->num_rows > 0) {
-    while ($table_row = $tables_result->fetch_array()) {
-        $table_name = $table_row[0];
-        echo "<h2>Table: $table_name</h2>";
+# Block access to sensitive directories 
+# Uncomment and customize if needed
+# RedirectMatch 403 ^/(\.git|\.svn|bin|includes|node_modules)/.*$
 
-        // Fetch data from each table
-        $sql = "SELECT * FROM $table_name";
-        $result = $conn->query($sql);
+# Allow direct access to specific file types even in protected directories
+# Useful for CSS, JS, and image files that need to be accessible
+<FilesMatch "\.(css|js|gif|jpg|jpeg|png|svg|ico|woff|woff2|ttf|eot|json)$">
+    Order deny,allow
+    Allow from all
+</FilesMatch>
 
-        if ($result->num_rows > 0) {
-            echo "<table border='1'><tr>";
+# Set the proper MIME type for JSON files (important for Lottie animations)
+AddType application/json .json
 
-            // Fetch column names
-            while ($field = $result->fetch_field()) {
-                echo "<th>{$field->name}</th>";
-            }
-            echo "</tr>";
-
-            // Fetch rows
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                foreach ($row as $value) {
-                    echo "<td>{$value}</td>";
-                }
-                echo "</tr>";
-            }
-            echo "</table><br>";
-        } else {
-            echo "No data available in this table.<br><br>";
-        }
-    }
-} else {
-    echo "No tables found in the database.";
-}
-
-$conn->close();
-?>
-
-<!-- Buttons for Create, Drop & Import -->
-<form method="post">
-    <button type="submit" name="create_db">
-        Create Database
-    </button>
-</form>
-
-<form method="post">
-    <button type="submit" name="drop_db" onclick="return confirm('Are you sure you want to drop the database?');">
-        Drop Database
-    </button>
-</form>
-
-<form method="post" enctype="multipart/form-data">
-    <input type="file" name="sql_file" accept=".sql" required>
-    <button type="submit" name="import_db">Import Database</button>
-</form>
+# Add caching for static assets including Lottie JSON files
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Cache Lottie JSON files for 1 week
+    ExpiresByType application/json "access plus 1 week"
+    
+    # Cache other static assets
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
