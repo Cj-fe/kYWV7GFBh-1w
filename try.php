@@ -12,7 +12,38 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get all table names from the database
+// Handle database drop request
+if (isset($_POST['drop_db'])) {
+    $drop_query = "DROP DATABASE $database";
+    if ($conn->query($drop_query) === TRUE) {
+        echo "Database dropped successfully!";
+    } else {
+        echo "Error dropping database: " . $conn->error;
+    }
+    exit;
+}
+
+// Handle database import request
+if (isset($_POST['import_db'])) {
+    if (isset($_FILES['sql_file']) && $_FILES['sql_file']['error'] == 0) {
+        $sql_file = $_FILES['sql_file']['tmp_name'];
+        $sql_content = file_get_contents($sql_file);
+
+        // Execute SQL queries
+        $queries = explode(";", $sql_content);
+        foreach ($queries as $query) {
+            if (trim($query) != "") {
+                $conn->query($query);
+            }
+        }
+        echo "Database imported successfully!";
+    } else {
+        echo "Error uploading SQL file.";
+    }
+    exit;
+}
+
+// Get all table names
 $tables_result = $conn->query("SHOW TABLES");
 
 if ($tables_result->num_rows > 0) {
@@ -52,3 +83,15 @@ if ($tables_result->num_rows > 0) {
 
 $conn->close();
 ?>
+
+<!-- Buttons for Drop & Import -->
+<form method="post">
+    <button type="submit" name="drop_db" onclick="return confirm('Are you sure you want to drop the database?');">
+        Drop Database
+    </button>
+</form>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="sql_file" accept=".sql" required>
+    <button type="submit" name="import_db">Import Database</button>
+</form>
