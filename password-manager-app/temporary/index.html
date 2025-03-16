@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Network Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .control-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .status {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        .status.error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .status.success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        .device-count {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border-left-color: #09f;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .network-info {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Dynamic Network Scanner</h1>
+        
+        <div id="networkInfo" class="network-info">
+            <!-- Network information will be displayed here -->
+        </div>
+        
+        <div class="control-panel">
+            <div>
+                <button id="scanBtn">Scan Network</button>
+                <span class="device-count" id="deviceCount"></span>
+            </div>
+            <div>
+                <label for="ipRange">Network Base:</label>
+                <input type="text" id="ipRange" placeholder="e.g. 192.168.1">
+            </div>
+        </div>
+        
+        <div id="status" class="status"></div>
+        
+        <table id="deviceTable">
+            <thead>
+                <tr>
+                    <th>IP Address</th>
+                    <th>MAC Address</th>
+                    <th>Device Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="deviceList">
+                <!-- Devices will be listed here -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3>How it works</h3>
+        <p>This scanner uses Node.js to:</p>
+        <ol>
+            <li>Detect your network automatically</li>
+            <li>Send network-wide pings to populate the ARP table</li>
+            <li>Query the ARP table to find connected devices</li>
+            <li>Display real-time results of actually connected devices</li>
+        </ol>
+        <p><strong>Note:</strong> Device names may not be available due to network privacy settings.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scanBtn = document.getElementById('scanBtn');
+            const deviceList = document.getElementById('deviceList');
+            const status = document.getElementById('status');
+            const deviceCount = document.getElementById('deviceCount');
+            const ipRangeInput = document.getElementById('ipRange');
+            const networkInfo = document.getElementById('networkInfo');
+            
+            let isScanning = false;
+            
+            scanBtn.addEventListener('click', function() {
+                if (isScanning) return;
+                
+                isScanning = true;
+                scanBtn.disabled = true;
+                deviceList.innerHTML = '';
+                
+                showStatus(`<div class="spinner"></div> Scanning network... This may take a minute...`, 'success');
+                scanBtn.textContent = 'Scanning...';
+                
+                const networkBase = ipRangeInput.value.trim();
+                const url = `/api/scan${networkBase ? `?networkBase=${networkBase}` : ''}`;
+                
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network scan failed');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        displayNetworkInfo(data.networkInfo);
+                        displayDevices(data.devices);
+                        showStatus(`Scan complete. Found ${data.devices.length} devices on the network.`, 'success');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showStatus(`Error: ${error.message}`, 'error');
+                    })
+                    .finally(() => {
+                        isScanning = false;
+                        scanBtn.disabled = false;
+                        scanBtn.textContent = 'Scan Network';
+                    });
+            });
+            
+            function displayNetworkInfo(info) {
+                networkInfo.innerHTML = `
+                    <strong>Your IP:</strong> ${info.localIP} &nbsp;|&nbsp;
+                    <strong>Network:</strong> ${info.networkBase}.0/24
+                `;
+                
+                // Set the input placeholder to the detected network
+                if (!ipRangeInput.value) {
+                    ipRangeInput.placeholder = info.networkBase;
+                }
+            }
+            
+            function displayDevices(devices) {
+                deviceList.innerHTML = '';
+                
+                if (devices.length === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = '<td colspan="4" style="text-align: center;">No devices found</td>';
+                    deviceList.appendChild(row);
+                } else {
+                    devices.forEach(device => {
+                        const row = document.createElement('tr');
+                        
+                        row.innerHTML = `
+                            <td>${device.ip}</td>
+                            <td>${device.mac}</td>
+                            <td>${device.name || '<unknown>'}</td>
+                            <td><span class="status-indicator ${device.status}">${device.status}</span></td>
+                        `;
+                        
+                        deviceList.appendChild(row);
+                    });
+                }
+                
+                deviceCount.textContent = `(${devices.length} devices)`;
+            }
+            
+            function showStatus(message, type) {
+                status.innerHTML = message;
+                status.className = 'status ' + type;
+            }
+            
+            // Trigger an automatic scan when the page loads
+            showStatus('Initializing scanner...', 'success');
+            setTimeout(() => {
+                scanBtn.click();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
