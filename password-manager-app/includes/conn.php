@@ -1,9 +1,9 @@
 <?php 
 
 $servername = "localhost";
-$username = "u510162695_mccalumni";
-$password = "u510162695_mccalumni_root";
-$db = "1Mccalumni_root";
+$username = "u510162695_mccalumni_root";
+$password = "1Mccalumni_root";
+$db = "u510162695_mccalumni";
 
 
 try {
