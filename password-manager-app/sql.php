@@ -34,7 +34,7 @@ function importSQLFile($pdo, $sqlFile) {
     }
 }
 
-// Main execution
+// Main exection
 try {
     // Create database connection
     $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
