@@ -1,7 +1,7 @@
 
 <?php
 define('EMAIL_USERNAME', 'montgomeryaurelia06@gmail.com');
-define('EMAIL_PASSWORD', 'oylq mpnj adlw iuod');
+define('EMAIL_PASSWORD', 'meqh okly xqfj uldi');
 
 
 $databaseURL = "https://mccnians-bc4f4-default-rtdb.firebaseio.com/";
